@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>AI Workflow Map — ChatGPT / Work / Codex / Agent</title>
+<style>
+:root{
+  --burg:#7d0019; --red:#a80e28; --pink:#f8e9ec; --soft:#fff8f8;
+  --ink:#161616; --muted:#6a6264; --line:#ead7dc; --white:#fff;
+}
+*{box-sizing:border-box}
+body{margin:0;background:#f4f0f1;color:var(--ink);font-family:Kanit,"Noto Sans Thai",Arial,sans-serif}
+.page{max-width:1180px;margin:24px auto;background:#fff;border-radius:24px;box-shadow:0 18px 60px rgba(60,0,12,.10);overflow:hidden}
+header{padding:34px 42px 26px;background:linear-gradient(135deg,#fff 0%,#fff7f8 58%,#f7e5e9 100%);border-bottom:1px solid var(--line)}
+h1{margin:0;font-size:42px;line-height:1.05;color:var(--burg);letter-spacing:-.5px}
+header p{margin:9px 0 0;font-size:20px;color:#3a3335}
+.badge{display:inline-block;background:var(--burg);color:#fff;border-radius:999px;padding:7px 13px;font-size:13px;margin-bottom:12px}
+main{padding:28px 34px 34px}
+.section{margin:0 0 26px}
+.section-title{font-size:27px;font-weight:800;color:var(--burg);margin:0 0 12px}
+.grid4,.grid3,.grid2{display:grid;gap:12px}
+.grid4{grid-template-columns:repeat(4,1fr)}
+.grid3{grid-template-columns:repeat(3,1fr)}
+.grid2{grid-template-columns:repeat(2,1fr)}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--soft);padding:16px}
+.card h3{margin:0 0 7px;font-size:20px;color:var(--burg)}
+.card p,.card li{font-size:15px;line-height:1.45}
+.card ul,.card ol{margin:7px 0 0;padding-left:22px}
+.dark{background:var(--burg);color:#fff;border-color:var(--burg)}
+.dark h3{color:#fff}
+.kicker{font-weight:800;color:var(--burg)}
+.flow{display:flex;gap:8px;align-items:stretch;flex-wrap:wrap}
+.flow .box{flex:1;min-width:145px;border:1px solid var(--line);border-radius:14px;padding:13px;background:#fff}
+.flow .arrow{align-self:center;font-size:24px;color:var(--red);font-weight:800}
+.small{font-size:13px;color:var(--muted)}
+.table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;border:1px solid var(--line);border-radius:16px}
+.table th{background:var(--burg);color:#fff;text-align:left;padding:12px;font-size:15px}
+.table td{padding:12px;border-top:1px solid var(--line);vertical-align:top;font-size:14px;line-height:1.4}
+.table tr:nth-child(even) td{background:#fff8f9}
+.prompt{position:relative;background:#191516;color:#fdfdfd;border-radius:14px;padding:15px 92px 15px 16px;margin-top:10px;white-space:pre-wrap;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;line-height:1.5}
+.copy{position:absolute;right:10px;top:10px;background:#fff;color:var(--burg);border:0;border-radius:9px;padding:8px 10px;font-weight:800;cursor:pointer}
+.note{border-left:5px solid var(--red);background:#fff3f5;padding:13px 16px;border-radius:10px;font-size:14px;line-height:1.45}
+.steps{counter-reset:s}
+.step{display:flex;gap:10px;margin:8px 0;font-size:14px;line-height:1.4}
+.step:before{counter-increment:s;content:counter(s);min-width:25px;height:25px;border-radius:50%;background:var(--burg);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800}
+footer{padding:18px 34px 24px;background:#faf5f6;border-top:1px solid var(--line);font-size:12px;color:#6a6264}
+@media(max-width:850px){
+  .grid4,.grid3,.grid2{grid-template-columns:1fr}
+  h1{font-size:34px}
+  main{padding:22px 18px}
+  header{padding:26px 20px}
+  .table{display:block;overflow-x:auto}
+}
+@media print{
+  body{background:#fff}.page{box-shadow:none;margin:0;max-width:none;border-radius:0}
+  .copy{display:none}
+}
+</style>
+</head>
+<body>
+<div class="page">
+<header>
+  <span class="badge">UPDATED 3 OCT 2026</span>
+  <h1>AI WORKFLOW MAP</h1>
+  <p>เข้าใจ ChatGPT, Work, Codex และ AI Agent ในหน้าเดียว — เลือกให้ถูก แล้วลงมือทำได้ทันที</p>
+</header>
+
+<main>
+<section class="section">
+  <h2 class="section-title">1) เริ่มจากภาพใหญ่ก่อน</h2>
+  <div class="grid4">
+    <div class="card"><h3>Model = สมอง</h3><p>โมเดลคือความสามารถในการคิด เช่น GPT‑5.6 Sol, Terra, Luna และ GPT‑6 Astra</p></div>
+    <div class="card"><h3>Chat / Work / Codex = วิธีใช้งาน</h3><p><b>Chat</b> คุยและคิด<br><b>Work</b> ทำงานหลายขั้นจนเสร็จ<br><b>Codex</b> งานโค้ด ระบบ และเทคนิค</p></div>
+    <div class="card dark"><h3>AI Agent = ผู้ลงมือทำ</h3><p>AI ที่รับเป้าหมาย วางขั้นตอน ใช้เครื่องมือ ทำหลายขั้น และส่งผลลัพธ์กลับมา</p></div>
+    <div class="card"><h3>สรุป</h3><p><b>Agent ไม่ใช่ชื่อโมเดล</b><br>Work คือ Agent สำหรับงานทั่วไปหลายขั้น<br>Codex คือ Agent สำหรับงานเทคนิค/ซอฟต์แวร์</p></div>
+  </div>
+</section>
+
+<section class="section">
+  <h2 class="section-title">2) เลือกโหมดให้ถูกก่อนเลือกโมเดล</h2>
+  <table class="table">
+    <thead><tr><th>ต้องการทำอะไร</th><th>เลือก</th><th>ตัวอย่าง</th><th>ระดับการคิด</th></tr></thead>
+    <tbody>
+      <tr><td>ถาม คิด เขียน สรุป Brainstorm</td><td><b>Chat</b></td><td>Content, Strategy, Q&A, Search</td><td>Instant/Medium → งานทั่วไป<br>High/Extra High → งานซับซ้อน</td></tr>
+      <tr><td>อยากได้ “ชิ้นงานที่เสร็จ” หลายขั้น</td><td><b>Work</b></td><td>Research → วิเคราะห์ → ทำ Report / Sheet / Slide / Site</td><td>Medium/High เป็นหลัก</td></tr>
+      <tr><td>แตะ Code, Repo, Terminal, API, Automation</td><td><b>Codex</b></td><td>สร้างเว็บ, แก้ระบบ, ทำ Script, Agent ทางเทคนิค</td><td>High/Extra High เมื่องานยาก</td></tr>
+    </tbody>
+  </table>
+  <p class="small"><b>จำง่าย:</b> Chat = คุย / Work = ทำงาน / Codex = สร้างระบบ</p>
+</section>
+
+<section class="section">
+  <h2 class="section-title">3) โมเดลที่ควรรู้ — ไม่ต้องจำทุกตัว</h2>
+  <div class="flow">
+    <div class="box"><b>GPT‑5.6 Luna</b><br><span class="small">เร็ว / งานทั่วไป / Free-Go เป็นหลัก</span></div>
+    <div class="arrow">→</div>
+    <div class="box"><b>GPT‑5.6 Terra</b><br><span class="small">สมดุลคุณภาพ-ต้นทุน / Work-Codex-API</span></div>
+    <div class="arrow">→</div>
+    <div class="box"><b>GPT‑5.6 Sol</b><br><span class="small">งานมืออาชีพ ซับซ้อน วิเคราะห์ Coding</span></div>
+    <div class="arrow">→</div>
+    <div class="box"><b>GPT‑6 Astra</b><br><span class="small">งานยากมาก Agentic / Computer Use / Professional Work</span></div>
+  </div>
+  <div class="note" style="margin-top:12px"><b>สำคัญ:</b> ใน Chat ปกติอาจไม่ได้เห็นชื่อโมเดลทุกตัวให้เลือกตรง ๆ เพราะบางรุ่นอยู่ใน Work, Codex หรือ API ส่วน “Instant / Medium / High / Extra High” คือระดับการใช้เหตุผล ไม่ใช่ชื่อโมเดล</div>
+</section>
+
+
+<section class="section">
+  <h2 class="section-title">4) ก่อนใช้ศัพท์เทคนิค: อะไร “ต้องมี” และอะไร “ยังไม่ต้องมี”</h2>
+
+  <div class="note" style="font-size:16px">
+    <b>กฎสำคัญ:</b> ถ้าทำ Content Agent, Slide Agent, Research Agent หรือผู้ช่วยงานใน ChatGPT
+    <b>ยังไม่ต้องสร้าง Repo และ Environment</b> — ใช้ Project + Instructions + Files + Work ก็เริ่มได้แล้ว
+  </div>
+
+  <table class="table" style="margin-top:12px">
+    <thead><tr><th>คำนี้คืออะไร</th><th>อธิบายแบบง่าย</th><th>ต้องใช้เมื่อไหร่</th><th>ไม่ใช้ได้ไหม</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>Project</b></td>
+        <td>ห้องงานของเรื่องหนึ่ง รวม Chat, Files, Instructions และ Context ไว้ด้วยกัน</td>
+        <td>ทำงานต่อเนื่อง เช่น Content, Brand, Course, Client</td>
+        <td><b>ได้</b> แต่ถ้างานยาว Project ช่วยไม่ให้ข้อมูลกระจัดกระจาย</td>
+      </tr>
+      <tr>
+        <td><b>Skill</b></td>
+        <td>SOP หรือวิธีทำงานที่อยากให้ AI ทำซ้ำแบบเดิมทุกครั้ง</td>
+        <td>งานที่มีขั้นตอนประจำ เช่น “คิด Hook → เขียน Script → QA”</td>
+        <td><b>ได้</b> ช่วงทดลองใช้ Prompt ธรรมดาก่อนได้</td>
+      </tr>
+      <tr>
+        <td><b>Repo</b></td>
+        <td>โฟลเดอร์โปรเจกต์ที่มีระบบจัด Version เช่น Git/GitHub — เป็น “ตัวงานจริง” ของเว็บ แอป หรือ Automation</td>
+        <td>เมื่อ Codex ต้องแก้เว็บไซต์ แอป Script หรือระบบที่มีไฟล์หลายไฟล์</td>
+        <td><b>ได้</b> ถ้าไม่ได้ทำระบบ/โค้ด หรือกำลังทดลองในโฟลเดอร์ธรรมดา</td>
+      </tr>
+      <tr>
+        <td><b>Environment</b></td>
+        <td>เครื่องมือที่ทำให้โปรเจกต์รันได้ เช่น Python, Node, Libraries, สิทธิ์เข้าถึง และ Network</td>
+        <td>สำคัญเมื่อใช้ <b>Codex Cloud</b> เพราะเครื่อง Cloud ต้องรู้ว่าต้องเตรียมอะไรให้โปรเจกต์</td>
+        <td><b>ไม่ต้องสร้าง Cloud Environment</b> ถ้าใช้ Chat/Work หรือใช้ Codex บนเครื่องตัวเอง</td>
+      </tr>
+      <tr>
+        <td><b>Plugin</b></td>
+        <td>แพ็กเกจที่รวม Skill และ/หรือการเชื่อมเครื่องมือ เช่น MCP / Apps</td>
+        <td>เมื่ออยากให้ AI ใช้วิธีทำงานเดิมและเรียกเครื่องมือเดิมซ้ำได้</td>
+        <td><b>ได้</b> เริ่มจาก Prompt + Project ก่อน แล้วค่อยทำ Plugin เมื่อ Workflow ลงตัว</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="grid3" style="margin-top:12px">
+    <div class="card">
+      <h3>Content / Slide Agent</h3>
+      <p><b>เริ่มได้เลย</b></p>
+      <p>Project + Files + Instructions + Work</p>
+      <p class="small">ไม่ต้อง Repo<br>ไม่ต้อง Environment<br>ไม่ต้อง Agents SDK</p>
+    </div>
+    <div class="card">
+      <h3>Website / Automation</h3>
+      <p><b>เริ่มแตะ Codex</b></p>
+      <p>Folder/Repo + Codex</p>
+      <p class="small">ถ้าใช้ My Computer ใช้ Environment บนเครื่อง<br>ถ้าใช้ Cloud ต้องเตรียม Cloud Environment</p>
+    </div>
+    <div class="card dark">
+      <h3>Agent Application จริง</h3>
+      <p><b>ขั้นนักพัฒนา</b></p>
+      <p>Agents API หรือ Agents SDK + Tools + ระบบของบริษัท</p>
+      <p class="small" style="color:#f5dfe4">จำเป็นเมื่อจะทำ Agent เป็น Product / App / Backend จริง ๆ เท่านั้น</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2 class="section-title">5) Repo กับ Environment — ทำไมต้องมี และสร้างยังไง?</h2>
+
+  <div class="grid2">
+    <div class="card">
+      <h3>Repo = “แฟ้มงานของระบบ”</h3>
+      <p>สมมติสร้างเว็บร้านค้า Repo คือโฟลเดอร์ที่มีไฟล์เว็บทั้งหมด เช่น หน้าเว็บ รูป Script และไฟล์ตั้งค่า พร้อมประวัติว่าใครแก้อะไรเมื่อไหร่</p>
+      <p><b>มันช่วยอะไร:</b> Codex รู้ว่าของเดิมอยู่ตรงไหน แก้อะไรได้บ้าง และเราย้อน Version ได้</p>
+      <p><b>ไม่ทำได้ไหม:</b> ได้ ถ้ายังทดลองงานเล็ก ๆ หรือใช้โฟลเดอร์ธรรมดา แต่ถ้าเริ่มเป็นระบบจริงควรใช้ Git/Repo</p>
+    </div>
+    <div class="card">
+      <h3>Environment = “โต๊ะทำงาน + เครื่องมือ”</h3>
+      <p>ไฟล์อย่างเดียวรันไม่ได้ ถ้าไม่มีโปรแกรมและ Library ที่ต้องใช้ เช่น Python, Node.js, ffmpeg หรือสิทธิ์เชื่อม API</p>
+      <p><b>มันช่วยอะไร:</b> ทำให้ Codex เปิดโปรเจกต์ Run, Test และแก้ระบบได้จริง</p>
+      <p><b>ไม่ทำได้ไหม:</b> ถ้าใช้ My Computer เครื่องเรามี Environment อยู่แล้วบางส่วน แต่ถ้าใช้ Codex Cloud ต้องเตรียม Cloud Environment ให้พร้อมก่อนใช้งานซ้ำ</p>
+    </div>
+  </div>
+
+  <div class="note" style="margin-top:12px;font-size:15px">
+    <b>ตัวอย่างให้เห็นภาพ:</b><br>
+    ไฟล์ Premiere/CapCut Project = คล้าย Repo<br>
+    โปรแกรม CapCut + Codec + Font + Plugin ที่เครื่องต้องมี = คล้าย Environment<br>
+    วิธีตัดคลิปของทีม = Skill
+  </div>
+
+  <h3 style="color:var(--burg);font-size:21px;margin:18px 0 8px">ถ้าจะใช้ Codex Cloud จากมือถือ ต้อง Setup ครั้งแรกแบบนี้</h3>
+  <div class="card">
+    <div class="step"><b>ทำบน Desktop หรือ Web ก่อน</b> → เปิด Codex → เลือก Cloud → สร้าง/ตั้งค่า Environment</div>
+    <div class="step"><b>เลือก Project/Repository</b> ที่ Codex จะทำงานด้วย ถ้าโปรเจกต์อยู่ GitHub ให้เชื่อม GitHub แล้วเลือก Repo</div>
+    <div class="step"><b>ให้ระบบเตรียม Dependencies</b> เช่น <code>npm install</code> หรือ <code>pip install -r requirements.txt</code> ถ้าโปรเจกต์ต้องใช้</div>
+    <div class="step"><b>เพิ่มสิทธิ์ที่จำเป็น</b> เช่น API credentials หรือ Network access เฉพาะบริการที่งานต้องใช้ — อย่าใส่รหัสลับไว้ใน Repo</div>
+    <div class="step"><b>Test Environment</b> ให้โปรเจกต์เปิด/รัน/Test ได้จริง</div>
+    <div class="step"><b>Publish Environment</b> เพื่อให้ใช้ Setup นี้ซ้ำกับ Task ใหม่ได้</div>
+    <div class="step">จากนั้นเปิด <b>มือถือ → Codex → Cloud → เลือก Environment → พิมพ์งาน</b> งาน Cloud ทำต่อได้แม้คอมเราหลับ</div>
+  </div>
+
+  <div class="prompt" id="pcloud">ช่วยตรวจโปรเจกต์นี้เพื่อเตรียมใช้กับ Codex Cloud
+
+ทำตามลำดับ:
+1. ตรวจว่าโปรเจกต์ใช้ภาษาและ framework อะไร
+2. ตรวจว่าต้องติดตั้ง dependencies อะไรบ้าง
+3. บอกคำสั่ง setup ที่ต้องใช้
+4. บอกว่าต้องใช้ environment variables / credentials อะไร โดยห้ามแสดง secret จริง
+5. บอกว่า network ต้องอนุญาต domain ใดบ้าง
+6. บอกวิธี test ว่า environment พร้อมแล้ว
+7. สรุปเป็น checklist ก่อน Publish Environment
+
+ถ้าสิ่งไหนยังไม่จำเป็น อย่าเพิ่มเข้ามา<button class="copy" onclick="copyText('pcloud')">COPY</button></div>
+</section>
+
+<section class="section">
+  <h2 class="section-title">6) Codex: Cloud vs My Computer — เลือกจาก “งานอยู่ที่ไหน”</h2>
+  <div class="grid2">
+    <div class="card">
+      <h3>Cloud</h3>
+      <p><b>Codex ทำงานบนเครื่องของ OpenAI</b></p>
+      <ul>
+        <li>เหมาะเมื่ออยากสั่งจากมือถือแล้วปล่อยงานทำต่อ</li>
+        <li>คอมของเรา Sleep ได้ งาน Cloud ยังทำต่อ</li>
+        <li>ต้องมี <b>Published Environment</b> สำหรับโปรเจกต์นั้น</li>
+        <li>ถ้าทำกับระบบเดิม ควรมี Repo เพื่อเก็บ Source และ Version</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>My Computer</h3>
+      <p><b>Codex ทำงานกับเครื่องจริงของเรา</b></p>
+      <ul>
+        <li>เหมาะกับไฟล์ Local, Terminal และโปรแกรมที่ติดตั้งในเครื่อง</li>
+        <li>เริ่มง่ายกว่าเมื่อโปรเจกต์ยังอยู่ในโฟลเดอร์เครื่อง</li>
+        <li>ไม่ต้องสร้าง Cloud Environment ก่อน</li>
+        <li>แต่เครื่องต้องเปิดและออนไลน์ถ้าจะ Remote จากมือถือ</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="note" style="margin-top:12px">
+    <b>เลือกแบบนี้:</b> ถ้างานต้องใช้ไฟล์/โปรแกรมใน Mac ตอนนี้ → <b>My Computer</b><br>
+    ถ้าอยากฝากงานไว้ให้ Codex ทำบน Cloud และคุมจากมือถือ → <b>Cloud</b>
+  </div>
+</section>
+
+<section class="section">
+  <h2 class="section-title">7) AI Agent สร้างเองได้ 3 ระดับ — ไม่ต้องเริ่มจากโค้ดทุกคน</h2>
+
+  <div class="grid3">
+    <div class="card">
+      <h3>LEVEL 1 — Agent ใน ChatGPT</h3>
+      <p><b>เหมาะกับ:</b> Content, Slide, Research, Marketing</p>
+      <p><b>ใช้:</b> Project + Files + Instructions + Work + Skill/Plugin</p>
+      <p><b>ไม่ต้องมี:</b> Repo / Environment / API / SDK</p>
+      <p class="kicker">นักเรียนทั่วไปควรเริ่มตรงนี้</p>
+    </div>
+    <div class="card">
+      <h3>LEVEL 2 — Agent ทำระบบด้วย Codex</h3>
+      <p><b>เหมาะกับ:</b> เว็บ, Automation, Script, Data Workflow, MCP</p>
+      <p><b>ใช้:</b> Codex + Folder/Repo + Tools</p>
+      <p><b>Cloud:</b> เพิ่ม Environment</p>
+      <p class="kicker">ใช้เมื่อ Agent ต้องสร้างหรือแก้ระบบจริง</p>
+    </div>
+    <div class="card dark">
+      <h3>LEVEL 3 — Agent Application</h3>
+      <p><b>เหมาะกับ:</b> ทำ Agent เป็น Product, App หรือ Backend ของบริษัท</p>
+      <p><b>ทางง่ายกว่า:</b> Agents API — OpenAI จัดการ Agent runtime ให้</p>
+      <p><b>ทางควบคุมมากกว่า:</b> Agents SDK — เราคุม Tools, State, Approvals และ Deployment เอง</p>
+      <p class="small" style="color:#f5dfe4">เป็นงานนักพัฒนา ไม่ใช่ขั้นบังคับสำหรับ Content/Slide Agent</p>
+    </div>
+  </div>
+
+  <h3 style="color:var(--burg);font-size:21px;margin:18px 0 8px">ถ้าถามว่า “แล้วฉันควรเริ่มตรงไหน?”</h3>
+  <table class="table">
+    <thead><tr><th>โจทย์</th><th>เริ่มตรงไหน</th><th>Repo/Environment?</th></tr></thead>
+    <tbody>
+      <tr><td>อยากมี Agent คิด Content ทุกวัน</td><td><b>Project + Work + Skill</b></td><td>ไม่ต้อง</td></tr>
+      <tr><td>อยากมี Agent ทำ Presentation จากข้อมูล</td><td><b>Work + Google Slides/Canva Plugin</b></td><td>ไม่ต้อง</td></tr>
+      <tr><td>อยากให้ AI เตรียมไฟล์/Script เพื่อตัดคลิป</td><td><b>Work + Codex My Computer</b></td><td>Repo ไม่บังคับ / Cloud Env ไม่ต้อง</td></tr>
+      <tr><td>อยากสร้างระบบอัตโนมัติที่รันบน Cloud และสั่งจากมือถือ</td><td><b>Codex Cloud</b></td><td>Environment ต้องมี / Repo แนะนำมาก</td></tr>
+      <tr><td>อยากสร้าง Agent เป็นแอปให้ลูกค้าใช้</td><td><b>Agents API หรือ Agents SDK</b></td><td>โดยทั่วไปต้องมีระบบโปรเจกต์และ Environment</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note" style="margin-top:12px">
+    <b>Agent Builder:</b> ไม่ควรใช้เป็นแกนหลักในการสอนตอนนี้ เพราะ OpenAI กำลังเลิกใช้ และกำหนดปิดวันที่ 30 พ.ย. 2026
+  </div>
+</section>
+
+<section class="section">
+  <h2 class="section-title">8) ทดลองสร้าง Agent ไปพร้อมกัน — 3 Use Case</h2>
+
+  <div class="card" style="margin-bottom:12px">
+    <h3>A. Content Agent — เริ่มที่ Chat/Work</h3>
+    <div class="steps">
+      <div class="step">ChatGPT → New Project → ตั้งชื่อ “Content Agent”</div>
+      <div class="step">ใส่ Brand Guide / Persona / Product / ตัวอย่าง Content</div>
+      <div class="step">เลือก <b>Work</b> ถ้าต้องการให้ทำหลายขั้นและส่งชิ้นงาน</div>
+      <div class="step">วาง Prompt ด้านล่างแล้วทดสอบ</div>
+    </div>
+    <div class="prompt" id="p1">คุณคือ Content Planning Agent ของแบรนด์ [ชื่อแบรนด์]
+
+เป้าหมาย: สร้างคอนเทนต์ที่นำไปใช้ได้จริงและไม่ซ้ำกัน
+
+เมื่อฉันส่งหัวข้อหรือเป้าหมาย ให้ทำตามลำดับ:
+1. อ่านข้อมูลแบรนด์และไฟล์อ้างอิงที่มี
+2. ระบุ Audience และ Objective
+3. สร้าง Hook
+4. วาง Content Angle
+5. เขียน Key Message
+6. เลือก Format ที่เหมาะกับ Facebook / Instagram / TikTok
+7. เขียน CTA
+8. ระบุ KPI ที่ควรวัด
+9. ตรวจซ้ำว่าไม่ขัดกับ Brand Guideline และไม่ซ้ำกับงานเดิม
+
+ส่งผลลัพธ์เป็นตารางสั้น กระชับ พร้อมใช้ทันที<button class="copy" onclick="copyText('p1')">COPY</button></div>
+  </div>
+
+  <div class="card" style="margin-bottom:12px">
+    <h3>B. Slide Agent — ใช้ Work</h3>
+    <div class="steps">
+      <div class="step">ChatGPT → Work</div>
+      <div class="step">อัปโหลดเนื้อหา + Reference Deck/Template</div>
+      <div class="step">ถ้ามี Canva/Google Slides Plugin ให้เชื่อมก่อน</div>
+      <div class="step">วาง Prompt และให้ Work ทำ Deck ให้จบ</div>
+    </div>
+    <div class="prompt" id="p2">ทำหน้าที่เป็น Presentation Agent
+
+งาน: สร้าง Presentation จากไฟล์และข้อมูลที่แนบ
+
+กติกา:
+1. สรุปสาระก่อนออกแบบ
+2. หนึ่งสไลด์มีหนึ่ง Key Message
+3. ตัดข้อความซ้ำและข้อความที่ไม่จำเป็น
+4. ใช้โครงเรื่อง: Problem → Insight → Solution → Action
+5. รักษา CI และ Template ที่แนบ
+6. ใช้ตัวอักษรให้อ่านง่าย ไม่อัดข้อความ
+7. สร้างชิ้นงาน Presentation ที่พร้อมนำเสนอ
+8. ตรวจภาษา ตัวเลข และความสอดคล้องก่อนส่ง
+
+เริ่มทำจากข้อมูลที่แนบได้เลย<button class="copy" onclick="copyText('p2')">COPY</button></div>
+  </div>
+
+  <div class="card">
+    <h3>C. Video / CapCut Agent — ใช้แบบ Hybrid</h3>
+    <p><b>ข้อเท็จจริง:</b> ตอนนี้ไม่ควรสอนว่า “สร้าง Skill แล้ว ChatGPT จะคุม CapCut Desktop ได้ทันที” การควบคุมโดยตรงต้องมี Integration/API/MCP/Computer Control ที่รองรับก่อน</p>
+    <div class="steps">
+      <div class="step">ให้ Chat/Work ทำ Script + Editing Brief + Caption</div>
+      <div class="step">ถ้ามีไฟล์วิดีโอในเครื่อง ให้ Codex My Computer วิเคราะห์ไฟล์และเตรียมรายการตัด</div>
+      <div class="step">เปิด CapCut Desktop → Project → Import clips</div>
+      <div class="step">ไปที่ AI / Smart Edit → Auto Cut (ถ้าบัญชีมี) → เลือก Script Mode/ตัวเลือกที่รองรับ</div>
+      <div class="step">นำ Brief/คำสั่งไปใช้ แล้วตรวจ Timeline ก่อน Export</div>
+    </div>
+    <div class="prompt" id="p3">ทำหน้าที่เป็น Video Editing Prep Agent
+
+โฟลเดอร์งาน: [ใส่ path]
+เป้าหมาย: ทำคลิปแนวตั้ง 9:16 ความยาว 30–45 วินาที สำหรับ Reels/TikTok
+
+ทำดังนี้:
+1. ตรวจไฟล์ทั้งหมดในโฟลเดอร์ โดยห้ามแก้ต้นฉบับ
+2. สรุปว่ามีคลิปอะไรบ้างและความยาวเท่าไร
+3. เลือกช่วงที่ดีที่สุด พร้อม timestamp เข้า-ออก
+4. เรียงลำดับ Hook → Main → Proof/Detail → CTA
+5. สร้างไฟล์ edit_plan.md
+6. สร้าง selects.csv ที่มี filename, in, out, reason
+7. ถ้ามีเสียงพูด ให้สร้าง captions.srt
+8. ระบุคำสั่งสั้น ๆ สำหรับนำไปใช้ต่อใน CapCut Auto Cut / Script Mode
+9. ถ้าขาด dependency เช่น ffmpeg หรือ transcription tool ให้หยุดและบอกสิ่งที่ต้องติดตั้งก่อน
+
+ห้ามลบ ย้าย หรือ overwrite ไฟล์ต้นฉบับ<button class="copy" onclick="copyText('p3')">COPY</button></div>
+  </div>
+</section>
+
+<section class="section">
+  <h2 class="section-title">9) ทำให้ Agent ใช้ซ้ำได้</h2>
+  <div class="grid2">
+    <div class="card">
+      <h3>ถ้าบัญชีมี Plugin Creator</h3>
+      <div class="step">Sidebar → Plugins → Add (+)</div>
+      <div class="step">ติดตั้ง Plugin Creator</div>
+      <div class="step">เริ่มแชทกับ @plugin-creator</div>
+      <div class="step">บอก Role + ขั้นตอน + Output + Apps ที่ต้องใช้</div>
+      <div class="step">Test → แก้ → ใช้งานด้วย @ชื่อปลั๊กอิน</div>
+      <div class="prompt" id="p4">Create a plugin called “Content Production Agent”.
+
+It should:
+- use my brand guidelines and reference files
+- turn a business goal into content ideas, hooks, scripts, CTAs and KPIs
+- check for duplication before finalizing
+- use connected Google Drive/Canva tools when available
+- ask for approval before any external publishing action
+- return concise, production-ready output
+
+Add reusable workflow instructions so the same standard is applied every time.<button class="copy" onclick="copyText('p4')">COPY</button></div>
+    </div>
+    <div class="card">
+      <h3>ถ้าจะสร้าง Agent เป็นระบบจริง</h3>
+      <p>ใช้ <b>Codex + Repo + Environment + Agents SDK</b></p>
+      <p>เหมาะเมื่อ Agent ต้องมี Logic, เรียกหลาย Tool, เชื่อม API, จัดการ State หรือทำงานในระบบของบริษัท</p>
+      <p class="kicker">ไม่ต้องเริ่มตรงนี้ ถ้าโจทย์ยังเป็นแค่ Content / Slide / Research</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2 class="section-title">10) สูตรจำก่อนจบ</h2>
+  <div class="card dark" style="font-size:20px;line-height:1.7">
+    <b>Chat</b> = คุยและคิด<br>
+    <b>Work</b> = มอบงานให้ทำหลายขั้นจนเสร็จ<br>
+    <b>Codex</b> = งานระบบ โค้ด ไฟล์ และ Automation<br>
+    <b>Agent</b> = AI ที่รับเป้าหมายแล้ววางขั้นตอน + ใช้เครื่องมือ + ลงมือทำ<br>
+    <b>Project</b> = ห้องงาน | <b>Repo</b> = ตัวงานจริง | <b>Environment</b> = เครื่องมือให้รันได้ | <b>Skill</b> = SOP | <b>Plugin</b> = Skill + Tools/Apps
+  </div>
+</section>
+</main>
+
+<footer>
+ตรวจสอบกับเอกสารทางการ OpenAI และ CapCut ณ 3 ต.ค. 2026 — OpenAI Help: ChatGPT Work & Codex, Plugins, Skills, Agents SDK, GPT‑5.6 / GPT‑6 Astra; CapCut Help: Auto Cut / AI editing. ฟีเจอร์บางรายการขึ้นกับแพ็กเกจ ภูมิภาค และเวอร์ชันแอป
+</footer>
+</div>
+
+<script>
+function copyText(id){
+  const el=document.getElementById(id);
+  let text=el.innerText.replace("COPY","").trim();
+  navigator.clipboard.writeText(text).then(()=>{
+    const btn=el.querySelector('.copy');
+    const old=btn.textContent; btn.textContent='COPIED';
+    setTimeout(()=>btn.textContent=old,1200);
+  });
+}
+</script>
+</body>
+</html>
