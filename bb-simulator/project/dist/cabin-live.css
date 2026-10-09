@@ -133,16 +133,6 @@
   transition: none;
 }
 
-/* Name chip = role icon + name + one status line, beside the portrait */
-.simRole {
-  display: inline-block;
-  flex-shrink: 0;
-  width: 14px;
-  height: 14px;
-  background: currentColor;
-  -webkit-mask: var(--icon) center / contain no-repeat;
-  mask: var(--icon) center / contain no-repeat;
-}
 .simName {
   gap: 6px;
   align-items: center;
@@ -216,43 +206,7 @@
   display: none;
 }
 
-/* Work sparks during Demo */
-.simSpark {
-  position: absolute;
-  z-index: 95;
-  width: 22px;
-  height: 22px;
-  color: #4f0208;
-  background: none;
-  pointer-events: none;
-  animation: simSpark 1.6s ease-out forwards;
-}
-.simSpark::before {
-  content: "";
-  position: absolute;
-  inset: -4px;
-  border-radius: 50%;
-  background: #fffaf5;
-  box-shadow: 0 2px 6px #20070a55;
-  z-index: -1;
-}
-@keyframes simSpark {
-  from {
-    transform: translate(-50%, 0) scale(0.6);
-    opacity: 0;
-  }
-  20% {
-    opacity: 1;
-    transform: translate(-50%, -30%) scale(1);
-  }
-  to {
-    transform: translate(-50%, -260%) scale(0.9);
-    opacity: 0;
-  }
-}
-
 /* HUD + toolbar */
-.simHud,
 .simToolbar {
   position: absolute;
   top: 10px;
@@ -260,18 +214,15 @@
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-}
-.simHud {
-  left: 10px;
-  flex-direction: column;
-  align-items: flex-start;
-}
-.simToolbar {
   right: 10px;
   justify-content: flex-end;
   max-width: 64%;
 }
 .simHudChip {
+  position: absolute;
+  top: 12px;
+  left: 10px;
+  z-index: 100;
   font-size: 12px;
   line-height: 1.2;
   background: #fffaf5e8;
@@ -280,8 +231,7 @@
   border-radius: 12px;
   white-space: nowrap;
 }
-.simHudChip.isLive::before,
-.simHudChip.isDemo::before {
+.simHudChip::before {
   content: "";
   display: inline-block;
   width: 6px;
@@ -309,143 +259,11 @@
   color: #f6e0e3;
   cursor: pointer;
 }
-.simToolbar button[aria-pressed="false"] {
+.simToolbar button:not(.simQuiet)[aria-pressed="false"] {
   opacity: 0.55;
 }
-.simToolbar button[data-panel][aria-pressed="true"] {
-  background: #f6e0e3;
-  color: #4f0208;
-}
-
-/* Log / Status Board sheet */
-.simPanel {
-  position: absolute;
-  left: 10px;
-  right: 10px;
-  bottom: 10px;
-  z-index: 120;
-  max-height: 58%;
-  display: flex;
-  flex-direction: column;
-  background: #2a0105f2;
-  border-radius: 14px;
-  box-shadow: 0 -6px 24px #12000366;
-  color: #fff;
-}
-.simPanelHead {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 10px 14px 8px;
-  border-bottom: 1px solid #f6e0e32b;
-  font-size: 15px;
-}
-.simPanelHead button {
-  min-height: 36px;
-  border: 0;
-  background: none;
+.simToolbar .simQuiet {
   color: #f6e0e3;
-  font-size: 14px;
-  cursor: pointer;
-}
-.simPanelBody {
-  overflow: auto;
-  padding: 8px 14px 12px;
-}
-.simPanelLog {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 8px;
-  font-size: 14px;
-}
-.simPanelLog li {
-  display: flex;
-  gap: 10px;
-  color: #f6e0e3;
-}
-.simPanelLog time {
-  font-size: 12px;
-  opacity: 0.7;
-  flex-shrink: 0;
-  font-variant-numeric: tabular-nums;
-}
-.simBoardNote {
-  margin: 4px 0 8px;
-  font-size: 13px;
-  color: #f6e0e3;
-}
-.simBoardSteps {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-bottom: 8px;
-}
-.simBoardSteps span {
-  font-size: 12px;
-  padding: 3px 9px;
-  border-radius: 12px;
-  background: #f6e0e31f;
-  color: #f6e0e3;
-}
-.simBoardSteps span.isDone {
-  background: #f6e0e3;
-  color: #4f0208;
-}
-.simBoardList {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 2px;
-}
-.simBoardList li {
-  display: grid;
-  grid-template-columns: auto 64px minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 10px;
-  padding: 6px 4px;
-  border-bottom: 1px solid #f6e0e31a;
-  cursor: pointer;
-}
-.simBoardList .simAvatar {
-  zoom: 0.72;
-}
-.simBoardWho {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.2;
-}
-.simBoardWho strong {
-  font-size: 14px;
-  font-weight: 500;
-}
-.simBoardWho small,
-.simBoardStatus {
-  font-size: 12px;
-  color: #f6e0e3;
-}
-.simBoardStatus {
-  overflow-wrap: anywhere;
-}
-.simBoardList em {
-  font-style: normal;
-  font-size: 11px;
-  padding: 2px 8px;
-  border-radius: 10px;
-  background: #f6e0e31f;
-  color: #f6e0e3;
-  white-space: nowrap;
-}
-.simBoardList em.isWorking {
-  background: #f7cb3f;
-  color: #350207;
-}
-.simBoardList em.isWaiting {
-  background: #f6e0e3;
-  color: #4f0208;
 }
 
 /* Paused / reduced motion */
@@ -458,8 +276,7 @@
 @media (prefers-reduced-motion: reduce) {
   .simCloud,
   .simLight,
-  .simTrail polyline,
-  .simSpark {
+  .simTrail polyline {
     animation: none !important;
   }
 }
@@ -470,10 +287,6 @@
   .simStatus {
     font-size: 10.5px;
     max-width: 24cqw;
-  }
-  .simRole {
-    width: 12px;
-    height: 12px;
   }
   .simName {
     padding: 3px 8px 3px 6px;
@@ -491,18 +304,502 @@
     min-height: 34px;
   }
 }
-.simRole.is-command {
-  --icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M4%2014a8%208%200%200%201%200-4M8%2012h.01M20%2010a8%208%200%200%201%200%204M7.5%2016.5a6%206%200%200%201%200-9M16.5%207.5a6%206%200%200%201%200%209%22/%3E%3C/svg%3E");
+
+/* ===== 2.5D stage (cabin-cam.js) ===== */
+.simLayout {
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 380px);
+  gap: 24px;
 }
-.simRole.is-camera {
-  --icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%223%22%20y%3D%227%22%20width%3D%2218%22%20height%3D%2213%22%20rx%3D%222%22/%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2213.5%22%20r%3D%223.5%22/%3E%3Cpath%20d%3D%22M9%207l1.5-3h3L15%207%22/%3E%3C/svg%3E");
+.simWorld {
+  position: relative;
+  display: block;
 }
-.simRole.is-timeline {
-  --icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M4%207h10M4%2012h16M4%2017h7%22/%3E%3Cpath%20d%3D%22M17%204v16%22/%3E%3C/svg%3E");
+.simScene {
+  width: 100%;
+  height: clamp(520px, calc(100svh - 190px), 900px);
+  margin: 0;
+  perspective: 1700px;
+  perspective-origin: 50% 40%;
+  background: radial-gradient(ellipse at 50% 40%, #66101a 0%, #3a0207 62%, #2b0105 100%);
+  touch-action: pan-y;
+  cursor: grab;
+  user-select: none;
 }
-.simRole.is-pen {
-  --icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M4%2020l1.5-5L16%204.5l3.5%203.5L9%2018.5z%22/%3E%3Cpath%20d%3D%22M14%206.5l3.5%203.5%22/%3E%3C/svg%3E");
+.simScene[data-dragged="true"] {
+  cursor: grabbing;
 }
-.simRole.is-check {
-  --icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%225%22%20y%3D%223.5%22%20width%3D%2214%22%20height%3D%2217%22%20rx%3D%222%22/%3E%3Cpath%20d%3D%22M8.5%2012.5l2.5%202.5%204.5-5%22/%3E%3C/svg%3E");
+.simCam {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 600px;
+  height: 900px;
+  transform-origin: 0 0;
+  transform-style: preserve-3d;
+}
+.simCam > .simEnvironment {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  filter: drop-shadow(0 30px 30px #1a0004aa);
+}
+.simCam > .simSky {
+  position: absolute;
+  inset: -45% -60%;
+  transform: translateZ(-260px);
+  background: none;
+  overflow: visible;
+}
+.simCam .simLights,
+.simCam .simTrail {
+  transform: translateZ(1px);
+}
+.simCam .simActors {
+  transform-style: preserve-3d;
+  transform: translateZ(2px);
+}
+/* Billboards: undo the camera rotation so each person faces the viewer. */
+.simCam .simActor {
+  transform-origin: 0 0;
+  transform: rotateZ(calc(var(--yaw, 0deg) * -1)) rotateX(calc(var(--pitch, 0deg) * -1)) translate(-50%, -100%);
+}
+.simCam .simParcel {
+  transform-origin: 0 0;
+  transform: rotateZ(calc(var(--yaw, 0deg) * -1)) rotateX(calc(var(--pitch, 0deg) * -1)) translate(-50%, -110%);
+}
+/* Chips keep a readable size whatever the zoom. */
+.simCam .simName {
+  zoom: clamp(1, calc(var(--inv, 1) * 0.8), 2.4);
+}
+.simCam .simActor[data-label="left"] .simName,
+.simCam .simActor[data-label="right"] .simName {
+  bottom: 6%;
+}
+.simCam .simActor:focus-visible {
+  outline: none;
+}
+.simCam .simActor:focus-visible .simSprite {
+  outline: 3px solid #f6e0e3;
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+/* Camera controls */
+.simCamCtl {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 110;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.simCamCtl button {
+  min-width: 44px;
+  min-height: 40px;
+  padding: 4px 8px;
+  border: 0;
+  border-radius: 12px;
+  background: #fffaf5e8;
+  color: #4f0208;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 2px 8px #20070a40;
+}
+.simCamCtl button:nth-last-child(-n + 2) {
+  font-size: 12px;
+}
+
+/* KPI tiles over the top of the stage */
+.simKpis {
+  position: absolute;
+  z-index: 120;
+  top: 54px;
+  left: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  pointer-events: none;
+}
+.simKpi {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: baseline;
+  column-gap: 8px;
+  min-width: 132px;
+  padding: 7px 11px;
+  border-radius: 12px;
+  background: #fffaf5e8;
+  color: #4f0208;
+  box-shadow: 0 2px 8px #20070a33;
+}
+.simKpi strong {
+  grid-row: span 2;
+  font-size: 22px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.simKpi span {
+  font-size: 12px;
+  font-weight: 500;
+}
+.simKpi small {
+  font-size: 10.5px;
+  color: #8a5a60;
+}
+
+/* Production tracking under the stage */
+.simTrack {
+  margin-top: 12px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: #350207;
+}
+.simTrackHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.simTrackHead strong {
+  font-size: 15px;
+  font-weight: 500;
+}
+.simTrackHead small {
+  color: #f6e0e3;
+  font-size: 12px;
+}
+.simTrack ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+.simTrack li {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  text-align: center;
+  font-size: 12px;
+}
+.simTrack li i {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid #f6e0e366;
+  background: #350207;
+  z-index: 1;
+}
+.simTrack li::before {
+  content: "";
+  position: absolute;
+  top: 7px;
+  left: -50%;
+  width: 100%;
+  height: 2px;
+  background: #f6e0e333;
+}
+.simTrack li:first-child::before {
+  display: none;
+}
+.simTrack li.isDone i {
+  background: #f6e0e3;
+  border-color: #f6e0e3;
+}
+.simTrack li.isDone::before {
+  background: #f6e0e3;
+}
+.simTrack li.isActive i {
+  background: #f7cb3f;
+  border-color: #f7cb3f;
+  box-shadow: 0 0 0 4px #f7cb3f33;
+}
+.simTrack li small {
+  font-size: 10.5px;
+  color: #f6e0e3;
+  opacity: 0.8;
+}
+
+/* Side panel cards */
+.simSide {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.simCard {
+  padding: 14px;
+  border-radius: 14px;
+  background: #350207;
+}
+.simSide .routing {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+.simCrewTabs {
+  display: flex;
+  gap: 4px;
+  margin: 0 0 12px;
+  padding: 0;
+}
+.simCrewTabs button {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 6px 2px;
+  min-height: 0;
+  border: 0;
+  border-radius: 10px;
+  background: none;
+  color: #f6e0e3;
+  font-size: 12px;
+  cursor: pointer;
+}
+.simCrewTabs button[aria-pressed="true"] {
+  background: #f6e0e31f;
+  color: #fff;
+}
+.simCrewTabs .simAvatar {
+  box-shadow: 0 0 0 1px #f6e0e355;
+}
+.simCrewTabs button[aria-pressed="true"] .simAvatar {
+  box-shadow: 0 0 0 2px #f6e0e3;
+}
+.simIdentity {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 12px;
+}
+.simIdentity h1 > .type {
+  height: 28px;
+}
+.simIdentity strong {
+  margin-top: 4px;
+  font-size: 15px;
+}
+.simState {
+  align-self: start;
+  font-size: 11.5px;
+  padding: 3px 9px;
+  border-radius: 10px;
+  background: #f6e0e31f;
+  color: #f6e0e3;
+  white-space: nowrap;
+}
+.simState.isWorking {
+  background: #f7cb3f;
+  color: #350207;
+}
+.simState.isWaiting {
+  background: #f6e0e3;
+  color: #4f0208;
+}
+.simNow {
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #4f0208;
+}
+.simNowLabel {
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: #f6e0e3;
+}
+.simNowText {
+  margin: 2px 0 8px;
+  font-size: 15px;
+}
+.simProgress {
+  height: 6px;
+  border-radius: 3px;
+  background: #f6e0e326;
+  overflow: hidden;
+}
+.simProgress span {
+  display: block;
+  height: 100%;
+  background: #f6e0e3;
+  border-radius: 3px;
+  transition: width 0.4s;
+}
+.simProgressText {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  color: #f6e0e3;
+}
+.simActions {
+  margin-top: 12px;
+}
+.simActions button {
+  font-size: 14px;
+  min-height: 44px;
+}
+.simSectionTitle h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 500;
+}
+.simModeChip {
+  font-size: 11.5px;
+  padding: 3px 9px;
+  border-radius: 10px;
+  background: #f6e0e31f;
+  color: #f6e0e3;
+}
+.simLogFilters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 8px 0 10px;
+}
+.simLogFilters button {
+  min-height: 32px;
+  padding: 4px 11px;
+  border: 0;
+  border-radius: 16px;
+  background: #f6e0e31a;
+  color: #f6e0e3;
+  font-size: 12.5px;
+  cursor: pointer;
+}
+.simLogFilters button[aria-pressed="true"] {
+  background: #f6e0e3;
+  color: #4f0208;
+}
+.simLogFilters select {
+  min-height: 32px;
+  padding: 4px 8px;
+  border-radius: 16px;
+  font-size: 12.5px;
+  margin-left: auto;
+}
+.simLogList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 300px;
+  overflow: auto;
+}
+.simLogList li {
+  display: grid;
+  grid-template-columns: 58px 22px 48px 50px minmax(0, 1fr);
+  align-items: center;
+  gap: 6px;
+  padding: 7px 0;
+  border-bottom: 1px solid #f6e0e31a;
+  font-size: 12.5px;
+}
+.simLogList time {
+  font-size: 11px;
+  color: #f6e0e3;
+  opacity: 0.75;
+  font-variant-numeric: tabular-nums;
+}
+.simLogWho {
+  font-weight: 500;
+}
+.simLogList em {
+  font-style: normal;
+  font-size: 10.5px;
+  font-weight: 600;
+  text-align: center;
+  padding: 2px 0;
+  border-radius: 8px;
+  background: #f6e0e31f;
+  color: #f6e0e3;
+}
+.simLogList em.is-start {
+  background: #f7cb3f;
+  color: #350207;
+}
+.simLogList em.is-send {
+  background: #e8b9c0;
+  color: #350207;
+}
+.simLogList em.is-done,
+.simLogList em.is-save {
+  background: #f6e0e3;
+  color: #4f0208;
+}
+.simLogText {
+  overflow-wrap: anywhere;
+}
+.simLogEmpty {
+  display: block !important;
+  color: #f6e0e3;
+}
+@media (max-width: 900px) {
+  .simLayout {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 680px) {
+  .simScene {
+    height: min(120vw, 560px);
+  }
+  .simKpis {
+    position: static;
+    flex-direction: row;
+    overflow-x: auto;
+    margin: 0 0 10px;
+    pointer-events: auto;
+  }
+  .simKpi {
+    min-width: 116px;
+  }
+  .simKpi strong {
+    font-size: 19px;
+  }
+  .simTrack ol {
+    grid-template-columns: repeat(7, minmax(44px, 1fr));
+    overflow-x: auto;
+  }
+  .simTrack li {
+    font-size: 11px;
+  }
+  .simLogList li {
+    grid-template-columns: 54px 22px 44px 46px minmax(0, 1fr);
+    font-size: 12px;
+  }
+  .simCamCtl {
+    top: auto;
+    bottom: 10px;
+    right: 50%;
+    transform: translateX(50%);
+    flex-direction: row;
+    gap: 4px;
+  }
+  .simCamCtl button {
+    min-height: 38px;
+    min-width: 40px;
+    padding: 4px 7px;
+  }
+}
+/* Only people and controls take taps; the floor and effects never block them. */
+.simCam > .simEnvironment,
+.simCam > .simSky,
+.simCam .simLights,
+.simCam .simTrail,
+.simCam .simParcel {
+  pointer-events: none;
+}
+/* Kitty sits right above Leo: lift her chip so it never lands on Leo's face. */
+.simCam .simActor[data-index="2"] .simName {
+  bottom: 42%;
+}
+/* Chicha sits behind Tidy: keep her chip beside her own face, above Tidy. */
+.simCam .simActor[data-index="4"] .simName {
+  bottom: 58%;
 }

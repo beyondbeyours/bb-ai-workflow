@@ -11,7 +11,7 @@
       sub: "Direction & Approval",
       x: 50,
       y: 73.2,
-      label: "below",
+      label: "right",
       sprite: 0,
       member: 0,
       avatar: [512, 470, 330],

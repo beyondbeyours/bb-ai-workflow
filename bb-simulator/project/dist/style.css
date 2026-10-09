@@ -1818,3 +1818,342 @@ textarea {
   margin: 14px 0 0;
   min-height: 48px;
 }
+
+/* ===== Work Zone home (workzone.js) ===== */
+.worklaunch.wz {
+  display: block;
+  margin: 0 0 32px;
+}
+.wzHero {
+  position: relative;
+  height: 210px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--deep);
+}
+.wzHero > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 32%;
+  display: block;
+}
+.wzHero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #350207f2 0%, #350207b3 38%, #35020700 70%);
+  pointer-events: none;
+}
+.wzHeroText {
+  position: absolute;
+  left: 24px;
+  bottom: 22px;
+  z-index: 1;
+  pointer-events: none;
+}
+.wzHeroText h1 {
+  margin: 0 0 6px;
+}
+.wzHeroText h1 .type {
+  height: 40px;
+}
+.wzHeroText p {
+  margin: 0;
+  color: var(--pink);
+  font-size: 15px;
+}
+.wzGrid {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  grid-template-areas: "current lanes" "current recent";
+  gap: 16px;
+  margin-top: 16px;
+}
+.wzCard {
+  min-width: 0;
+  padding: 18px;
+  border-radius: 16px;
+  background: var(--deep);
+}
+.wzCurrent {
+  grid-area: current;
+}
+.wzLanes {
+  grid-area: lanes;
+}
+.wzRecent {
+  grid-area: recent;
+}
+.wzCard header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+.wzCard h2 {
+  margin: 0 0 10px;
+  font-size: 18px;
+  font-weight: 500;
+}
+.wzCard header small {
+  color: var(--pink);
+  font-size: 12px;
+}
+.wzTitle {
+  margin: 0 0 14px;
+  font-size: 24px;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+.wzTitle.isEmpty {
+  color: var(--pink);
+  font-size: 18px;
+  font-weight: 400;
+}
+.wzSteps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+.wzSteps button {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  min-height: 74px;
+  padding: 10px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--wine);
+  color: #fff;
+  text-align: left;
+  cursor: pointer;
+}
+.wzSteps i {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid #f6e0e388;
+}
+.wzSteps span {
+  font-size: 14px;
+  font-weight: 500;
+}
+.wzSteps small {
+  font-size: 11.5px;
+  color: var(--pink);
+}
+.wzSteps button.isDone i {
+  background: var(--pink);
+  border-color: var(--pink);
+}
+.wzSteps button:hover {
+  background: #640a12;
+}
+.wzMissing {
+  margin-top: 16px;
+}
+.wzMissing strong {
+  font-size: 14px;
+  font-weight: 500;
+}
+.wzMissing ul {
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 6px;
+}
+.wzMissing li {
+  font-size: 14px;
+  color: var(--pink);
+  padding-left: 16px;
+  position: relative;
+}
+.wzMissing li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 0.6em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--yellow);
+}
+.wzMissing li.isOk::before {
+  background: var(--pink);
+}
+.wzMissing li.isMore::before {
+  display: none;
+}
+.wzActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+.wzActions button {
+  min-height: 48px;
+}
+.wz #resumeBrief {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  margin: 0;
+  padding: 10px 18px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--pink);
+  color: var(--wine);
+  font-size: 16px;
+  font-weight: 500;
+}
+.wz #resumeBrief[hidden] {
+  display: none;
+}
+.wz #resumeInfo {
+  color: var(--wine);
+  font-size: 12px;
+  font-weight: 400;
+}
+.wz .startbrief {
+  width: auto;
+  min-height: 48px;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.wz .startbrief.isSecondary {
+  background: transparent;
+  color: var(--pink);
+  box-shadow: inset 0 0 0 1px #f6e0e355;
+}
+.wzConfirm {
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  margin-top: 2px;
+}
+.isArmed {
+  box-shadow: inset 0 0 0 2px var(--yellow) !important;
+}
+.wzLaneList {
+  display: grid;
+  gap: 8px;
+}
+.wzLane {
+  display: grid;
+  gap: 3px;
+  padding: 12px 14px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--wine);
+  color: #fff;
+  text-align: left;
+  cursor: pointer;
+}
+.wzLane strong {
+  font-size: 15px;
+  font-weight: 500;
+}
+.wzLane span {
+  font-size: 12.5px;
+  color: var(--pink);
+  line-height: 1.5;
+}
+.wzLane small {
+  font-size: 12px;
+  color: #fff;
+  opacity: 0.85;
+}
+.wzLane.isCurrent {
+  box-shadow: inset 3px 0 0 var(--pink);
+}
+.wzLane:hover {
+  background: #640a12;
+}
+.wzRecent ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 6px;
+}
+.wzRecent li button {
+  width: 100%;
+  display: grid;
+  gap: 2px;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--wine);
+  color: #fff;
+  text-align: left;
+  cursor: pointer;
+}
+.wzRecent li strong {
+  font-size: 14.5px;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+.wzRecent li span,
+.wzRecent li small {
+  font-size: 12px;
+  color: var(--pink);
+}
+.wzEmpty {
+  color: var(--pink);
+  font-size: 14px;
+}
+.wzLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 12px;
+}
+.wzLinks .textbutton {
+  min-height: 44px;
+  margin: 0 !important;
+}
+@media (max-width: 860px) {
+  .wzGrid {
+    grid-template-columns: 1fr;
+    grid-template-areas: "current" "lanes" "recent";
+  }
+}
+@media (max-width: 680px) {
+  .wzHero {
+    height: 170px;
+    margin: 0 -18px;
+    border-radius: 0;
+  }
+  .wzHeroText {
+    left: 18px;
+    bottom: 16px;
+  }
+  .wzHeroText h1 .type {
+    height: 32px;
+  }
+  .wzSteps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .wzCard {
+    padding: 14px;
+  }
+  .wzTitle {
+    font-size: 20px;
+  }
+}
+.wzCard header {
+  max-width: none;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}

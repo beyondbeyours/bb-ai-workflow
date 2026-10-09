@@ -7,7 +7,12 @@ const assert = require("node:assert/strict");
   const out = process.argv[2] || ".",
     url = process.argv[3] || "http://localhost:4173/";
   const b = await chromium.launch();
-  const ctx = await b.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, deviceScaleFactor: 2 });
+  const ctx = await b.newContext({
+    viewport: { width: Number(process.env.W || 390), height: 844 },
+    isMobile: !process.env.W,
+    hasTouch: !process.env.W,
+    deviceScaleFactor: 2,
+  });
   const p = await ctx.newPage();
   const errs = [];
   p.on("pageerror", (e) => errs.push(e.message));
@@ -28,44 +33,55 @@ const assert = require("node:assert/strict");
     [4, "Chicha"],
     [0, "BB"],
   ];
-  // Living cabin: HUD, toolbar, Log and Status Board.
+  // Stage, global status, production tracking, log, camera.
   const cabinShown = await p.isVisible("#simScene");
-  ok("cabin is the main view", () => assert(cabinShown));
-  const hud = await p.textContent(".simHud");
-  ok("HUD says Workspace, not live production", () => {
+  ok("jet stage is the main view", () => assert(cabinShown));
+  const hud = await p.textContent(".simHudChip");
+  ok("mode chip says Workspace, not live production", () => {
     assert.match(hud, /Workspace/);
     assert.doesNotMatch(hud, /LIVE/);
   });
   const statusCount = await p.$$eval(".simStatus", (e) => e.filter((x) => x.textContent.trim()).length);
   ok("every crew chip has a status line", () => assert.equal(statusCount, 5));
-  await p.click('.simToolbar [data-panel="board"]');
-  const boardRows = await p.$$eval(".simBoardList li", (e) => e.length);
-  const boardText = await p.textContent(".simPanel");
-  ok("Status Board lists all five crew", () => assert.equal(boardRows, 5));
-  ok("Status Board states Export is not connected", () => assert.match(boardText, /ยังไม่เชื่อม/));
-  await p.click(".simBoardList li:nth-child(4)");
-  const fromBoard = await p.getAttribute("#simIdentity h1 img", "alt");
-  ok("Board row opens Tidy", () => assert.equal(fromBoard, "Tidy"));
-  await p.click('.simToolbar [data-panel="log"]');
-  const logText = await p.textContent(".simPanel");
-  ok("Log shows activity", () => assert.match(logText, /เปิด Cockpit/));
-  await p.click(".simPanelHead button");
-  const panelHidden = await p.isHidden(".simPanel");
-  ok("panel closes", () => assert(panelHidden));
+  const kpis = await p.$$eval(".simKpi", (e) => e.length);
+  const kpiText = await p.textContent("#simKpis");
+  ok("four KPI tiles", () => assert.equal(kpis, 4));
+  ok("KPI says real production is not connected", () => assert.match(kpiText, /ยังไม่เชื่อมระบบผลิต/));
+  const trackSteps = await p.$$eval("#simTrack li", (e) => e.length);
+  ok("production tracking shows 7 steps", () => assert.equal(trackSteps, 7));
+  const logText = await p.textContent("#simLog");
+  ok("execution log shows opening entry", () => assert.match(logText, /เปิด Cockpit/));
+  await p.click('#simLogFilters button:has-text("Demo")');
+  const demoOnly = await p.textContent("#simLog");
+  ok("Demo log filter hides workspace entries", () => assert.match(demoOnly, /ยังไม่มีรายการ/));
+  await p.click('#simLogFilters button:has-text("ทั้งหมด")');
   await p.click('.simToolbar button:has-text("สถานะ")');
   const statusHidden = await p.isHidden(".simStatus >> nth=0");
   ok("status toggle hides status lines", () => assert(statusHidden));
   await p.click('.simToolbar button:has-text("สถานะ")');
+  const camBefore = await p.getAttribute("#simCam", "style");
+  await p.click('.simCamCtl button[aria-label="หมุนขวา"]');
+  await p.waitForTimeout(800);
+  const camAfter = await p.getAttribute("#simCam", "style");
+  ok("rotate button turns the camera", () => assert.notEqual(camBefore, camAfter));
+  await p.click('.simCamCtl button[aria-label="สลับมุมบนกับมุมเอียง"]');
+  await p.waitForTimeout(800);
+  const top = await p.evaluate(() => document.getElementById("simScene").classList.contains("isTopView"));
+  ok("top view toggle works", () => assert(top));
+  await p.click('.simCamCtl button[aria-label="กลับภาพรวมทั้งลำ"]');
+  await p.waitForTimeout(800);
   for (const [i, name] of crewList) {
-    await p.tap(`.simActor[data-index="${i}"]`);
+    await p.click(`.simActor[data-index="${i}"]`);
     const h = await p.getAttribute("#simIdentity h1 img", "alt");
     ok(`tap cabin ${name} opens ${name}`, () => assert.equal(h, name));
     const box = await p.locator(`.simActor[data-index="${i}"]`).boundingBox();
     ok(`${name} hit target >= 44px`, () => assert(box.width >= 44 && box.height >= 44, JSON.stringify(box)));
   }
-  await p.tap("#simCrewDock button:nth-child(3)");
+  await p.click("#simCrewDock button:nth-child(3)");
   const dockName = await p.getAttribute("#simIdentity h1 img", "alt");
-  ok("dock avatar 3 -> Kitty", () => assert.equal(dockName, "Kitty"));
+  ok("crew tab 3 -> Kitty", () => assert.equal(dockName, "Kitty"));
+  await p.click('.simCamCtl button[aria-label="กลับภาพรวมทั้งลำ"]');
+  await p.waitForTimeout(800);
   // overlap check: faces (top 45% of each portrait) must not be covered by another actor's box
   const boxes = await p.$$eval(".simActor", (els) =>
     els.map((e) => {
@@ -90,8 +106,10 @@ const assert = require("node:assert/strict");
   await p.waitForTimeout(500);
   const mode = await p.textContent("#simMode");
   ok("demo labelled", () => assert.match(mode, /Demo/));
-  const demoHud = await p.textContent(".simHud");
-  ok("HUD marks Demo as not saving real work", () => {
+  const demoHud = await p.textContent(".simHudChip");
+  const trackDemo = await p.textContent("#simTrack");
+  ok("tracking marks Demo", () => assert.match(trackDemo, /Demo/));
+  ok("mode chip marks Demo as not saving real work", () => {
     assert.match(demoHud, /DEMO/);
     assert.match(demoHud, /ไม่บันทึกงานจริง/);
   });
@@ -119,6 +137,18 @@ const assert = require("node:assert/strict");
   ok("draft mood restored", () => assert.equal(m, mood));
   ok("draft step restored (02)", () => assert.match(step, /^02/));
   await p.screenshot({ path: out + "/func-resume.png" });
+  // Work Zone home reflects the draft.
+  await p.click("#backWorkZone");
+  const wzTitle = await p.textContent("#wzDraftTitle");
+  const wzMissing = await p.$$eval("#wzMissing li", (e) => e.length);
+  const lanes = await p.$$eval("#wzLanes .wzLane", (e) => e.length);
+  ok("Work Zone shows the brief in progress", () => assert.equal(wzTitle, "Draft Test Clip"));
+  ok("Work Zone lists what is missing", () => assert(wzMissing > 0));
+  ok("Work Zone offers three lanes", () => assert.equal(lanes, 3));
+  await p.click("#wzLanes .wzLane:nth-child(2)");
+  const armedText = await p.textContent("#wzLanes .wzLane:nth-child(2)");
+  ok("lane start asks a second tap when a draft exists", () => assert.match(armedText, /แตะอีกครั้ง/));
+  await p.click("#resumeBrief");
   // save twice -> one project
   await p.click('[data-step="3"]');
   await p.click("#save");

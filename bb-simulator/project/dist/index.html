@@ -6,9 +6,9 @@
     <meta name="theme-color" content="#4f0208" />
     <title>BB Simulator</title>
     <meta name="description" content="BB Simulator" />
-    <link rel="stylesheet" href="style.css?v=25" />
-    <link rel="stylesheet" href="simulator.css?v=25" />
-    <link rel="stylesheet" href="cabin-live.css?v=25" />
+    <link rel="stylesheet" href="style.css?v=26" />
+    <link rel="stylesheet" href="simulator.css?v=26" />
+    <link rel="stylesheet" href="cabin-live.css?v=26" />
   </head>
   <body>
     <header>
@@ -63,99 +63,99 @@
         </div>
         <div class="simLayout">
           <div class="simWorld">
+            <div class="simKpis" id="simKpis" aria-label="สถานะรวม"></div>
             <div class="simScene" id="simScene">
               <div class="simSky" id="simSky" aria-hidden="true"></div>
-              <img
-                class="simEnvironment"
-                src="assets/bb-jet-cutout-v19.webp"
-                width="1024"
-                height="1536"
-                alt="เครื่องบินสตูดิโอเต็มลำ เห็นหัวเครื่อง ปีก และหาง มี Cockpit ของ BB และสี่โซนผลิต"
-                fetchpriority="high"
-              />
-              <div id="simActors" class="simActors"></div>
-              <span id="simParcel" class="simParcel" hidden aria-hidden="true"><img src="assets/icon-brief.svg" alt="" /></span
-              ><span class="simSceneLabel"><img class="type" src="assets/type/cockpit.svg" alt="Cockpit" /></span>
+              <div class="simCam" id="simCam">
+                <img
+                  class="simEnvironment"
+                  src="assets/bb-jet-cutout-v19.webp"
+                  width="1024"
+                  height="1536"
+                  alt="เครื่องบินสตูดิโอเต็มลำ เห็นหัวเครื่อง ปีก และหาง มี Cockpit ของ BB และสี่โซนผลิต"
+                  fetchpriority="high"
+                  draggable="false"
+                />
+                <div id="simActors" class="simActors"></div>
+                <span id="simParcel" class="simParcel" hidden aria-hidden="true"><img src="assets/icon-brief.svg" alt="" /></span>
+              </div>
+              <div class="simCamCtl" id="simCamCtl" aria-label="มุมกล้อง"></div>
             </div>
-            <div class="simCrewDock" id="simCrewDock" aria-label="เลือกทีม"></div>
+            <div class="simTrack" id="simTrack" aria-label="ติดตามสายงาน"></div>
           </div>
           <aside class="simSide">
-            <section id="simCommand">
+            <section id="simCommand" class="simCard simPerson">
+              <div class="simCrewTabs" id="simCrewDock" aria-label="เลือกทีม"></div>
               <div class="simIdentity" id="simIdentity"></div>
-              <div id="simRouting" data-routing-slot="simulator"></div>
+              <div class="simNow" id="simNow" aria-live="polite"></div>
               <div class="simActions" id="simActions"></div>
-              <p id="simTask" class="simTask" aria-live="polite"></p>
             </section>
-            <section class="simDashboard">
-              <div class="simSectionTitle">
-                <img class="type" src="assets/type/projects.svg" alt="Projects" /><button id="simOpenQueue" class="simQuiet">
-                  ดูทั้งหมด →
-                </button>
-              </div>
-              <div class="simMetrics">
-                <div><strong id="simJobCount">0</strong><span>โปรเจกต์</span></div>
-                <div><strong id="simRefCount">0</strong><span>Reference</span></div>
-                <div><strong>—</strong><span>รออนุมัติจริง</span></div>
-              </div>
-              <div id="simJobs"></div>
+            <section class="simCard">
+              <div id="simRouting" data-routing-slot="simulator"></div>
             </section>
-            <section class="simActivity">
+            <section class="simCard simLogCard">
               <div class="simSectionTitle">
-                <img class="type" src="assets/type/activity.svg" alt="Activity" /><span id="simMode">Workspace</span>
+                <h2>Execution Log</h2>
+                <span id="simMode" class="simModeChip">Workspace</span>
               </div>
-              <ol id="simLog" aria-live="polite"></ol>
+              <div class="simLogFilters" id="simLogFilters"></div>
+              <ol id="simLog" class="simLogList" aria-live="polite"></ol>
               <button id="simContinue" class="simDemo" hidden>ต่อ Journey ตัวอย่าง →</button>
-              <p class="simConnection">สถานะใน Demo เป็นงานจำลอง · Production ยังไม่ได้เชื่อม</p>
+              <p class="simConnection">Log นี้อยู่ในเบราว์เซอร์นี้เท่านั้น · Demo เป็นงานจำลอง · Production ยังไม่ได้เชื่อม</p>
             </section>
           </aside>
         </div>
       </section>
       <section id="workspace" class="tabcontent">
-        <section id="workLaunch" class="worklaunch">
-          <div class="launchscene">
-            <img
-              src="assets/bb-workzone-hero-v14.png"
-              width="1536"
-              height="1024"
-              fetchpriority="high"
-              alt="BB หัวหน้าทีมที่โต๊ะผลิตงานในเคบินเครื่องบิน เห็นศีรษะและพื้นที่ทำงานครบ"
-            /><button id="sceneStart" class="sceneStart" aria-label="เริ่ม Brief กับ BB"></button>
-          </div>
-          <div class="launchcontrols">
-            <h1><img class="type" src="assets/type/work-zone.svg" alt="Work Zone" /></h1>
-            <button id="startBrief" class="startbrief">
-              <span class="starticon"><img src="assets/icon-brief.svg" alt="" /></span
-              ><span><img class="type" src="assets/type/start-brief.svg" alt="Start Brief" /><small>กำหนดงานกับ BB</small></span
-              ><span aria-hidden="true">→</span>
-            </button>
-            <button id="resumeBrief" class="textbutton" hidden>
-              <img class="type" src="assets/type/continue-brief.svg" alt="Continue Brief" /><small id="resumeInfo"></small>
-            </button>
-            <div class="launchshortcuts">
-              <button data-launch-step="1">
-                <img class="toolicon" src="assets/icon-reference.svg" alt="" /><img
-                  class="type"
-                  src="assets/type/reference.svg"
-                  alt="Reference"
-                /><small>แนบต้นแบบ</small></button
-              ><button data-launch-step="2">
-                <img class="toolicon" src="assets/icon-footage.svg" alt="" /><img
-                  class="type"
-                  src="assets/type/footage.svg"
-                  alt="Footage"
-                /><small>ใส่คลิป</small></button
-              ><button data-launch-step="3">
-                <img class="toolicon" src="assets/icon-review.svg" alt="" /><img
-                  class="type"
-                  src="assets/type/review.svg"
-                  alt="Review"
-                /><small>ตรวจคำสั่ง</small>
-              </button>
+        <section id="workLaunch" class="worklaunch wz">
+          <div class="wzHero">
+            <img src="assets/bb-workzone-hero-v14.png" width="1536" height="1024" alt="BB ที่โต๊ะผลิตงานในเคบินเครื่องบิน" /><button
+              id="sceneStart"
+              class="sceneStart"
+              aria-label="เริ่ม Brief กับ BB"
+            ></button>
+            <div class="wzHeroText">
+              <h1><img class="type" src="assets/type/work-zone.svg" alt="Work Zone" /></h1>
+              <p id="wzContext">Beyond Beyours · Video</p>
             </div>
-            <button id="openProduction" class="textbutton">ดูคิวผลิต →</button
-            ><button id="openStyleBoard" class="textbutton">
-              <img class="type" src="assets/type/choose-a-look.svg" alt="Choose A Look" />
-            </button>
+          </div>
+          <div class="wzGrid">
+            <article class="wzCard wzCurrent">
+              <header>
+                <h2>งานที่กำลังทำ</h2>
+                <small id="wzDraftMeta"></small>
+              </header>
+              <p id="wzDraftTitle" class="wzTitle">ยังไม่มีบรีฟที่เปิดอยู่</p>
+              <div class="wzSteps">
+                <button data-launch-step="0"><i></i><span>Brief</span><small></small></button
+                ><button data-launch-step="1"><i></i><span>Reference</span><small></small></button
+                ><button data-launch-step="2"><i></i><span>Footage</span><small></small></button
+                ><button data-launch-step="3"><i></i><span>Review</span><small></small></button>
+              </div>
+              <div class="wzMissing">
+                <strong>สิ่งที่ยังขาด</strong>
+                <ul id="wzMissing"></ul>
+              </div>
+              <div class="wzActions">
+                <button id="resumeBrief" class="primary" hidden>ทำบรีฟต่อ<small id="resumeInfo"></small></button
+                ><button id="startBrief" class="startbrief">เริ่มบรีฟกับ BB →</button>
+              </div>
+            </article>
+            <article class="wzCard wzLanes">
+              <h2>เริ่มงานใหม่ตามสายงาน</h2>
+              <div id="wzLanes" class="wzLaneList"></div>
+            </article>
+            <article class="wzCard wzRecent">
+              <header>
+                <h2>โปรเจกต์ล่าสุด</h2>
+                <button id="wzAllProjects" class="textbutton">ดูทั้งหมด →</button>
+              </header>
+              <ul id="wzRecent"></ul>
+              <div class="wzLinks">
+                <button id="openProduction" class="textbutton">ดูคิวผลิต →</button
+                ><button id="openStyleBoard" class="textbutton">เลือกลุค / Style Board →</button>
+              </div>
+            </article>
           </div>
         </section>
         <div id="workEditor" hidden>
@@ -938,10 +938,13 @@
         >
       </footer>
     </main>
-    <script src="workflow.js?v=25"></script>
-    <script src="app.js?v=25"></script>
-    <script src="simulator-model.js?v=25"></script>
-    <script src="simulator.js?v=25"></script>
-    <script src="cabin-live.js?v=25"></script>
+    <script src="workflow.js?v=26"></script>
+    <script src="app.js?v=26"></script>
+    <script src="status.js?v=26"></script>
+    <script src="simulator-model.js?v=26"></script>
+    <script src="simulator.js?v=26"></script>
+    <script src="cabin-live.js?v=26"></script>
+    <script src="cabin-cam.js?v=26"></script>
+    <script src="workzone.js?v=26"></script>
   </body>
 </html>

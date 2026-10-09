@@ -81,3 +81,20 @@ Changes:
 Tests: unit 10/10; browser smoke 67/67 (cabin main view, Workspace HUD, five status lines, Board rows and Export note, Board row opens Tidy, Log, panel close, status toggle, Demo HUD, plus round-01 checks). No horizontal overflow at 360/390/1366/1440.
 
 Screenshots: `PREVIEW/round-03/`
+
+## Round 04 · 2026-10-10 · 2.5D stage, overview panels, Work Zone home
+
+แม่: more dimension like the WareTrack reference (rotate, pick zones); take the useful parts of the agent-studio reference (global status, person card, execution log) without its icon clutter; Work Zone looked unfinished.
+
+Changes:
+
+- `cabin-cam.js`: CSS 3D camera, no library (cdnjs is blocked in this sandbox, and the page needs none). The approved jet render is the floor; crew are billboards that always face the camera. Drag to rotate (mouse also tilts), pinch or ctrl+wheel to zoom, buttons for zoom / rotate / top view / overview. Tap a person → camera flies to that station; Demo follows the working station. Phones start nearly straight-on so faces stay large.
+- Clouds moved below the floor plane, so they parallax and rotate with the aircraft.
+- Removed clutter: floating role icons and Demo sparks, the separate crew roster under the stage, in-scene Log/Board buttons and sheet, duplicate Projects/Activity blocks.
+- Simulator layout: KPI tiles (saved briefs, Reference, Footage, "กำลังผลิตจริง 0 · ยังไม่เชื่อมระบบผลิต"), production tracking under the stage (7 steps per lane, real states from the brief; Demo marked), person card with crew tabs (the only roster), state chip, "งานตอนนี้" + brief progress, tools; brand/lane card; Execution Log with type tags (OPEN/SAVE/START/SEND/WAIT/DONE/STOP) and filters (all / Workspace / Demo, per person).
+- `status.js`: one shared snapshot of browser-local truth for the chips, side panel and Work Zone.
+- Work Zone home rebuilt (`workzone.js`): banner with brand · lane; "งานที่กำลังทำ" with the 4 steps (tap to open), what is still missing (from the real review checks), Continue / New brief; one start card per lane (Video → CapCut, Content → Canva, Calendar → Canva + schedule, not connected); recent projects of the brand. Actions that would clear a draft ask for a second tap.
+
+Tests: unit 10/10; browser smoke 74/74 at 390 mobile, 1366 and 1440 laptop (camera rotate/top view, KPIs, tracking, log filter, tabs, labels clear of faces in overview, Work Zone draft / missing / lanes / two-tap, plus earlier checks). No horizontal overflow at 360/390/1366/1440.
+
+Limits: true 3D (walking around, seeing the back of seats) would need a modelled cabin; this is the approved 2D render tilted in 3D. When rotated far, a nearer person can cover a farther person's label (real depth). Screenshots: `PREVIEW/round-04/`

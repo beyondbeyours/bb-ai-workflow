@@ -1,18 +1,27 @@
 "use strict";
+// Simulator tab: crew on the jet stage, person card, global status, production tracking and
+// the execution log. Everything shown comes from this browser (BBStatus) or is labelled Demo.
 (function () {
   const model = window.BBSimulator,
     scene = $("simScene"),
     actors = [],
-    dock = [];
+    tabs = [];
   let selected = 0,
     timer = null,
-    returnTimer = null,
     demoIndex = -1,
     demoSteps = [],
     demoRunning = false,
-    log = [];
+    log = [],
+    logFilter = { mode: "all", owner: "all" };
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (reduced) scene.classList.add("simPaused");
+  const emit = (name, detail) => document.dispatchEvent(new CustomEvent("bbsim:" + name, { detail }));
+  const el = (tag, cls, text) => {
+    const n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text !== undefined) n.textContent = text;
+    return n;
+  };
   function nameImage(name) {
     const img = typeImage(name);
     img.alt = name;
@@ -30,19 +39,20 @@
     const [cx, cy, r] = model.crew[index].avatar,
       scale = size / (2 * r),
       sheet = index !== 0,
-      el = document.createElement("span");
-    el.className = "simAvatar";
-    el.setAttribute("aria-hidden", "true");
-    el.style.width = el.style.height = size + "px";
-    el.style.backgroundImage = 'url("' + (sheet ? "assets/bb-crew-visible-faces-v22.png" : "assets/bb-cockpit-seated-v19.png") + '")';
-    el.style.backgroundSize = (sheet ? 2048 : 1024) * scale + "px " + (sheet ? 768 : 1536) * scale + "px";
-    el.style.backgroundPosition = -((sheet ? (index - 1) * 512 : 0) + cx - r) * scale + "px " + -(cy - r) * scale + "px";
-    return el;
+      a = el("span", "simAvatar");
+    a.setAttribute("aria-hidden", "true");
+    a.style.width = a.style.height = size + "px";
+    a.style.backgroundImage = 'url("' + (sheet ? "assets/bb-crew-visible-faces-v22.png" : "assets/bb-cockpit-seated-v19.png") + '")';
+    a.style.backgroundSize = (sheet ? 2048 : 1024) * scale + "px " + (sheet ? 768 : 1536) * scale + "px";
+    a.style.backgroundPosition = -((sheet ? (index - 1) * 512 : 0) + cx - r) * scale + "px " + -(cy - r) * scale + "px";
+    return a;
   }
+  window.BBAvatar = avatar;
+
+  // ---------- crew on stage + crew tabs (the one roster) ----------
   scene.style.setProperty("--h", model.portraitHeight);
   model.crew.forEach((person, index) => {
-    const actor = document.createElement("button");
-    actor.className = "simActor";
+    const actor = el("button", "simActor");
     actor.type = "button";
     actor.dataset.index = index;
     actor.dataset.label = person.label;
@@ -53,39 +63,29 @@
     actor.style.zIndex = String(Math.round(person.y));
     actor.setAttribute("aria-label", person.name + " · " + person.role + " · เปิดเครื่องมือ");
     actor.setAttribute("aria-pressed", String(index === 0));
-    const sprite = document.createElement("span");
-    sprite.className = "simSprite";
+    const sprite = el("span", "simSprite");
     sprite.append(spriteImage(index));
-    const label = document.createElement("span");
-    label.className = "simName";
-    const dot = document.createElement("i");
-    dot.className = "simDot";
+    const label = el("span", "simName");
+    const dot = el("i", "simDot");
     dot.setAttribute("aria-hidden", "true");
     label.append(dot, nameImage(person.name));
     actor.append(sprite, label);
-    actor.onclick = () => select(index, true);
+    actor.onclick = () => {
+      if (scene.dataset.dragged === "true") return;
+      select(index, true);
+    };
     $("simActors").append(actor);
     actors.push(actor);
-    const b = document.createElement("button");
-    b.type = "button";
-    b.setAttribute("aria-pressed", String(index === 0));
-    b.setAttribute("aria-label", person.name + " · " + person.role);
-    b.append(avatar(index, 48), nameImage(person.name));
-    const role = document.createElement("small");
-    role.textContent = person.role;
-    b.append(role);
-    b.onclick = () => select(index, true);
-    $("simCrewDock").append(b);
-    dock.push(b);
+    const t = el("button");
+    t.type = "button";
+    t.setAttribute("aria-pressed", String(index === 0));
+    t.setAttribute("aria-label", person.name + " · " + person.role);
+    t.append(avatar(index, 40), el("span", "", person.name));
+    t.onclick = () => select(index, false);
+    $("simCrewDock").append(t);
+    tabs.push(t);
   });
-  function makeAction(label, action, secondary = false) {
-    const b = document.createElement("button");
-    b.type = "button";
-    b.className = secondary ? "secondary" : "";
-    b.append(typeImage(label));
-    b.onclick = action;
-    return b;
-  }
+
   function openStep(n, group) {
     tab("workspace");
     setStep(n);
@@ -94,180 +94,243 @@
       $(group).scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
     } else $("workEditor").scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
   }
-  // Overlay layers (cabin-live.js) follow the simulator through these DOM events.
-  const emit = (name, detail) => document.dispatchEvent(new CustomEvent("bbsim:" + name, { detail }));
-  function select(index, scroll = false) {
-    selected = index;
-    emit("select", { index });
-    const p = model.crew[index];
-    actors.forEach((a, i) => a.setAttribute("aria-pressed", String(i === index)));
-    dock.forEach((a, i) => a.setAttribute("aria-pressed", String(i === index)));
+  const tools = [
+    [
+      ["เปิด Brief", () => openStep(0)],
+      ["ดูคิวผลิต", () => (tab("production"), renderProduction(0))],
+    ],
+    [
+      ["Footage", () => openStep(2)],
+      ["Reference", () => openStep(1)],
+    ],
+    [
+      ["Creative", () => openStep(0, "creativeGroup")],
+      ["Style Board", () => (tab("workspace"), $("openStyleBoard").click())],
+    ],
+    [
+      ["Sound & Graphics", () => openStep(0, "soundGroup")],
+      ["Text & Cover", () => openStep(0, "styleBoardGroup")],
+    ],
+    [
+      ["Review", () => openStep(3)],
+      ["Projects", () => tab("history")],
+    ],
+  ];
+
+  // ---------- person card ----------
+  function personState(index) {
+    if (!demoRunning) return ["ว่าง", ""];
+    const step = demoSteps[demoIndex];
+    if (step?.pause && index === 0) return ["รอแม่ตรวจ", "isWaiting"];
+    if (step?.owner === index) return ["Demo ทำอยู่", "isWorking"];
+    return ["ว่าง", ""];
+  }
+  function renderPerson() {
+    const index = selected,
+      p = model.crew[index],
+      s = window.BBStatus.snapshot();
     const identity = $("simIdentity");
     identity.replaceChildren();
-    const face = avatar(index, 76);
-    const titles = document.createElement("div");
-    const h = document.createElement("h1");
+    const titles = el("div");
+    const h = el("h1");
     h.append(nameImage(p.name));
-    const role = document.createElement("strong");
-    role.append(typeImage(p.role));
-    const sub = document.createElement("small");
-    sub.textContent = p.sub;
-    titles.append(h, role, sub);
-    identity.append(face, titles);
+    const [stateText, stateCls] = personState(index);
+    titles.append(h, el("strong", "", p.role), el("small", "", p.sub));
+    identity.append(avatar(index, 64), titles, el("span", "simState " + stateCls, stateText));
+    const now = $("simNow");
+    now.replaceChildren();
+    const step = demoSteps[demoIndex];
+    const working = demoRunning && step && step.owner === index;
+    now.append(el("span", "simNowLabel", demoRunning ? "Demo" : "งานตอนนี้"));
+    now.append(el("p", "simNowText", working ? step.text : demoRunning ? "ว่าง ระหว่าง Demo" : s.text[index]));
+    const bar = el("div", "simProgress");
+    const fill = el("span");
+    fill.style.width = (s.doneSteps / 4) * 100 + "%";
+    bar.append(fill);
+    now.append(
+      bar,
+      el("small", "simProgressText", s.title ? "บรีฟ " + s.title + " · พร้อม " + s.doneSteps + "/4 ขั้น" : "ยังไม่มีบรีฟที่เปิดอยู่"),
+    );
     const actions = $("simActions");
     actions.replaceChildren();
-    const tasks = [
-      ["Brief", () => openStep(0), "Reference", () => openStep(1)],
-      ["Footage", () => openStep(2), "Reference", () => openStep(1)],
-      [
-        "Creative",
-        () => openStep(0, "creativeGroup"),
-        "Style Board",
-        () => {
-          tab("workspace");
-          $("openStyleBoard").click();
-        },
-      ],
-      [
-        "Sound & Graphics",
-        () => openStep(0, "soundGroup"),
-        "Cover Preview",
-        () => {
-          tab("workspace");
-          $("openStyleBoard").click();
-        },
-      ],
-      ["Review", () => openStep(3), "Projects", () => tab("history")],
-    ][index];
-    actions.append(makeAction(tasks[0], tasks[1]), makeAction(tasks[2], tasks[3], true));
-    if (index === 0) {
-      const b = document.createElement("button");
-      b.className = "secondary";
-      b.textContent = "คิวผลิต →";
-      b.onclick = () => {
-        tab("production");
-        renderProduction(0);
-      };
+    tools[index].forEach(([label, fn], i) => {
+      const b = el("button", i ? "secondary" : "", label);
+      b.type = "button";
+      b.onclick = fn;
       actions.append(b);
-    }
-    const taskText = [
-      "เริ่มงานจาก BB · เลือกแบรนด์และสายงาน แล้วเปิด Brief",
-      "แนบไฟล์ต้นฉบับและ Reference ของแบรนด์นี้",
-      "จัดสไตล์ จังหวะภาพ และไฟล์ที่ต้องส่งเข้า Canva / CapCut",
-      "ตั้งภาษา Subtitles, Super, Graphics และ Cover",
-      "ตรวจบรีฟและไฟล์ก่อนส่งกลับให้ BB อนุมัติ",
-    ];
-    $("simTask").textContent = demoRunning ? "Demo · " + (demoSteps[demoIndex]?.text || "") : taskText[index];
-    if (scroll && window.innerWidth <= 680) $("simCommand").scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
+    });
   }
-  function addLog(text) {
-    log.unshift({ text, time: new Date().toLocaleTimeString("th-TH", { hour: "2-digit", minute: "2-digit" }) });
-    emit("log", log[0]);
-    log = log.slice(0, 4);
-    $("simLog").replaceChildren();
-    for (const item of log) {
-      const li = document.createElement("li"),
-        time = document.createElement("time"),
-        span = document.createElement("span");
-      time.textContent = item.time;
-      span.textContent = item.text;
-      li.append(time, span);
-      $("simLog").append(li);
+  function select(index, fromStage = false) {
+    selected = index;
+    actors.forEach((a, i) => a.setAttribute("aria-pressed", String(i === index)));
+    tabs.forEach((a, i) => a.setAttribute("aria-pressed", String(i === index)));
+    renderPerson();
+    emit("select", { index, fromStage });
+    if (fromStage && window.innerWidth <= 680) $("simCommand").scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
+  }
+
+  // ---------- global status (KPIs) + production tracking ----------
+  function renderKpis() {
+    const s = window.BBStatus.snapshot(),
+      k = $("simKpis");
+    k.replaceChildren();
+    const tile = (value, label, id, note) => {
+      const t = el("div", "simKpi");
+      const v = el("strong", "", String(value));
+      if (id) v.id = id;
+      t.append(v, el("span", "", label));
+      if (note) t.append(el("small", "", note));
+      k.append(t);
+    };
+    tile(s.jobs, "บรีฟที่บันทึก", "simJobCount", s.brand.name);
+    tile(s.refs, "Reference", "simRefCount", "ของแบรนด์นี้");
+    tile(s.clips, s.video ? "Footage" : "ไฟล์แนบ", "", "ในเซสชันนี้");
+    tile("0", "กำลังผลิตจริง", "", "ยังไม่เชื่อมระบบผลิต");
+  }
+  function renderTrack() {
+    const s = window.BBStatus.snapshot(),
+      tr = $("simTrack"),
+      video = s.video;
+    const flow = [
+      { label: "Brief", who: "BB", done: s.steps[0].done },
+      { label: video ? "Footage" : "Assets", who: "Leo", done: s.steps[2].done },
+      { label: video ? "CapCut" : "Canva", who: "Kitty", done: false },
+      { label: "Graphics", who: "Tidy", done: false },
+      { label: "QA", who: "Chicha", done: false },
+      { label: "แม่ตรวจ", who: "BB", done: false },
+      { label: "Export", who: video ? "ส่งโปรเจกต์" : "จาก Canva", done: false },
+    ];
+    let active = flow.findIndex((f) => !f.done);
+    if (demoRunning) {
+      const step = demoSteps[demoIndex];
+      active = step.pause ? 5 : step.state === "Export" || step.state === "Complete" ? 6 : step.owner === 0 ? 0 : step.owner;
+      flow.forEach((f, i) => (f.done = i < active));
     }
+    tr.replaceChildren();
+    const head = el("div", "simTrackHead");
+    head.append(el("strong", "", "ติดตามสายงาน"), el("small", "", (demoRunning ? "Demo · " : "") + BBWorkflow.laneName(s.lane)));
+    const ol = el("ol");
+    flow.forEach((f, i) => {
+      const li = el("li", f.done ? "isDone" : i === active ? "isActive" : "");
+      li.append(el("i"), el("span", "", f.label), el("small", "", f.who));
+      ol.append(li);
+    });
+    tr.append(head, ol);
   }
   function refresh() {
+    $("simBrandLabel").textContent = currentBrand().name || "เลือกแบรนด์";
+    renderKpis();
+    renderTrack();
+    renderPerson();
     emit("refresh", {});
-    const brand = currentBrand(),
-      saved = readSaved(),
-      refs = referenceRecords;
-    const m = model.metrics(saved, refs, brand.id);
-    $("simJobCount").textContent = m.jobs;
-    $("simRefCount").textContent = m.references;
-    $("simBrandLabel").textContent = brand.name || "เลือกแบรนด์";
-    $("simJobs").replaceChildren();
-    const jobs = saved.filter((j) => (j.brand?.id || "beyond") === brand.id).slice(0, 3);
-    if (!jobs.length) {
-      const p = document.createElement("p");
-      p.className = "simEmpty";
-      p.textContent = "ยังไม่มีโปรเจกต์ · เริ่มที่ Cockpit ของ BB";
-      $("simJobs").append(p);
-    }
-    for (const j of jobs) {
-      const b = document.createElement("button");
-      b.className = "simJob";
-      const name = document.createElement("strong"),
-        status = document.createElement("small");
-      name.textContent = j.title;
-      status.textContent = "Brief saved";
-      b.append(name, status);
-      b.onclick = () => {
-        tab("history");
-      };
-      $("simJobs").append(b);
-    }
   }
-  function clearMotion() {
-    clearTimeout(timer);
-    clearTimeout(returnTimer);
-    actors.forEach((a, i) => {
-      a.classList.remove("isWorking", "isWalking");
-      a.style.setProperty("--x", model.crew[i].x);
-      a.style.setProperty("--y", model.crew[i].y);
+
+  // ---------- execution log ----------
+  const typeLabel = { open: "OPEN", save: "SAVE", start: "START", send: "SEND", wait: "WAIT", done: "DONE", stop: "STOP" };
+  function addLog(text, type = "open", owner = 0, mode = "workspace") {
+    log.unshift({
+      text,
+      type,
+      owner,
+      mode,
+      time: new Date().toLocaleTimeString("th-TH", { hour: "2-digit", minute: "2-digit", second: "2-digit" }),
     });
-    $("simParcel").hidden = true;
+    log = log.slice(0, 40);
+    emit("log", log[0]);
+    renderLog();
   }
-  function stopDemo() {
+  function renderLogFilters() {
+    const f = $("simLogFilters");
+    f.replaceChildren();
+    for (const [mode, label] of [
+      ["all", "ทั้งหมด"],
+      ["workspace", "Workspace"],
+      ["demo", "Demo"],
+    ]) {
+      const b = el("button", "", label);
+      b.type = "button";
+      b.setAttribute("aria-pressed", String(logFilter.mode === mode));
+      b.onclick = () => {
+        logFilter.mode = mode;
+        renderLogFilters();
+        renderLog();
+      };
+      f.append(b);
+    }
+    const sel = el("select");
+    sel.setAttribute("aria-label", "กรองตามคน");
+    sel.append(new Option("ทุกคน", "all"));
+    model.crew.forEach((p, i) => sel.append(new Option(p.name, String(i))));
+    sel.value = logFilter.owner;
+    sel.onchange = () => {
+      logFilter.owner = sel.value;
+      renderLog();
+    };
+    f.append(sel);
+  }
+  function renderLog() {
+    const list = $("simLog");
+    list.replaceChildren();
+    const rows = log.filter(
+      (r) => (logFilter.mode === "all" || r.mode === logFilter.mode) && (logFilter.owner === "all" || String(r.owner) === logFilter.owner),
+    );
+    if (!rows.length) list.append(el("li", "simLogEmpty", "ยังไม่มีรายการ"));
+    for (const r of rows.slice(0, 12)) {
+      const li = el("li");
+      li.append(
+        el("time", "", r.time),
+        avatar(r.owner, 22),
+        el("span", "simLogWho", model.crew[r.owner].name),
+        el("em", "is-" + r.type, typeLabel[r.type]),
+        el("span", "simLogText", r.text),
+      );
+      list.append(li);
+    }
+  }
+
+  // ---------- demo ----------
+  function stopDemo(silent) {
     demoRunning = false;
+    clearTimeout(timer);
     emit("demo", { running: false });
-    clearMotion();
     $("simContinue").hidden = true;
     $("simDemo").textContent = "▶ ทดลอง Journey";
     $("simMode").textContent = "Workspace";
-    select(selected);
-    addLog("หยุด Demo · ไม่มีผลกับโปรเจกต์จริง");
+    if (!silent) addLog("หยุด Demo · ไม่มีผลกับโปรเจกต์จริง", "stop", 0, "demo");
+    refresh();
   }
   function advance() {
     if (!demoRunning) return;
     demoIndex++;
     const step = demoSteps[demoIndex];
-    if (!step) {
-      stopDemo();
-      return;
-    }
-    emit("demo", { running: true, step, index: demoIndex, from: demoSteps[demoIndex - 1]?.owner ?? step.owner });
-    actors.forEach((a) => a.classList.remove("isWorking"));
-    actors[step.owner].classList.add("isWorking");
-    select(step.owner);
-    $("simTask").textContent = "Demo · " + step.text;
+    if (!step) return stopDemo(true);
+    const prev = demoSteps[demoIndex - 1];
+    if (prev && prev.owner !== step.owner) addLog("ส่งต่อให้ " + model.crew[step.owner].name, "send", prev.owner, "demo");
+    emit("demo", { running: true, step, index: demoIndex, from: prev?.owner ?? step.owner });
     $("simMode").textContent = "Demo · " + step.state;
-    addLog("Demo · " + step.text);
-    // Seated crew stay at their stations; cabin-live.js carries the handoff along the aisle.
-
+    addLog(step.text, step.pause ? "wait" : step.state === "Complete" ? "done" : "start", step.owner, "demo");
+    select(step.owner);
+    renderKpis();
+    renderTrack();
     if (step.pause) {
       $("simContinue").hidden = false;
-      actors[step.owner].classList.remove("isWorking");
       return;
     }
     if (step.state === "Complete") {
       demoRunning = false;
       emit("demo", { running: false, complete: true });
-      clearMotion();
       $("simDemo").textContent = "↻ ทดลองอีกครั้ง";
-      $("simContinue").hidden = true;
+      $("simMode").textContent = "Workspace";
+      refresh();
       return;
     }
-    timer = setTimeout(advance, 2300);
+    timer = setTimeout(advance, 2400);
   }
   $("simDemo").onclick = () => {
-    if (demoRunning) {
-      stopDemo();
-      return;
-    }
-    clearMotion();
+    if (demoRunning) return stopDemo();
     demoSteps = model.journey($("productionLane").value);
     demoIndex = -1;
     demoRunning = true;
-    log = [];
     $("simDemo").textContent = "■ หยุด Demo";
     $("simContinue").hidden = true;
     advance();
@@ -277,28 +340,30 @@
     advance();
   };
   $("simSound").setAttribute("aria-pressed", String(reduced));
-  $("simSound").textContent = reduced ? "เปิดภาพเคลื่อนไหว" : "หยุดภาพเคลื่อนไหว";
+  $("simSound").textContent = reduced ? "เล่นภาพ" : "หยุดภาพ";
   $("simSound").onclick = () => {
     const paused = scene.classList.toggle("simPaused");
     $("simSound").setAttribute("aria-pressed", String(paused));
-    $("simSound").textContent = paused ? "เปิดภาพเคลื่อนไหว" : "หยุดภาพเคลื่อนไหว";
+    $("simSound").textContent = paused ? "เล่นภาพ" : "หยุดภาพ";
   };
-  $("simOpenQueue").onclick = () => tab("history");
+
+  // ---------- wiring ----------
   const oldSave = $("save").onclick;
   $("save").onclick = (e) => {
     oldSave(e);
+    if (/^(บันทึกโปรเจกต์แล้ว|อัปเดตโปรเจกต์เดิมแล้ว)/.test($("saveStatus").textContent))
+      addLog("บันทึก Brief · " + $("title").value.trim(), "save", 0);
     refresh();
-    if ($("saveStatus").textContent.startsWith("บันทึกโปรเจกต์แล้ว")) addLog("บันทึก Brief · " + $("title").value.trim());
   };
   $("brandSelect").addEventListener("change", () => {
-    if (demoRunning) stopDemo();
+    if (demoRunning) stopDemo(true);
+    addLog("เปลี่ยนแบรนด์เป็น " + currentBrand().name, "open", 0);
     refresh();
-    select(selected);
   });
   $("customBrand").addEventListener("input", refresh);
   $("productionLane").addEventListener("change", () => {
-    if (demoRunning) stopDemo();
-    select(selected);
+    if (demoRunning) stopDemo(true);
+    refresh();
   });
   const oldRenderRefs = renderReferences;
   renderReferences = function () {
@@ -310,9 +375,15 @@
       if (b.dataset.tab === "simulator") refresh();
     }),
   );
-  window.BBSimSelect = (index, scroll) => select(index, scroll);
+  let later = null;
+  document.addEventListener("input", () => {
+    clearTimeout(later);
+    later = setTimeout(refresh, 400);
+  });
+  window.BBSimSelect = (index, fromStage) => select(index, fromStage);
+  renderLogFilters();
   select(0);
   refresh();
-  addLog("เปิด Cockpit · " + currentBrand().name);
+  addLog("เปิด Cockpit · " + currentBrand().name, "open", 0);
   tab("simulator");
 })();
