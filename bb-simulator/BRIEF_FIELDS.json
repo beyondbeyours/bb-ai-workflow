@@ -1,0 +1,1198 @@
+[
+  {
+    "id": "brandSelect",
+    "tag": "select",
+    "options": [
+      {
+        "value": "beyond",
+        "label": "Beyond Beyours"
+      },
+      {
+        "value": "thailista",
+        "label": "Thailista"
+      },
+      {
+        "value": "maemore",
+        "label": "Maemore AI"
+      },
+      {
+        "value": "yaadz",
+        "label": "Y&Z Stories"
+      },
+      {
+        "value": "custom",
+        "label": "แบรนด์อื่น"
+      }
+    ]
+  },
+  {
+    "id": "customBrand",
+    "tag": "input",
+    "placeholder": "ชื่อแบรนด์"
+  },
+  {
+    "id": "productionLane",
+    "tag": "select",
+    "options": [
+      {
+        "value": "video",
+        "label": "Video · สั่งผลิตคลิป"
+      },
+      {
+        "value": "content",
+        "label": "Content · สั่งผลิตคอนเทนต์"
+      },
+      {
+        "value": "scheduled",
+        "label": "Content · ตามแผน"
+      }
+    ]
+  },
+  {
+    "id": "title",
+    "tag": "input",
+    "type": "text",
+    "placeholder": "ชื่อโปรเจกต์"
+  },
+  {
+    "id": "contentType",
+    "tag": "select",
+    "options": [
+      {
+        "value": null,
+        "label": "รีวิวสินค้า"
+      },
+      {
+        "value": null,
+        "label": "Tutorial"
+      },
+      {
+        "value": null,
+        "label": "Carousel"
+      },
+      {
+        "value": null,
+        "label": "Single Post"
+      },
+      {
+        "value": null,
+        "label": "Article"
+      },
+      {
+        "value": null,
+        "label": "Vlog"
+      },
+      {
+        "value": null,
+        "label": "สัมภาษณ์"
+      },
+      {
+        "value": null,
+        "label": "โฆษณา"
+      },
+      {
+        "value": null,
+        "label": "Podcast"
+      },
+      {
+        "value": null,
+        "label": "คลิปเปิดตัว"
+      },
+      {
+        "value": null,
+        "label": "กำหนดเอง"
+      }
+    ]
+  },
+  {
+    "id": "contentTypeCustom",
+    "tag": "input",
+    "placeholder": "ระบุเพิ่มเติม"
+  },
+  {
+    "id": "objective",
+    "tag": "select",
+    "options": [
+      {
+        "value": null,
+        "label": "เพิ่มการรับรู้"
+      },
+      {
+        "value": null,
+        "label": "ขายสินค้า / บริการ"
+      },
+      {
+        "value": null,
+        "label": "เพิ่มผู้ติดตาม"
+      },
+      {
+        "value": null,
+        "label": "เก็บลีด / รับสมัคร"
+      },
+      {
+        "value": null,
+        "label": "สอน / อธิบาย"
+      },
+      {
+        "value": null,
+        "label": "เล่าเรื่อง / สร้างภาพลักษณ์"
+      },
+      {
+        "value": null,
+        "label": "กำหนดเอง"
+      }
+    ]
+  },
+  {
+    "id": "objectiveCustom",
+    "tag": "input",
+    "placeholder": "ระบุเพิ่มเติม"
+  },
+  {
+    "id": "audience",
+    "tag": "select",
+    "options": [
+      {
+        "value": null,
+        "label": "ผู้ชมใหม่"
+      },
+      {
+        "value": null,
+        "label": "ลูกค้าเดิม"
+      },
+      {
+        "value": null,
+        "label": "เจ้าของธุรกิจ"
+      },
+      {
+        "value": null,
+        "label": "คนทำงาน"
+      },
+      {
+        "value": null,
+        "label": "นักเรียน / นักศึกษา"
+      },
+      {
+        "value": null,
+        "label": "ผู้เรียนคอร์ส"
+      },
+      {
+        "value": null,
+        "label": "กำหนดเอง"
+      }
+    ]
+  },
+  {
+    "id": "audienceCustom",
+    "tag": "input",
+    "placeholder": "ระบุเพิ่มเติม"
+  },
+  {
+    "id": "keyMessage",
+    "tag": "input",
+    "type": "text",
+    "placeholder": "สารหลัก / ข้อเสนอ / สิ่งที่ต้องพูด"
+  },
+  {
+    "id": "platform",
+    "tag": "select",
+    "options": [
+      {
+        "value": null,
+        "label": "Reels / TikTok / Shorts"
+      },
+      {
+        "value": null,
+        "label": "Facebook / Instagram"
+      },
+      {
+        "value": null,
+        "label": "YouTube"
+      },
+      {
+        "value": null,
+        "label": "สื่อการสอน"
+      }
+    ]
+  },
+  {
+    "id": "cta",
+    "tag": "select",
+    "options": [
+      {
+        "value": null,
+        "label": "ไม่มี CTA"
+      },
+      {
+        "value": null,
+        "label": "ทัก LINE"
+      },
+      {
+        "value": null,
+        "label": "ส่งข้อความ"
+      },
+      {
+        "value": null,
+        "label": "ซื้อ / จอง"
+      },
+      {
+        "value": null,
+        "label": "สมัครเรียน"
+      },
+      {
+        "value": null,
+        "label": "เข้าชมเว็บไซต์"
+      },
+      {
+        "value": null,
+        "label": "ติดตาม"
+      },
+      {
+        "value": null,
+        "label": "คอมเมนต์ / แชร์"
+      },
+      {
+        "value": null,
+        "label": "กำหนดเอง"
+      }
+    ]
+  },
+  {
+    "id": "ctaCustom",
+    "tag": "input",
+    "placeholder": "ระบุเพิ่มเติม"
+  },
+  {
+    "id": "ctaDestination",
+    "tag": "input",
+    "type": "text",
+    "placeholder": "ลิงก์ / LINE / คำที่ให้ทัก"
+  },
+  {
+    "id": "customPrimary",
+    "tag": "input",
+    "type": "color",
+    "value": "#4f0208"
+  },
+  {
+    "id": "customSecondary",
+    "tag": "input",
+    "type": "color",
+    "value": "#f6e0e3"
+  },
+  {
+    "id": "customAccent",
+    "tag": "input",
+    "type": "color",
+    "value": "#f7cb3f"
+  },
+  {
+    "id": "previewHeadline",
+    "tag": "input",
+    "value": "เรียนรู้แล้วทำได้จริง"
+  },
+  {
+    "id": "previewPhoto",
+    "tag": "select",
+    "options": [
+      {
+        "value": "assets/lookbook/cover-02-v15.jpg",
+        "label": "02 · Outfit Collage"
+      },
+      {
+        "value": "assets/lookbook/cover-03-v15.jpg",
+        "label": "03 · Creator Intro"
+      },
+      {
+        "value": "assets/lookbook/cover-04-v15.jpg",
+        "label": "04 · Text Focus"
+      },
+      {
+        "value": "assets/lookbook/cover-05-v15.jpg",
+        "label": "05 · Screen Demo"
+      },
+      {
+        "value": "assets/lookbook/cover-06-v15.jpg",
+        "label": "06 · Workshop Story"
+      },
+      {
+        "value": "assets/lookbook/cover-07-v15.jpg",
+        "label": "07 · Classroom Moment"
+      },
+      {
+        "value": "assets/lookbook/cover-08-v15.jpg",
+        "label": "08 · On-site Workshop"
+      },
+      {
+        "value": "assets/lookbook/cover-09-v15.jpg",
+        "label": "09 · Creator Mission"
+      },
+      {
+        "value": "assets/lookbook/cover-10-v15.jpg",
+        "label": "10 · Learning Moment"
+      },
+      {
+        "value": "assets/lookbook/cover-11-v15.jpg",
+        "label": "11 · Bilingual Lesson"
+      }
+    ]
+  },
+  {
+    "id": "designStyle",
+    "tag": "select",
+    "options": [
+      {
+        "value": null,
+        "label": "ตามแบรนด์ BB"
+      },
+      {
+        "value": null,
+        "label": "ตาม Reference"
+      },
+      {
+        "value": null,
+        "label": "เรียบ เท่ พรีเมียม"
+      },
+      {
+        "value": null,
+        "label": "Editorial"
+      },
+      {
+        "value": null,
+        "label": "Cinematic"
+      },
+      {
+        "value": null,
+        "label": "Documentary"
+      },
+      {
+        "value": null,
+        "label": "Bold / Dynamic"
+      },
+      {
+        "value": null,
+        "label": "กำหนดเอง"
+      }
+    ]
+  },
+  {
+    "id": "designStyleCustom",
+    "tag": "input",
+    "placeholder": "ระบุเพิ่มเติม"
+  },
+  {
+    "id": "mood",
+    "tag": "select",
+    "options": [
+      {
+        "value": null,
+        "label": "มั่นใจ ฉลาด เป็นกันเอง"
+      },
+      {
+        "value": null,
+        "label": "สงบ มีระดับ"
+      },
+      {
+        "value": null,
+        "label": "สนุก มีพลัง"
+      },
+      {
+        "value": null,
+        "label": "จริงใจ เป็นธรรมชาติ"
+      },
+      {
+        "value": null,
+        "label": "จริงจัง น่าเชื่อถือ"
+      },
+      {
+        "value": null,
+        "label": "อบอุ่น สร้างแรงบันดาลใจ"
+      },
+      {
+        "value": null,
+        "label": "กำหนดเอง"
+      }
+    ]
+  },
+  {
+    "id": "moodCustom",
+    "tag": "input",
+    "placeholder": "ระบุเพิ่มเติม"
+  },
+  {
+    "id": "palette",
+    "tag": "select",
+    "options": [
+      {
+        "value": null,
+        "label": "BB: ไวน์ ขาว ชมพู เหลืองเล็กน้อย"
+      },
+      {
+        "value": null,
+        "label": "ตาม Reference"
+      },
+      {
+        "value": null,
+        "label": "คงสีต้นฉบับ"
+      },
+      {
+        "value": null,
+        "label": "ขาวดำ"
+      },
+      {
+        "value": null,
+        "label": "สีธรรมชาติ"
+      },
+      {
+        "value": null,
+        "label": "กำหนดเอง"
+      }
+    ]
+  },
+  {
+    "id": "paletteCustom",
+    "tag": "input",
+    "placeholder": "ระบุเพิ่มเติม"
+  },
+  {
+    "id": "pace",
+    "tag": "select",
+    "options": [
+      {
+        "value": null,
+        "label": "กระชับ สมดุล"
+      },
+      {
+        "value": null,
+        "label": "เร็ว มีพลัง"
+      },
+      {
+        "value": null,
+        "label": "ช้า มีพื้นที่หายใจ"
+      },
+      {
+        "value": null,
+        "label": "ตาม Reference"
+      },
+      {
+        "value": null,
+        "label": "กำหนดเอง"
+      }
+    ]
+  },
+  {
+    "id": "paceCustom",
+    "tag": "input",
+    "placeholder": "ระบุเพิ่มเติม"
+  },
+  {
+    "id": "hook",
+    "tag": "select",
+    "options": [
+      {
+        "value": null,
+        "label": "ช็อตเด่นที่สุด"
+      },
+      {
+        "value": null,
+        "label": "คำถาม"
+      },
+      {
+        "value": null,
+        "label": "ผลลัพธ์ก่อน"
+      },
+      {
+        "value": null,
+        "label": "ปัญหา / Pain point"
+      },
+      {
+        "value": null,
+        "label": "เปิดด้วยผู้พูด"
+      },
+      {
+        "value": null,
+        "label": "ตาม Reference"
+      },
+      {
+        "value": null,
+        "label": "กำหนดเอง"
+      }
+    ]
+  },
+  {
+    "id": "hookCustom",
+    "tag": "input",
+    "placeholder": "ระบุเพิ่มเติม"
+  },
+  {
+    "id": "referenceMode",
+    "tag": "select",
+    "options": [
+      {
+        "value": null,
+        "label": "ยึดสไตล์ ไม่คัดลอกเนื้อหา"
+      },
+      {
+        "value": null,
+        "label": "ยึดจังหวะตัด"
+      },
+      {
+        "value": null,
+        "label": "ยึด Mood และสี"
+      },
+      {
+        "value": null,
+        "label": "ยึดซับ / กราฟิก"
+      },
+      {
+        "value": null,
+        "label": "เป็นแรงบันดาลใจเท่านั้น"
+      },
+      {
+        "value": null,
+        "label": "กำหนดเอง"
+      }
+    ]
+  },
+  {
+    "id": "referenceModeCustom",
+    "tag": "input",
+    "placeholder": "ระบุเพิ่มเติม"
+  },
+  {
+    "id": "graphics",
+    "tag": "select",
+    "options": [
+      {
+        "value": null,
+        "label": "น้อย เฉพาะจุดสำคัญ"
+      },
+      {
+        "value": null,
+        "label": "ตาม CI แบรนด์"
+      },
+      {
+        "value": null,
+        "label": "ตาม Reference"
+      },
+      {
+        "value": null,
+        "label": "เน้นข้อความ"
+      },
+      {
+        "value": null,
+        "label": "ไม่ใส่กราฟิก"
+      },
+      {
+        "value": null,
+        "label": "กำหนดเอง"
+      }
+    ]
+  },
+  {
+    "id": "graphicsCustom",
+    "tag": "input",
+    "placeholder": "ระบุเพิ่มเติม"
+  },
+  {
+    "id": "music",
+    "tag": "select",
+    "options": [
+      {
+        "value": null,
+        "label": "เพลงที่มีสิทธิ์ใช้งาน"
+      },
+      {
+        "value": null,
+        "label": "ใช้เพลงที่แนบ"
+      },
+      {
+        "value": null,
+        "label": "คงเสียงต้นฉบับ ไม่เพิ่มเพลง"
+      },
+      {
+        "value": null,
+        "label": "ไม่มีเพลง"
+      },
+      {
+        "value": null,
+        "label": "กำหนดเอง"
+      }
+    ]
+  },
+  {
+    "id": "musicCustom",
+    "tag": "input",
+    "placeholder": "ระบุเพิ่มเติม"
+  },
+  {
+    "id": "audio",
+    "tag": "select",
+    "options": [
+      {
+        "value": null,
+        "label": "เสียงพูดชัด เพลงอยู่ด้านหลัง"
+      },
+      {
+        "value": null,
+        "label": "คงเสียงต้นฉบับ"
+      },
+      {
+        "value": null,
+        "label": "Voiceover"
+      },
+      {
+        "value": null,
+        "label": "เพลงเป็นหลัก"
+      },
+      {
+        "value": null,
+        "label": "กำหนดเอง"
+      }
+    ]
+  },
+  {
+    "id": "audioCustom",
+    "tag": "input",
+    "placeholder": "ระบุเพิ่มเติม"
+  },
+  {
+    "id": "captionsFile",
+    "tag": "select",
+    "options": [
+      {
+        "value": null,
+        "label": "ฝังซับในคลิป"
+      },
+      {
+        "value": null,
+        "label": "ฝังซับ + SRT"
+      },
+      {
+        "value": null,
+        "label": "SRT แยก"
+      },
+      {
+        "value": null,
+        "label": "ไม่ต้องการ"
+      },
+      {
+        "value": null,
+        "label": "กำหนดเอง"
+      }
+    ]
+  },
+  {
+    "id": "captionsFileCustom",
+    "tag": "input",
+    "placeholder": "ระบุเพิ่มเติม"
+  },
+  {
+    "id": "subtitleEnabled",
+    "tag": "input",
+    "type": "checkbox"
+  },
+  {
+    "id": "subtitles",
+    "tag": "select",
+    "options": [
+      {
+        "value": null,
+        "label": "ไทย"
+      },
+      {
+        "value": null,
+        "label": "อังกฤษ"
+      },
+      {
+        "value": null,
+        "label": "ไทย + อังกฤษ"
+      },
+      {
+        "value": null,
+        "label": "ภาษาเดิม"
+      },
+      {
+        "value": null,
+        "label": "ไม่ใส่ซับ"
+      },
+      {
+        "value": null,
+        "label": "กำหนดเอง"
+      }
+    ]
+  },
+  {
+    "id": "subtitlesCustom",
+    "tag": "input",
+    "placeholder": "ระบุเพิ่มเติม"
+  },
+  {
+    "id": "superLanguage",
+    "tag": "select",
+    "options": [
+      {
+        "value": null,
+        "label": "ไทย"
+      },
+      {
+        "value": null,
+        "label": "อังกฤษ"
+      },
+      {
+        "value": null,
+        "label": "ไทย + อังกฤษ"
+      },
+      {
+        "value": null,
+        "label": "ไม่ใส่ Super"
+      },
+      {
+        "value": null,
+        "label": "กำหนดเอง"
+      }
+    ]
+  },
+  {
+    "id": "superLanguageCustom",
+    "tag": "input",
+    "placeholder": "ระบุเพิ่มเติม"
+  },
+  {
+    "id": "superStyle",
+    "tag": "select",
+    "options": [
+      {
+        "value": null,
+        "label": "เน้นคำสำคัญ"
+      },
+      {
+        "value": null,
+        "label": "สั้น หนึ่งประเด็นต่อช็อต"
+      },
+      {
+        "value": null,
+        "label": "ตาม Reference"
+      },
+      {
+        "value": null,
+        "label": "ข้อความที่กำหนด"
+      },
+      {
+        "value": null,
+        "label": "กำหนดเอง"
+      }
+    ]
+  },
+  {
+    "id": "superStyleCustom",
+    "tag": "input",
+    "placeholder": "ระบุเพิ่มเติม"
+  },
+  {
+    "id": "coverMode",
+    "tag": "select",
+    "options": [
+      {
+        "value": null,
+        "label": "ให้ทีมเสนอ 3 แบบ"
+      },
+      {
+        "value": null,
+        "label": "ใช้ข้อความที่กำหนด"
+      },
+      {
+        "value": null,
+        "label": "ไม่ใส่ข้อความ"
+      },
+      {
+        "value": null,
+        "label": "กำหนดเอง"
+      }
+    ]
+  },
+  {
+    "id": "coverModeCustom",
+    "tag": "input",
+    "placeholder": "ระบุเพิ่มเติม"
+  },
+  {
+    "id": "coverLanguage",
+    "tag": "select",
+    "options": [
+      {
+        "value": null,
+        "label": "ไทย"
+      },
+      {
+        "value": null,
+        "label": "อังกฤษ"
+      },
+      {
+        "value": null,
+        "label": "ไทย + อังกฤษ"
+      },
+      {
+        "value": null,
+        "label": "กำหนดเอง"
+      }
+    ]
+  },
+  {
+    "id": "coverLanguageCustom",
+    "tag": "input",
+    "placeholder": "ระบุเพิ่มเติม"
+  },
+  {
+    "id": "coverShot",
+    "tag": "select",
+    "options": [
+      {
+        "value": null,
+        "label": "ช็อตเด่นจากคลิป"
+      },
+      {
+        "value": null,
+        "label": "ผู้พูด / บุคคล"
+      },
+      {
+        "value": null,
+        "label": "สินค้า / ผลลัพธ์"
+      },
+      {
+        "value": null,
+        "label": "เลือกภาพใน Style Board"
+      },
+      {
+        "value": null,
+        "label": "กำหนดเอง"
+      }
+    ]
+  },
+  {
+    "id": "coverShotCustom",
+    "tag": "input",
+    "placeholder": "ระบุเพิ่มเติม"
+  },
+  {
+    "id": "coverStyle",
+    "tag": "select",
+    "options": [
+      {
+        "value": null,
+        "label": "ตาม CI แบรนด์"
+      },
+      {
+        "value": null,
+        "label": "ตาม Reference"
+      },
+      {
+        "value": null,
+        "label": "เรียบ เท่"
+      },
+      {
+        "value": null,
+        "label": "ข้อความเด่น"
+      },
+      {
+        "value": null,
+        "label": "ภาพเด่น"
+      },
+      {
+        "value": null,
+        "label": "กำหนดเอง"
+      }
+    ]
+  },
+  {
+    "id": "coverStyleCustom",
+    "tag": "input",
+    "placeholder": "ระบุเพิ่มเติม"
+  },
+  {
+    "id": "subtitlePosition",
+    "tag": "select",
+    "options": [
+      {
+        "value": null,
+        "label": "ล่างใน Safe Area"
+      },
+      {
+        "value": null,
+        "label": "กลางภาพ"
+      },
+      {
+        "value": null,
+        "label": "ตาม Reference"
+      },
+      {
+        "value": null,
+        "label": "กำหนดเอง"
+      }
+    ]
+  },
+  {
+    "id": "subtitlePositionCustom",
+    "tag": "input",
+    "placeholder": "ระบุเพิ่มเติม"
+  },
+  {
+    "id": "coverText",
+    "tag": "input",
+    "placeholder": "คำบนหน้าปก ถ้าเลือกใช้ข้อความที่กำหนด"
+  },
+  {
+    "id": "superText",
+    "tag": "textarea",
+    "placeholder": "ข้อความเน้น / Keyword / ประโยคที่ต้องมี"
+  },
+  {
+    "id": "restrictions",
+    "tag": "textarea",
+    "placeholder": "ช็อต / Timecode ที่ต้องเก็บหรือห้ามใช้ และข้อห้ามเพิ่มเติม"
+  },
+  {
+    "id": "brief",
+    "tag": "textarea",
+    "placeholder": "คำสั่งเพิ่มเติม ถ้ามี"
+  },
+  {
+    "id": "length",
+    "tag": "select",
+    "options": [
+      {
+        "value": "15",
+        "label": "15 วินาที"
+      },
+      {
+        "value": "30",
+        "label": "30 วินาที"
+      },
+      {
+        "value": "60",
+        "label": "60 วินาที"
+      },
+      {
+        "value": "custom",
+        "label": "กำหนดเอง"
+      }
+    ]
+  },
+  {
+    "id": "customLength",
+    "tag": "input",
+    "type": "number",
+    "placeholder": "วินาที"
+  },
+  {
+    "id": "ratio",
+    "tag": "select",
+    "options": [
+      {
+        "value": null,
+        "label": "9:16 แนวตั้ง"
+      },
+      {
+        "value": null,
+        "label": "16:9 แนวนอน"
+      },
+      {
+        "value": null,
+        "label": "1:1 จัตุรัส"
+      },
+      {
+        "value": null,
+        "label": "4:5 โพสต์"
+      }
+    ]
+  },
+  {
+    "id": "resolution",
+    "tag": "select",
+    "options": [
+      {
+        "value": null,
+        "label": "1080p"
+      },
+      {
+        "value": null,
+        "label": "4K"
+      },
+      {
+        "value": null,
+        "label": "ตามไฟล์ต้นฉบับ"
+      },
+      {
+        "value": null,
+        "label": "กำหนดเอง"
+      }
+    ]
+  },
+  {
+    "id": "resolutionCustom",
+    "tag": "input",
+    "placeholder": "ระบุเพิ่มเติม"
+  },
+  {
+    "id": "fps",
+    "tag": "select",
+    "options": [
+      {
+        "value": null,
+        "label": "ตามไฟล์ต้นฉบับ"
+      },
+      {
+        "value": null,
+        "label": "24 fps"
+      },
+      {
+        "value": null,
+        "label": "25 fps"
+      },
+      {
+        "value": null,
+        "label": "30 fps"
+      },
+      {
+        "value": null,
+        "label": "60 fps"
+      },
+      {
+        "value": null,
+        "label": "กำหนดเอง"
+      }
+    ]
+  },
+  {
+    "id": "fpsCustom",
+    "tag": "input",
+    "placeholder": "ระบุเพิ่มเติม"
+  },
+  {
+    "id": "delivery",
+    "tag": "select",
+    "options": [
+      {
+        "value": "edit",
+        "label": "CapCut Project + ไฟล์ต้นฉบับ"
+      },
+      {
+        "value": "both",
+        "label": "CapCut Project + MP4 หลังอนุมัติ"
+      }
+    ]
+  },
+  {
+    "id": "deadline",
+    "tag": "input",
+    "type": "datetime-local",
+    "placeholder": ""
+  },
+  {
+    "id": "approver",
+    "tag": "input",
+    "type": "text",
+    "placeholder": "ผู้อนุมัติสุดท้าย",
+    "value": "BB"
+  },
+  {
+    "id": "revisions",
+    "tag": "select",
+    "options": [
+      {
+        "value": null,
+        "label": "1 รอบ"
+      },
+      {
+        "value": null,
+        "label": "2 รอบ"
+      },
+      {
+        "value": null,
+        "label": "3 รอบ"
+      },
+      {
+        "value": null,
+        "label": "กำหนดเอง"
+      }
+    ]
+  },
+  {
+    "id": "revisionsCustom",
+    "tag": "input",
+    "placeholder": "ระบุเพิ่มเติม"
+  },
+  {
+    "id": "rights",
+    "tag": "select",
+    "options": [
+      {
+        "value": null,
+        "label": "ยังไม่ยืนยัน"
+      },
+      {
+        "value": null,
+        "label": "ยืนยันสิทธิ์ไฟล์ เพลง และบุคคลแล้ว"
+      },
+      {
+        "value": null,
+        "label": "มีไฟล์ที่ต้องตรวจสิทธิ์"
+      },
+      {
+        "value": null,
+        "label": "กำหนดเอง"
+      }
+    ]
+  },
+  {
+    "id": "rightsCustom",
+    "tag": "input",
+    "placeholder": "ระบุเพิ่มเติม"
+  },
+  {
+    "id": "assetsLink",
+    "tag": "input",
+    "type": "text",
+    "placeholder": "ลิงก์โลโก้ ฟอนต์ CI เพลง / ไฟล์เพิ่มเติม"
+  },
+  {
+    "id": "referenceFiles",
+    "tag": "input",
+    "type": "file",
+    "accept": "video/*,image/*",
+    "multiple": null
+  },
+  {
+    "id": "referenceNotes",
+    "tag": "textarea",
+    "placeholder": "จังหวะตัด / Hook / ซับ / Mood / สิ่งที่ต้องยึด"
+  },
+  {
+    "id": "styleName",
+    "tag": "input",
+    "placeholder": "ชื่อสไตล์"
+  },
+  {
+    "id": "files",
+    "tag": "input",
+    "type": "file",
+    "accept": "video/*,image/*",
+    "multiple": null
+  },
+  {
+    "id": "editorUrl",
+    "tag": "input",
+    "type": "url",
+    "placeholder": "https://…"
+  },
+  {
+    "id": "handoffVersion",
+    "tag": "input",
+    "placeholder": "เช่น v01"
+  },
+  {
+    "id": "handoffNotes",
+    "tag": "textarea",
+    "placeholder": "จุดที่ต้องแก้ / สิ่งที่ต้องตรวจ"
+  }
+]

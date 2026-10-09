@@ -1,0 +1,850 @@
+{
+  "count": 169,
+  "files": [
+    {
+      "path": "project/.openai/hosting.json",
+      "bytes": 105,
+      "sha256": "40b28ff848500e1abc6023a934c3538b242b01f47a9fec11422622f6d9cb84af"
+    },
+    {
+      "path": "project/PRODUCTION-WORKFLOW.md",
+      "bytes": 3304,
+      "sha256": "c89ca0f067f5c830ce56c20b3336ab964ab423bf2e5bd08ceeb9a0122e47fde4"
+    },
+    {
+      "path": "project/SIMULATOR-DESIGN.md",
+      "bytes": 11740,
+      "sha256": "2d0dd378e48a5330750c69aa845b1eb36988aa67d699810bb85599198c62cbb5"
+    },
+    {
+      "path": "project/dist/app.js",
+      "bytes": 46153,
+      "sha256": "dd0cd512f7f97373b8ea5dac4956a1aade82fdc8f2234971995df84992acb8d0"
+    },
+    {
+      "path": "project/dist/assets/assistant-team-v10.png",
+      "bytes": 1667983,
+      "sha256": "a45391491acdbb85d20b2474ea72a01569e600f8d25e1ee73d3a0d06c17375f6"
+    },
+    {
+      "path": "project/dist/assets/bb-cabin-journey-v11.png",
+      "bytes": 2480369,
+      "sha256": "1657ac726a44bfb5c33df26eb12e8a54608f77257294f6040690d265dd446265"
+    },
+    {
+      "path": "project/dist/assets/bb-cockpit-seated-v19.png",
+      "bytes": 2136233,
+      "sha256": "dabc38e7dd2352d12415b43b205cb7f101b080b1dc412373bd09393a2884a013"
+    },
+    {
+      "path": "project/dist/assets/bb-crew-sprites-v18.png",
+      "bytes": 2071134,
+      "sha256": "ed2e662d109eae331109be418cd61e359da64579abbcac4990169e7754a2f928"
+    },
+    {
+      "path": "project/dist/assets/bb-crew-visible-faces-v22.png",
+      "bytes": 2438197,
+      "sha256": "c46ddf39a2c702580251e83f49fb170f7b940263186e6940c9904afc336deccb"
+    },
+    {
+      "path": "project/dist/assets/bb-logo.png",
+      "bytes": 137530,
+      "sha256": "86240b435f37a346d1680359eed0c2a57439ddd05951d0d52c58635ca6da9c60"
+    },
+    {
+      "path": "project/dist/assets/bb-simulator-full-aircraft-v19.png",
+      "bytes": 1799621,
+      "sha256": "698c9da5dae8ce2da89ef6d0d86a17e14fed2c54c1401bd6c8cfe24e21cfa2ce"
+    },
+    {
+      "path": "project/dist/assets/bb-workzone-hero-v14.png",
+      "bytes": 2199740,
+      "sha256": "3dcc72b8e65944b0effc1375bbbca2867d9ddd4cc54a1ac01f4910ccbfedaa77"
+    },
+    {
+      "path": "project/dist/assets/icon-brief.svg",
+      "bytes": 227,
+      "sha256": "7da83f440abd9e81e6879fabd2e122fb8d6e90c6e277d619c6256b5f62a2b0ee"
+    },
+    {
+      "path": "project/dist/assets/icon-footage.svg",
+      "bytes": 210,
+      "sha256": "60e943bb930aeef1eb9c8c347e1994dbd898e07ea18c1c9b576fa247df3624b1"
+    },
+    {
+      "path": "project/dist/assets/icon-reference.svg",
+      "bytes": 254,
+      "sha256": "2894439ad46a038ba90916570ebd12e0ba07720c0acfeb1c45f7e854fbabcfb5"
+    },
+    {
+      "path": "project/dist/assets/icon-review.svg",
+      "bytes": 205,
+      "sha256": "ec3f66fb7aacd061ac594e8762d8ba230c6fe76ef3c70eee116b8b3663ca2fbb"
+    },
+    {
+      "path": "project/dist/assets/lookbook/clip-01.jpg",
+      "bytes": 67782,
+      "sha256": "bcb6bb0553498a3fb93c1e3be6d5f6391acbbc4c0e357d78bb6bea91a327da1b"
+    },
+    {
+      "path": "project/dist/assets/lookbook/clip-02.jpg",
+      "bytes": 37832,
+      "sha256": "f97f64fd2e7751d7e0654f64c4dd7f4b9c1e8af12924902818aa605606967e8b"
+    },
+    {
+      "path": "project/dist/assets/lookbook/clip-03.jpg",
+      "bytes": 89664,
+      "sha256": "09420cc7b4ef1b9548ee05960ea85eaf92accc755d2011defb172c21b2e2bae7"
+    },
+    {
+      "path": "project/dist/assets/lookbook/clip-04.jpg",
+      "bytes": 29515,
+      "sha256": "e33865b9be612923294e1e81e059de607198c07055102622561e5ce2d247484f"
+    },
+    {
+      "path": "project/dist/assets/lookbook/clip-05.jpg",
+      "bytes": 38611,
+      "sha256": "aa4166ced223dafb9df71ae3443b1adc8a3aaef184cd7d867d7c613520569823"
+    },
+    {
+      "path": "project/dist/assets/lookbook/clip-06.jpg",
+      "bytes": 69944,
+      "sha256": "92ccbbda8b2d67754486d479a86519f234a579d66091c1ab97ea7183f82c30e8"
+    },
+    {
+      "path": "project/dist/assets/lookbook/clip-07.jpg",
+      "bytes": 54024,
+      "sha256": "5d5279a1255decd424f60c4d5bfb871320dca3e3fdbc2458cc27ff745f05fa7f"
+    },
+    {
+      "path": "project/dist/assets/lookbook/clip-08.jpg",
+      "bytes": 47270,
+      "sha256": "8edefb72c7630e0ea1506fb2f4063a9ae0b3e30bdd7f7b47918336e5746f3d94"
+    },
+    {
+      "path": "project/dist/assets/lookbook/clip-09.jpg",
+      "bytes": 44513,
+      "sha256": "240942e5cc2cedcdbcc081e37d296ff6a86723b414dba69b9e3c9c1e040976a6"
+    },
+    {
+      "path": "project/dist/assets/lookbook/clip-10.jpg",
+      "bytes": 53790,
+      "sha256": "9f3f79c100f3a00719c3c03e006e4f377e5828982ba60ef7ebe42a3597c2f181"
+    },
+    {
+      "path": "project/dist/assets/lookbook/clip-11.jpg",
+      "bytes": 62583,
+      "sha256": "3b41f419d89ce5918810cbd6acf01be70f838fc35887dc7c29002a490d6fd99a"
+    },
+    {
+      "path": "project/dist/assets/lookbook/cover-01-v15.jpg",
+      "bytes": 71816,
+      "sha256": "b7bac127285d2338adca9338febeccf3794292d931bdc48935f291a1018ee542"
+    },
+    {
+      "path": "project/dist/assets/lookbook/cover-02-v15.jpg",
+      "bytes": 45382,
+      "sha256": "7786106dca7d2cdb81505dae69dc836ac404ccd386dc3f898f02e9ff56436ec6"
+    },
+    {
+      "path": "project/dist/assets/lookbook/cover-03-v15.jpg",
+      "bytes": 91429,
+      "sha256": "8d34efec97c91b8f60ae36744051321a3f32b4885cbeefcd9b77506b54351f8b"
+    },
+    {
+      "path": "project/dist/assets/lookbook/cover-04-v15.jpg",
+      "bytes": 33381,
+      "sha256": "b035c63734843a31841bb2e63c1ec8c591385852dbd2dd70abc5b7dccffff9bc"
+    },
+    {
+      "path": "project/dist/assets/lookbook/cover-05-v15.jpg",
+      "bytes": 34080,
+      "sha256": "a7d55ec4a31e98409704b148076db3ca92d47ef8040cea85fe97002f3637aa1b"
+    },
+    {
+      "path": "project/dist/assets/lookbook/cover-06-v15.jpg",
+      "bytes": 58999,
+      "sha256": "e2bc53c7f15900ca4f8ff040a3f3be48c1a4541a726df723b20af0d6ac8772b3"
+    },
+    {
+      "path": "project/dist/assets/lookbook/cover-07-v15.jpg",
+      "bytes": 57594,
+      "sha256": "30a36182f2b585190d9fc1354f04e9fca939bf0396b3af29af044df8f451677b"
+    },
+    {
+      "path": "project/dist/assets/lookbook/cover-08-v15.jpg",
+      "bytes": 45574,
+      "sha256": "35217cd48ac91298dffe04cb451c0923aff4bae255f4c7bf895d6eadd590bb56"
+    },
+    {
+      "path": "project/dist/assets/lookbook/cover-09-v15.jpg",
+      "bytes": 44474,
+      "sha256": "fd3eec2dbf7516b4dfcce842c6c74d3cc817d138da5fe7ef7a678edf7306662e"
+    },
+    {
+      "path": "project/dist/assets/lookbook/cover-10-v15.jpg",
+      "bytes": 37691,
+      "sha256": "bb99cbcda4793be34e2f6ee1e5c4cc5cbc2acc9eac8c1c62c6d66e109db09242"
+    },
+    {
+      "path": "project/dist/assets/lookbook/cover-11-v15.jpg",
+      "bytes": 51953,
+      "sha256": "f420be149b5408667824559ac2e8e10387740eb55a703ba5f42fcd637eedd9b8"
+    },
+    {
+      "path": "project/dist/assets/lookbook/profile.json",
+      "bytes": 10839,
+      "sha256": "707e972d5ebfed38ee62dd57287b89e42173eec3ffe5dfb53761701d087e4c97"
+    },
+    {
+      "path": "project/dist/assets/mascot-captain-cutout.png",
+      "bytes": 1354103,
+      "sha256": "e498926e502c985b093427a8e7692f9238c62a3d094655505341dd847e931639"
+    },
+    {
+      "path": "project/dist/assets/mascot-cheer.jpg",
+      "bytes": 353098,
+      "sha256": "cbd1811a64496e59ef301d09c8df519037a432b1330b99a2c6974ce9b2add592"
+    },
+    {
+      "path": "project/dist/assets/mascot-director.jpg",
+      "bytes": 261644,
+      "sha256": "09f0e4d24edc809fc35a82587395e2c382bb07933306006a447dc43037a3bf8d"
+    },
+    {
+      "path": "project/dist/assets/mascot-expressions.jpg",
+      "bytes": 362946,
+      "sha256": "9ba728565eac30168d71322675fa10c942b571c63a30ec5cfced488b721c662e"
+    },
+    {
+      "path": "project/dist/assets/mascot-lead-black-v10.png",
+      "bytes": 1393718,
+      "sha256": "67a155390ff25197c2f31a9d4086fadb87589393e5a7ac030ff03a7a034f5ca6"
+    },
+    {
+      "path": "project/dist/assets/mascot-office.jpg",
+      "bytes": 306369,
+      "sha256": "6565e7358e09e0e8c7259be0c36a82953912470d7b3468ff0b6f6e5456ce31cb"
+    },
+    {
+      "path": "project/dist/assets/mascot-pointing.jpg",
+      "bytes": 349355,
+      "sha256": "2b3495e2d79818d3cf83ac80a6d9867805c49536fadc5578240a72b6a4315b4c"
+    },
+    {
+      "path": "project/dist/assets/mascot-poses-cutout.png",
+      "bytes": 1831843,
+      "sha256": "fa58cbc77a9dd6f34fb01ae17f55deaf678c8a0e63e207bd4968abcbe71de15c"
+    },
+    {
+      "path": "project/dist/assets/mascot-qa.jpg",
+      "bytes": 218500,
+      "sha256": "80ab5e379908fe86c6ccfa42e90d40542e80ef56b49b99579562d3246feeebf9"
+    },
+    {
+      "path": "project/dist/assets/type/activity.svg",
+      "bytes": 1422,
+      "sha256": "50a065479719832b38137eaf58caa61bb8d038a158a5484882ca0259d10c9c53"
+    },
+    {
+      "path": "project/dist/assets/type/add-footage.svg",
+      "bytes": 2558,
+      "sha256": "939853e1bd32e139bd0e8211bde33e9f5be4bc9ffb3b5e10a4363314fa64ffcd"
+    },
+    {
+      "path": "project/dist/assets/type/add-reference.svg",
+      "bytes": 2771,
+      "sha256": "7590b8b506785ce1eebe17bc8dc3fb0429b2a9ef66570f72ef95daedb55eee98"
+    },
+    {
+      "path": "project/dist/assets/type/additional-rules.svg",
+      "bytes": 3155,
+      "sha256": "b42412569f4ff88ed0e7350b78b522697583a4f7ce3578f2cd700b6df8b1d877"
+    },
+    {
+      "path": "project/dist/assets/type/approval.svg",
+      "bytes": 1738,
+      "sha256": "f1d8d9303c842468d103c3fb3eb2735650abac853d2f87fe2baf7a9c833c5c32"
+    },
+    {
+      "path": "project/dist/assets/type/aspect-ratio.svg",
+      "bytes": 2744,
+      "sha256": "15383946e8bb0071f6e5c3b85626006681f342c860f1bb68ddeb0f34957cae73"
+    },
+    {
+      "path": "project/dist/assets/type/audience.svg",
+      "bytes": 1703,
+      "sha256": "825e1bb2eb20d756e63ccb4dc7030259c90b34070b9f2d07f306de38b4e0fa65"
+    },
+    {
+      "path": "project/dist/assets/type/audio.svg",
+      "bytes": 1003,
+      "sha256": "d10049bb8023e59f0050e63674ac48ccbc0dc7bc26eb0cdb325f31d63bae5c39"
+    },
+    {
+      "path": "project/dist/assets/type/avoid.svg",
+      "bytes": 926,
+      "sha256": "3defbd52aa6a2cadbc01949ec5c0d53e86c3a36515555c1c0144ea256bc6ca57"
+    },
+    {
+      "path": "project/dist/assets/type/back.svg",
+      "bytes": 1121,
+      "sha256": "c4156de071da313b6a061ff609a418a7e741292027073cfe9e06cbabda7a9d96"
+    },
+    {
+      "path": "project/dist/assets/type/bb-private-studio.svg",
+      "bytes": 3406,
+      "sha256": "c81491e9e48e018a59b40dab0b34fe26b026d2414cfcbff9ab89c57fe4020fd4"
+    },
+    {
+      "path": "project/dist/assets/type/bb-simulator.svg",
+      "bytes": 2681,
+      "sha256": "39566c70034c7c698f06fb6a7d7710abb36b5bdff7760e38ca779c40d5e954a4"
+    },
+    {
+      "path": "project/dist/assets/type/bb.svg",
+      "bytes": 663,
+      "sha256": "8d32ab9aa3da3682e4dbe351ae56192afdb293a7b3a8c32b981957cb989b4bf1"
+    },
+    {
+      "path": "project/dist/assets/type/bilingual-lesson.svg",
+      "bytes": 3355,
+      "sha256": "33acff7dfb0db55d80301ebe96f9a098f082b2150d3213805575b4f7c5065f97"
+    },
+    {
+      "path": "project/dist/assets/type/brand-assets.svg",
+      "bytes": 3100,
+      "sha256": "3b3774cf2aad8c82270fe063609c5fdb4e19ee7228ca83922d33ea026817cb43"
+    },
+    {
+      "path": "project/dist/assets/type/brief.svg",
+      "bytes": 1017,
+      "sha256": "142301081fbaa8019bea0f2160c9c550f9d5db81b36683b5944b1c42002808cb"
+    },
+    {
+      "path": "project/dist/assets/type/call-to-action.svg",
+      "bytes": 2298,
+      "sha256": "c4b0c071630511f730b36e380ec5f41d6f16f73228028e3c0ae97e574167ba50"
+    },
+    {
+      "path": "project/dist/assets/type/canva.svg",
+      "bytes": 1370,
+      "sha256": "0ebdec18b623977ebfb85d5e22f176d25d4969b9b1da7f1f5dedeb3590c548b7"
+    },
+    {
+      "path": "project/dist/assets/type/capcut.svg",
+      "bytes": 1618,
+      "sha256": "2e47228ffe53b085592a39d4f749f98fe2395df3cee8a50befb936f7277c1a44"
+    },
+    {
+      "path": "project/dist/assets/type/caption-file.svg",
+      "bytes": 2234,
+      "sha256": "96e82deb30d1f453e23f815754dab08b19e0b917847f6049ef2b2b6133457d38"
+    },
+    {
+      "path": "project/dist/assets/type/chicha.svg",
+      "bytes": 1417,
+      "sha256": "93ce41aa0d7af9d408cce9e7899f364d16375e3a269d7588e5db63b754741b24"
+    },
+    {
+      "path": "project/dist/assets/type/choose-a-look.svg",
+      "bytes": 2519,
+      "sha256": "fe2652df7a9c582c7fb8f2febc7eb28b77195a72922e2d7e9a3bfccecc05099c"
+    },
+    {
+      "path": "project/dist/assets/type/classroom-collage.svg",
+      "bytes": 4171,
+      "sha256": "e31eaa3c0246d9292bfc7ed757328349f3024feb3dc8d262e8350fc31d41c61d"
+    },
+    {
+      "path": "project/dist/assets/type/cockpit.svg",
+      "bytes": 1541,
+      "sha256": "52f88ba9bd2eeba95b471cbc2d699cafa3f9ad8a57cd9029c748cb30ff574b0d"
+    },
+    {
+      "path": "project/dist/assets/type/color-palette.svg",
+      "bytes": 2614,
+      "sha256": "a1c09195fe26c5dbf59f4dbc0077e8550470982812e03d3ef02ae556cf593dac"
+    },
+    {
+      "path": "project/dist/assets/type/content-plan.svg",
+      "bytes": 2436,
+      "sha256": "b89780551d06794ae980fbd6e44674dd562e3346c222d40c51ae51e33a82b554"
+    },
+    {
+      "path": "project/dist/assets/type/content-type.svg",
+      "bytes": 2510,
+      "sha256": "e6145a51a667d7963f3c43c81cfd6b08e82cd5b92d7f7a6ca4f2ac0e9c35916d"
+    },
+    {
+      "path": "project/dist/assets/type/content.svg",
+      "bytes": 1611,
+      "sha256": "985ebcd6c2fd3a8d57fc7a4d6c16766086536c508a035fba7bfb8352d1c64680"
+    },
+    {
+      "path": "project/dist/assets/type/continue-brief.svg",
+      "bytes": 2613,
+      "sha256": "961581a081d5a34db121a0a8294d8ddd3e77fe6f76f77e6ea8e729645cbd5fbf"
+    },
+    {
+      "path": "project/dist/assets/type/cover-headline.svg",
+      "bytes": 2719,
+      "sha256": "4f8c1a1129120032e9137fd090d70bdb622dbe302565200e4b6429a4dfae3c10"
+    },
+    {
+      "path": "project/dist/assets/type/cover-image.svg",
+      "bytes": 2469,
+      "sha256": "77aa5bcf7c691c388c208621e9e5f4757949406d0ab7bdf8af2c3ef9df5992d6"
+    },
+    {
+      "path": "project/dist/assets/type/cover-language.svg",
+      "bytes": 3291,
+      "sha256": "60a14f69307bd1fd36708d9fe1dde88f4a66b60ecffa07860f45da4b8cc7a379"
+    },
+    {
+      "path": "project/dist/assets/type/cover-preview.svg",
+      "bytes": 2299,
+      "sha256": "9fdb438d7d9fed8a6640cdce8d7ffe507371dab4d0d4bd99d14c77bd7b2e3f49"
+    },
+    {
+      "path": "project/dist/assets/type/cover-style.svg",
+      "bytes": 2303,
+      "sha256": "d04ea5d04988ae52240429fbd2c87d12e3159925827c227d8dfcd1ba76c70740"
+    },
+    {
+      "path": "project/dist/assets/type/creative.svg",
+      "bytes": 1765,
+      "sha256": "d77ceada82ea26fa0dd6ecce389bd7e0b8775c030c0b910240d1b4663b50c37f"
+    },
+    {
+      "path": "project/dist/assets/type/creator-collage.svg",
+      "bytes": 3385,
+      "sha256": "54d20fdf78bc17ab9e41274e9dacf3802d7afb030479b6ff7b5117d2998e1316"
+    },
+    {
+      "path": "project/dist/assets/type/creator-intro.svg",
+      "bytes": 2585,
+      "sha256": "60ac6303151682349e2f27672185b70112bce9aa067b1994aa593dccf77c1b7c"
+    },
+    {
+      "path": "project/dist/assets/type/creator-mission.svg",
+      "bytes": 3247,
+      "sha256": "92c295c4e3f0fd35c8da0069593a3283f1cef129d5c4d72b991a2415cddd1633"
+    },
+    {
+      "path": "project/dist/assets/type/deadline.svg",
+      "bytes": 1773,
+      "sha256": "0be34ce67185d22d6cc6d15e56015fad24ced4559663f35e0c41aa29ddcdeb15"
+    },
+    {
+      "path": "project/dist/assets/type/delete.svg",
+      "bytes": 1307,
+      "sha256": "6e01e4fdc69597db6903fa0d4d6996a43ec0554afc909580d32fb81fe4257f37"
+    },
+    {
+      "path": "project/dist/assets/type/deliverables.svg",
+      "bytes": 2571,
+      "sha256": "ea0a97684d0b04648b2e46bed158cc517a15fc54ba4eb5beabf1a574285d3b8d"
+    },
+    {
+      "path": "project/dist/assets/type/delivery.svg",
+      "bytes": 1483,
+      "sha256": "b74bd877471363935faaae8444ad277d18ead3997038f3bb6918a21586d5576d"
+    },
+    {
+      "path": "project/dist/assets/type/design-style.svg",
+      "bytes": 2753,
+      "sha256": "835e016f82122043a53f00b295bd47a4bfa4fd6ab84804b25506d44eaa7ee038"
+    },
+    {
+      "path": "project/dist/assets/type/design.svg",
+      "bytes": 1563,
+      "sha256": "8fea0f99d2efb6e72f96d03dae3580dadd8b9f185f7259a8ce836fb2476ac61e"
+    },
+    {
+      "path": "project/dist/assets/type/destination.svg",
+      "bytes": 2473,
+      "sha256": "b80bd03a045194ae41b6d44966cc7d5ac97bc2ba4ba06ffe8635d621a5686105"
+    },
+    {
+      "path": "project/dist/assets/type/direction.svg",
+      "bytes": 1744,
+      "sha256": "2e58f5ea62a9e2bad92d6c0f4a61524578396d5e7deaade3d0336306dce31937"
+    },
+    {
+      "path": "project/dist/assets/type/download-brief.svg",
+      "bytes": 2750,
+      "sha256": "2389aa537081e5d543572ebeb9bdca167d1dd7a8199d98c9adacedd411459eae"
+    },
+    {
+      "path": "project/dist/assets/type/duration.svg",
+      "bytes": 1689,
+      "sha256": "839ea947827fc08e99b6645c519410afcd4ca71312d29a1ca0eba4b4e9996a8e"
+    },
+    {
+      "path": "project/dist/assets/type/edit-brief.svg",
+      "bytes": 1680,
+      "sha256": "1164e4baf11c732764f9e3627cf894759381972f694044452d48edc85f3adcfa"
+    },
+    {
+      "path": "project/dist/assets/type/edit-pace.svg",
+      "bytes": 1817,
+      "sha256": "f52084a3f348e49991a5dc65af5310a3dd7b8844adc73588d961434ec065dcae"
+    },
+    {
+      "path": "project/dist/assets/type/edit.svg",
+      "bytes": 745,
+      "sha256": "0988d519daaa240dc6898b4500c065c479d0ba6c63c586bc61907ad69e345033"
+    },
+    {
+      "path": "project/dist/assets/type/export.svg",
+      "bytes": 1210,
+      "sha256": "ea108aab4e83a4d19b8cf918a32c8396d5e1a5ebd09529b4adee56ef36c5d045"
+    },
+    {
+      "path": "project/dist/assets/type/final-approval.svg",
+      "bytes": 2542,
+      "sha256": "2f1d6d84f0ba2cb64d4e8a8f2883bb323d236f6a66c95a65deb01ad34227e6d6"
+    },
+    {
+      "path": "project/dist/assets/type/footage.svg",
+      "bytes": 1887,
+      "sha256": "39367fb33d8dd6d598eb53951a7f73ba438659b3bf6cefc5b8a986888e0150c3"
+    },
+    {
+      "path": "project/dist/assets/type/frame-rate.svg",
+      "bytes": 2331,
+      "sha256": "41f465cf1b50988f11c54b0d646d9c4da242b56561ecaf677be308f4ebd38513"
+    },
+    {
+      "path": "project/dist/assets/type/graphics.svg",
+      "bytes": 2079,
+      "sha256": "ed2f9da2ffade2e7fab9fc017c2da08c5a943b5f34bb08f83419a7b1f912b3c6"
+    },
+    {
+      "path": "project/dist/assets/type/headline-text.svg",
+      "bytes": 2364,
+      "sha256": "aea6f47cec50eb0b3a5375bf426df4b79cd41db2f295619807724a1817b19912"
+    },
+    {
+      "path": "project/dist/assets/type/include.svg",
+      "bytes": 1367,
+      "sha256": "ef78dddb79a502393d73a9a2b229ed2fad0d4c3bbe10718c07038081d0f9c901"
+    },
+    {
+      "path": "project/dist/assets/type/keep.svg",
+      "bytes": 1005,
+      "sha256": "411f73f6bb1266f17fe630633b396bb2b55d63e5517211d77a80930cc3de4391"
+    },
+    {
+      "path": "project/dist/assets/type/key-message.svg",
+      "bytes": 2910,
+      "sha256": "1961cda367d7070c5a5bfce4cf2fe418725acdf5ddd58c3f55857a120b1e786b"
+    },
+    {
+      "path": "project/dist/assets/type/kitty.svg",
+      "bytes": 960,
+      "sha256": "bf7003f56c6ea34e300047c614e36ce0f22a35618a0142a7d95f94f9d80bb147"
+    },
+    {
+      "path": "project/dist/assets/type/learn-by-doing.svg",
+      "bytes": 2784,
+      "sha256": "0faf08b7d90ddaea52673981e659bfc416085cc48a40c64dd7a5b3e4ea9cbb47"
+    },
+    {
+      "path": "project/dist/assets/type/leo.svg",
+      "bytes": 679,
+      "sha256": "6073722dda845b8fef1ef66799318f0171efbd2269b86409f5f1171b13ea1244"
+    },
+    {
+      "path": "project/dist/assets/type/local-workspace.svg",
+      "bytes": 3346,
+      "sha256": "419267c6deff61271d9339e58c3a7560b5f6e1d536796fe5cccaedbece542fd6"
+    },
+    {
+      "path": "project/dist/assets/type/mood-tone.svg",
+      "bytes": 2080,
+      "sha256": "f231ed3ca5a20d4b375b9cd1c063b17cd8b89d549b23af4ba951bb83d382c417"
+    },
+    {
+      "path": "project/dist/assets/type/music.svg",
+      "bytes": 1111,
+      "sha256": "ce572373bb46bbfae7651b4d97fdb05bd802dbec51223c52c1a35c6cddb0df0f"
+    },
+    {
+      "path": "project/dist/assets/type/new-project.svg",
+      "bytes": 2089,
+      "sha256": "33c7f0e054af561a5f9c0e076a0ea2515ee6415acb0ddd9015ebb7cef26b6134"
+    },
+    {
+      "path": "project/dist/assets/type/next.svg",
+      "bytes": 767,
+      "sha256": "2bbdda92ebf32b170c3a9dbcc0ec05b0d215c71a1554cf07f70f1740f5e6db59"
+    },
+    {
+      "path": "project/dist/assets/type/objective.svg",
+      "bytes": 1971,
+      "sha256": "2e3551790bbe55bb31043ae3c5b33cdf458c848df559a2480b6f54dbc131128e"
+    },
+    {
+      "path": "project/dist/assets/type/open-project.svg",
+      "bytes": 2570,
+      "sha256": "4c34ddf59a5f561a589dc7caaf508239511894f63924e90acc0ebd112578c597"
+    },
+    {
+      "path": "project/dist/assets/type/opening.svg",
+      "bytes": 1706,
+      "sha256": "0b31190073a499504d1e8876c5129e400192c38347033085c5b55b6719e810de"
+    },
+    {
+      "path": "project/dist/assets/type/outfit-collage.svg",
+      "bytes": 2787,
+      "sha256": "15eaacaf93633c3197cdc4fa27740f997494d1a34fcc1b412c19a214aead050b"
+    },
+    {
+      "path": "project/dist/assets/type/platform.svg",
+      "bytes": 1748,
+      "sha256": "546fe86c85cdd93139f5f06fa6cc9145020511d60f105651fb75f4c0e3fd5c0a"
+    },
+    {
+      "path": "project/dist/assets/type/preview.svg",
+      "bytes": 1275,
+      "sha256": "10e3cf732456f7c1fe1689574ed33ef5fe930e2fae2100da3be941710de9fc84"
+    },
+    {
+      "path": "project/dist/assets/type/product-review.svg",
+      "bytes": 2671,
+      "sha256": "6fecff3d424d6a3b20642506dd6fce750c3b6a0c4f8bfd5760bebbe3ec8a5206"
+    },
+    {
+      "path": "project/dist/assets/type/project-name.svg",
+      "bytes": 2613,
+      "sha256": "a32b46c239a611ef704905e4455f3cbc5e60cc9501586bd3ee1decd19f24fa3f"
+    },
+    {
+      "path": "project/dist/assets/type/project.svg",
+      "bytes": 1585,
+      "sha256": "88c7718a3a220aef8f7f12f5ec810acb8b9fe97006d501169c342cca5ee33c55"
+    },
+    {
+      "path": "project/dist/assets/type/projects.svg",
+      "bytes": 1977,
+      "sha256": "01815dcffab677a7f7e0206ae240e0aa95a37c08688d2b502f8f991f1cabdd5b"
+    },
+    {
+      "path": "project/dist/assets/type/publish.svg",
+      "bytes": 1466,
+      "sha256": "1cf53968587efb20abfbccaf7a360f67f6afcf1a4963971e1dd53a4075845c3e"
+    },
+    {
+      "path": "project/dist/assets/type/reference-direction.svg",
+      "bytes": 3767,
+      "sha256": "42464cf3ba862c48c59e77c121a811e2e9ae489409216f436efceac2c04ecc6e"
+    },
+    {
+      "path": "project/dist/assets/type/reference.svg",
+      "bytes": 2100,
+      "sha256": "0e1ff5a6693d4d1e6f29b4402a0e598a9b0895cca62fe1be2dc311d2dffc9a7e"
+    },
+    {
+      "path": "project/dist/assets/type/resolution.svg",
+      "bytes": 2206,
+      "sha256": "8201265416333373f9db200590e5eccbe64c42f6f6778904e2296279989ceac1"
+    },
+    {
+      "path": "project/dist/assets/type/restrictions.svg",
+      "bytes": 2783,
+      "sha256": "f9c96df5794cc4e8f64819e56f4fa4bb95cf65d1423c89120f1d805020a6e8f5"
+    },
+    {
+      "path": "project/dist/assets/type/review.svg",
+      "bytes": 1175,
+      "sha256": "0c403325d4af893e9c5899f61ec418c745cb54cbbeb54dddec6ac852e2665f87"
+    },
+    {
+      "path": "project/dist/assets/type/revision-rounds.svg",
+      "bytes": 3222,
+      "sha256": "24e03800f25186023ad53f6b4bc58942cdec8e97b74b07c6e20c89eb2a891978"
+    },
+    {
+      "path": "project/dist/assets/type/save-project.svg",
+      "bytes": 2715,
+      "sha256": "82e6d1739b0c04299f9fb718459a6cefb9a37804c5682948eb839b573b7c8ad6"
+    },
+    {
+      "path": "project/dist/assets/type/save-style.svg",
+      "bytes": 2406,
+      "sha256": "3f7b0d8ca881e33e7eeaa2e80aa4ea3c2ca623bd7cff02f8dd07935146a79665"
+    },
+    {
+      "path": "project/dist/assets/type/screen-demo.svg",
+      "bytes": 2568,
+      "sha256": "bb345e01b676ccdca66ccc353f29480ba140d661a943822aeafca1bd71b2a690"
+    },
+    {
+      "path": "project/dist/assets/type/simulator.svg",
+      "bytes": 2094,
+      "sha256": "3f27088b58d201e8fb9af5879a201df16a5f7717c2101c2b914169c0b1527cf3"
+    },
+    {
+      "path": "project/dist/assets/type/sound-graphics.svg",
+      "bytes": 3665,
+      "sha256": "cf4d595bff6bb9120b5029370886374512e451541fe73e98f468d1bb50a5959d"
+    },
+    {
+      "path": "project/dist/assets/type/start-brief.svg",
+      "bytes": 2324,
+      "sha256": "5cc313d2cc5bc9531e82fc11bfdf811977b765336f15585b6ff2a5464072a4dd"
+    },
+    {
+      "path": "project/dist/assets/type/studio-journey.svg",
+      "bytes": 2943,
+      "sha256": "24e32011b2364bab1c49dac98648aafb35d875044e294b0d430b17ce44655149"
+    },
+    {
+      "path": "project/dist/assets/type/studio.svg",
+      "bytes": 1461,
+      "sha256": "48e5eab00d8bd79743870edacae6ac7911becb98e712f3f7b84491264a1fd941"
+    },
+    {
+      "path": "project/dist/assets/type/style-board.svg",
+      "bytes": 2626,
+      "sha256": "285751bb3178c0202f944a69f46e1675d422411c0d421361e053af78f4e8b43f"
+    },
+    {
+      "path": "project/dist/assets/type/style-name.svg",
+      "bytes": 2305,
+      "sha256": "ce6b015a974a454dc809a78319246c43507252d2c9209b381a2490e8341d7f1a"
+    },
+    {
+      "path": "project/dist/assets/type/style-notes.svg",
+      "bytes": 2481,
+      "sha256": "2e77d25fba8682c81140ff778720017f3c22bf30d97b712c61bb748e762fb554"
+    },
+    {
+      "path": "project/dist/assets/type/subtitle-position.svg",
+      "bytes": 3379,
+      "sha256": "771b0a1d2edeae34ab62d4bc4c51ba960d7af9ca7fa326d092e13b4b2001f524"
+    },
+    {
+      "path": "project/dist/assets/type/subtitles.svg",
+      "bytes": 2121,
+      "sha256": "1142802191c63cc2fe456a1930488c96ee72a863c4802ec7b5c6dcbb30c0a2a5"
+    },
+    {
+      "path": "project/dist/assets/type/super-language.svg",
+      "bytes": 3530,
+      "sha256": "1733329493a4fbf9279f3dfe44f79749d26cb8ee4ce6740a69c06f9454ebe55f"
+    },
+    {
+      "path": "project/dist/assets/type/super-style.svg",
+      "bytes": 2542,
+      "sha256": "4787a29012294072ad3c4059f2c90e99fdf7cf0e38f8c1c12639bf15455b0c7c"
+    },
+    {
+      "path": "project/dist/assets/type/super-text.svg",
+      "bytes": 2014,
+      "sha256": "10d28f721807f9793518f7ddfd7b8b11a6d4015e55768184756199d0b3a8302d"
+    },
+    {
+      "path": "project/dist/assets/type/text-cover.svg",
+      "bytes": 2082,
+      "sha256": "04b8a6e508c84321369c6610d3891e4b6c8c56c2f018f0550a0efb243a7c3721"
+    },
+    {
+      "path": "project/dist/assets/type/text-focus.svg",
+      "bytes": 1922,
+      "sha256": "4764ed1d0e533986230698847939f7bc8624f8578b8d447290ad45c9cea7b4b0"
+    },
+    {
+      "path": "project/dist/assets/type/text-layout.svg",
+      "bytes": 2110,
+      "sha256": "cf4f046aa846af70230d5b904522d723a66cd3e354e8e4b7c36f3556d4b9d197"
+    },
+    {
+      "path": "project/dist/assets/type/tidy.svg",
+      "bytes": 812,
+      "sha256": "d0eda7182473e32db1849090c5cd40a2b0749b54a55d0f6f8ff6b8084928680f"
+    },
+    {
+      "path": "project/dist/assets/type/tutorial.svg",
+      "bytes": 1487,
+      "sha256": "7f972731d0118d2d21c433565a10544817c8806420c0b86d5d0803d102ccdfc3"
+    },
+    {
+      "path": "project/dist/assets/type/upload-footage.svg",
+      "bytes": 3318,
+      "sha256": "e93f7d45f2522a73fef91c512e5d6c390b5ce2946691a3b11d30f4595cb5619d"
+    },
+    {
+      "path": "project/dist/assets/type/usage-rights.svg",
+      "bytes": 3121,
+      "sha256": "1a179fecbe8f93e05d3f05ae7da311e6c889a2054918c8605088044e1f786511"
+    },
+    {
+      "path": "project/dist/assets/type/video.svg",
+      "bytes": 1067,
+      "sha256": "6b7fcf080c7e294a53053f5d1fc86cb78089bf4f42df78b6151b6b9d1b36dbc4"
+    },
+    {
+      "path": "project/dist/assets/type/vlog.svg",
+      "bytes": 878,
+      "sha256": "a58d09886819ba27944c315196c65e7c62a0ba317627c30c208798aa1d9c6c05"
+    },
+    {
+      "path": "project/dist/assets/type/work-zone.svg",
+      "bytes": 1552,
+      "sha256": "69fe0e155c5d976734274fcd39fd49dde24121a6300573eb781ca6f4a2edc600"
+    },
+    {
+      "path": "project/dist/assets/type/workshop-campaign.svg",
+      "bytes": 4071,
+      "sha256": "20fc0e2fc93c056df6ff86e891249175eb5782204ceddac4f5eba33367390f17"
+    },
+    {
+      "path": "project/dist/assets/type/workshop-story.svg",
+      "bytes": 3137,
+      "sha256": "a7f7e579679a66dda78999a7456a49ccee33ee7ecdbc5537f6e239c0b32548c8"
+    },
+    {
+      "path": "project/dist/index.html",
+      "bytes": 44410,
+      "sha256": "2970ccf6fd749eafaca13613d30f9948208e6b0f24cfda0974a15d002550fe64"
+    },
+    {
+      "path": "project/dist/simulator-model.js",
+      "bytes": 2090,
+      "sha256": "016b5d94a28fa6affec3c13b027df8c7e53cf477cf805168e2a7f90e80d0ac3c"
+    },
+    {
+      "path": "project/dist/simulator.css",
+      "bytes": 10243,
+      "sha256": "64a3b6772d4e3a85391bbe13e84484cd8a5369cebbec89d50637c7015c65879f"
+    },
+    {
+      "path": "project/dist/simulator.js",
+      "bytes": 9115,
+      "sha256": "ba0115932f20aeb310a3bbf81f090aa169e6e2c42d182b5d9e8be0b2adc19b4b"
+    },
+    {
+      "path": "project/dist/style.css",
+      "bytes": 23267,
+      "sha256": "3c9c6e3293ad51796f842d44de769363172d273556a4d215ea0bc45b565d1728"
+    },
+    {
+      "path": "project/dist/workflow.js",
+      "bytes": 4901,
+      "sha256": "9ff36c32d82e218eb77eae2eeb053d2403b05a8fa2e6332a3b0266c0c8f0c74b"
+    },
+    {
+      "path": "project/tests/simulator.test.cjs",
+      "bytes": 1407,
+      "sha256": "91e6992bde4df1509dd7f80381e4335cb1054c0be44df4f8f085628e500afab9"
+    },
+    {
+      "path": "project/tests/workflow.test.cjs",
+      "bytes": 1940,
+      "sha256": "f3d78e16568f73a347a83a2875b1cec88fb4c737295af79b645686732c24ed8b"
+    }
+  ]
+}

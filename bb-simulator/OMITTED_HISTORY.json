@@ -1,0 +1,16 @@
+{
+  "reason": "Remove unused historical render variants to meet 30 MB upload limit. Current runtime assets and identity references retained.",
+  "files": [
+    "assistant-team-v4.png",
+    "assistant-team-v5.png",
+    "assistant-team-v6.png",
+    "assistant-team-v7.png",
+    "assistant-team-v8.png",
+    "bb-crew-angles-v21.png",
+    "bb-crew-working-v20.png",
+    "bb-simulator-cockpit-v18.png",
+    "bb-studio-v2.png",
+    "jet-desktop-v3.png",
+    "jet-mobile-v3.png"
+  ]
+}

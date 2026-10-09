@@ -1,0 +1,20 @@
+{
+  "product": "BB Simulator",
+  "snapshot_at": "2026-10-09 Asia/Bangkok",
+  "baseline_commit": "d3f9ec1ab85bee9d12f981da9791f00f2d623aa3",
+  "live_url": "https://bb-private-studio.nextniza.chatgpt.site",
+  "project_id": "appgprj_6ac6551359c08191858bc4d2f38f0f8d",
+  "deployment_id": "appgdep_6ac907a102208191abde5e919bad3445",
+  "version_id": "appgprj_6ac6551359c08191858bc4d2f38f0f8d~appgver_aab19b4112ec8191b7c63b749245c52c",
+  "access": "owner-private",
+  "stack": "buildless HTML/CSS/vanilla JS",
+  "current_assets": {
+    "environment": "dist/assets/bb-simulator-full-aircraft-v19.png",
+    "BB": "dist/assets/bb-cockpit-seated-v19.png",
+    "crew": "dist/assets/bb-crew-visible-faces-v22.png",
+    "logo": "dist/assets/bb-logo.png",
+    "BB_identity_reference": "dist/assets/mascot-lead-black-v10.png",
+    "lookbook": "dist/assets/lookbook/"
+  },
+  "historical_assets": "Included for comparison; prior versions are not all approved."
+}
