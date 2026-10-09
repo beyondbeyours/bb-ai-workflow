@@ -97,10 +97,10 @@
   const tools = [
     [
       ["เปิด Brief", () => openStep(0)],
-      ["ดูคิวผลิต", () => (tab("production"), renderProduction(0))],
+      ["ตรวจงาน · ปักหมุดสั่งแก้", () => tab("review")],
     ],
     [
-      ["Footage", () => openStep(2)],
+      ["Footage + Timeline ร่าง", () => openStep(2)],
       ["Reference", () => openStep(1)],
     ],
     [
@@ -112,8 +112,8 @@
       ["Text & Cover", () => openStep(0, "styleBoardGroup")],
     ],
     [
-      ["Review", () => openStep(3)],
-      ["Projects", () => tab("history")],
+      ["ห้องตรวจงาน", () => tab("review")],
+      ["ตรวจบรีฟ", () => openStep(3)],
     ],
   ];
 

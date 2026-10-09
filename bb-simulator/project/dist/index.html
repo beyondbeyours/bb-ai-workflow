@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="style.css?v=26" />
     <link rel="stylesheet" href="simulator.css?v=26" />
     <link rel="stylesheet" href="cabin-live.css?v=26" />
+    <link rel="stylesheet" href="builder-review.css?v=27" />
   </head>
   <body>
     <header>
@@ -49,6 +50,7 @@
       <nav class="tabs" aria-label="Workspace">
         <button data-tab="simulator" class="selected"><img class="type" src="assets/type/simulator.svg" alt="Simulator" /></button
         ><button data-tab="workspace"><img class="type" src="assets/type/work-zone.svg" alt="Work Zone" /></button
+        ><button data-tab="review"><img class="type" src="assets/type/review.svg" alt="Review" /></button
         ><button data-tab="history"><img class="type" src="assets/type/projects.svg" alt="Projects" /></button>
       </nav>
       <section id="simulator" class="tabcontent">
@@ -877,6 +879,7 @@
                 <video id="video" controls playsinline hidden></video><img id="imagePreview" hidden alt="ไฟล์ภาพที่เลือก" />
                 <p id="videoName" class="hint"></p>
               </section>
+              <section id="vbBuilder" class="vb" aria-label="Timeline ร่าง"></section>
             </section>
             <section class="workstep" data-work-step="3" hidden>
               <h2><img class="type" src="assets/type/review.svg" alt="Review" /></h2>
@@ -927,6 +930,16 @@
         ><button id="saveHandoff" class="primary">บันทึกการส่งต่อ</button>
         <p id="handoffStatus" class="hint" role="status"></p>
       </section>
+      <section id="review" class="tabcontent" hidden>
+        <div class="rvHead">
+          <div>
+            <h1><img class="type" src="assets/type/review.svg" alt="Review" /></h1>
+            <p class="hint">ตรวจ Preview แล้วปักหมุดสั่งแก้ตรงวินาทีหรือจุดบนภาพ · ปิดงานได้เมื่อทุกหมุดผ่าน</p>
+          </div>
+          <div class="routingslot" data-routing-slot="review"></div>
+        </div>
+        <div id="reviewApp" class="rvApp"></div>
+      </section>
       <section id="history" class="tabcontent" hidden>
         <h1><img class="type" src="assets/type/projects.svg" alt="Projects" /></h1>
         <div class="routingslot" data-routing-slot="history"></div>
@@ -946,5 +959,7 @@
     <script src="cabin-live.js?v=26"></script>
     <script src="cabin-cam.js?v=26"></script>
     <script src="workzone.js?v=26"></script>
+    <script src="timeline.js?v=27"></script>
+    <script src="review.js?v=27"></script>
   </body>
 </html>

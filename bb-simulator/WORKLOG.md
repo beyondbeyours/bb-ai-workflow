@@ -98,3 +98,18 @@ Changes:
 Tests: unit 10/10; browser smoke 74/74 at 390 mobile, 1366 and 1440 laptop (camera rotate/top view, KPIs, tracking, log filter, tabs, labels clear of faces in overview, Work Zone draft / missing / lanes / two-tap, plus earlier checks). No horizontal overflow at 360/390/1366/1440.
 
 Limits: true 3D (walking around, seeing the back of seats) would need a modelled cabin; this is the approved 2D render tilted in 3D. When rotated far, a nearer person can cover a farther person's label (real depth). Screenshots: `PREVIEW/round-04/`
+
+## Round 05 · 2026-10-10 · Video Builder + Review room
+
+แม่: let BB build the order herself (DIY) so less is lost to guessing and long AI waits; for review, pin fixes point by point; reduce revision rounds. Decisions (grill): production = AI draft + human finishing; Video Builder v1 = rough timeline; review inside BB Simulator; a version passes only when every pin passes; footage from local files and Drive links; sharing with the team = copyable sheet (no backend yet, no cost).
+
+Changes:
+
+- `timeline.js` (Work Zone → Footage step, video lane only): clip bin from local footage + Drive links (listed as "ยังไม่ได้ตรวจสิทธิ์", not read); set In/Out from the player or by typing; per-shot subtitle, Super, note, cover frame; proportional timeline strip, reorder, edit, delete; total vs target length; sequential preview with subtitle/Super overlay; copy Shot List (timecodes in the final cut + source in/out); SRT built from shot order. Saved with the brief/draft (`timeline` field); local files must be re-attached after reload and the UI says so. Not a CapCut project; it is the spec an editor or AI assembles from.
+- `review.js` + new Review tab: review rounds per brand (IndexedDB `bb-simulator-review`, separate from the existing reference DB); upload preview v1, v2…; tap the video/image to pin a spot (+ timecode for video) or "ปักหมุดที่วินาทีนี้"; category auto-routes to a person (ข้อความ/ซับ, สี/CI, หน้าปก → Tidy; จังหวะ, เพลง → Kitty; ภาพ/ช็อต → Leo) and can be changed; must-fix vs nice-to-have; statuses ต้องแก้ → ทีมแก้แล้ว → ผ่าน / ยังไม่ผ่าน; markers on the video track; compare with the previous version (synced); "คัดลอกใบสั่งแก้" grouped by person with timecodes; "ผ่านการตรวจ Preview" only on the latest version when every pin has passed, with a note that final approval stays in CapCut / Canva.
+- Person tools now link here (BB: ตรวจงาน, Chicha: ห้องตรวจงาน, Leo: Footage + Timeline ร่าง).
+- `tests/browser.review.cjs` + `tests/fixtures/*.webm` (generated test patterns).
+
+Tests: unit 10/10; smoke 74/74 at 390 / 1366 / 1440; builder + review 21/21 at 390 and 1440. No horizontal overflow.
+
+Limits: no backend, so files and pins stay in this browser (team cannot open them from their own device yet); Drive clips are not read or played; SRT download is blocked inside the claude.ai preview frame (works on a normal site); browser must be able to play the file (H.264 MP4 or WebM).
