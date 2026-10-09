@@ -21,14 +21,48 @@ const assert = require("node:assert/strict");
       results.push("FAIL " + name + " :: " + e.message);
     }
   };
-  // crew tap -> identity
-  for (const [i, name] of [
+  const crewList = [
     [1, "Leo"],
     [2, "Kitty"],
     [3, "Tidy"],
     [4, "Chicha"],
     [0, "BB"],
+  ];
+  // Town (default view): tap each token and each building/jet -> that person's tools.
+  const townVisible = await p.isVisible("#simTown"),
+    cabinHidden = await p.isHidden("#simScene");
+  ok("town shown, cabin hidden by default", () => assert(townVisible && cabinHidden));
+  for (const [i, name] of crewList) {
+    await p.tap(`.townToken[data-index="${i}"]`);
+    ok(`tap town token ${name} opens ${name}`, async () => {});
+    const h = await p.getAttribute("#simIdentity h1 img", "alt");
+    ok(`town token ${name} -> ${name}`, () => assert.equal(h, name));
+    const box = await p.locator(`.townToken[data-index="${i}"]`).boundingBox();
+    ok(`town token ${name} >= 44px`, () => assert(box.width >= 44 && box.height >= 44, JSON.stringify(box)));
+  }
+  for (const [label, name] of [
+    ["Footage Studio", "Leo"],
+    ["Edit House", "Kitty"],
+    ["Graphics Lab", "Tidy"],
+    ["Review Office", "Chicha"],
+    ["BB Jet", "BB"],
   ]) {
+    await p.tap(`.townSpot[aria-label^="${label}"]`);
+    const h = await p.getAttribute("#simIdentity h1 img", "alt");
+    ok(`tap ${label} opens ${name}`, () => assert.equal(h, name));
+  }
+  const hud = await p.textContent(".townHud");
+  ok("HUD says Workspace, not live production", () => {
+    assert.match(hud, /Workspace/);
+    assert.doesNotMatch(hud, /LIVE/);
+  });
+  const gate = await p.textContent(".townSpot.isLocked");
+  ok("Export Gate shown as locked", () => assert.match(gate, /Export Gate/));
+  // Switch to cabin view and check the seated crew there.
+  await p.click(".townBar button:last-child");
+  const cabinShown = await p.isVisible("#simScene");
+  ok("cabin view opens", () => assert(cabinShown));
+  for (const [i, name] of crewList) {
     await p.tap(`.simActor[data-index="${i}"]`);
     const h = await p.getAttribute("#simIdentity h1 img", "alt");
     ok(`tap cabin ${name} opens ${name}`, () => assert.equal(h, name));
@@ -56,12 +90,17 @@ const assert = require("node:assert/strict");
       }
     ok(`own label clear of face ${a.i}`, () => assert.equal(inter(face, a.n), 0));
   }
+  await p.click("#simTownBack");
+  const backToTown = await p.isVisible("#simTown");
+  ok("back to town", () => assert(backToTown));
   // demo does not change real counts
   const before = await p.textContent("#simJobCount");
   await p.click("#simDemo");
   await p.waitForTimeout(500);
   const mode = await p.textContent("#simMode");
   ok("demo labelled", () => assert.match(mode, /Demo/));
+  const demoHud = await p.textContent(".townHud");
+  ok("town HUD marks Demo as not saving real work", () => assert.match(demoHud, /DEMO · ไม่บันทึกงานจริง/));
   await p.click("#simDemo");
   const after = await p.textContent("#simJobCount");
   ok("job count unchanged by demo", () => assert.equal(after, before));

@@ -1,0 +1,335 @@
+/* BB Town: same footprint rule as the cabin scene (2:3), so the whole map fits a laptop screen. */
+.simTown {
+  position: relative;
+  container-type: inline-size;
+  width: min(100%, calc(max(560px, 100svh - 210px) * 600 / 980));
+  aspect-ratio: 600 / 980;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #350207;
+  user-select: none;
+}
+.townMap {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.townOverlay {
+  --token: clamp(32px, 8cqw, 50px);
+  position: absolute;
+  inset: 0;
+}
+
+/* Ambient motion: road flow (Demo only), lamps, windows, clouds. */
+.townFlow {
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.simTown.isDemo .townFlow {
+  opacity: 1;
+  animation: townFlow 1.6s linear infinite;
+}
+@keyframes townFlow {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
+.townClouds {
+  animation: townDrift 38s linear infinite alternate;
+}
+@keyframes townDrift {
+  from {
+    transform: translateX(-30px);
+  }
+  to {
+    transform: translateX(40px);
+  }
+}
+.townLamp {
+  animation: townGlow 3.2s ease-in-out infinite;
+}
+@keyframes townGlow {
+  50% {
+    opacity: 0.55;
+  }
+}
+.townBuilding {
+  transition: transform 0.25s;
+}
+.townBuilding.isSelected,
+.townJet.isSelected {
+  filter: drop-shadow(0 0 6px #f6e0e3);
+}
+.townBuilding.isLocked {
+  opacity: 0.82;
+}
+
+/* Hit areas + signs */
+.townSpot {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 22%;
+  aspect-ratio: 1;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+}
+.townJetSpot {
+  width: 46%;
+  aspect-ratio: 2.4;
+}
+.townSpot:focus-visible,
+.townToken:focus-visible {
+  outline: 2px solid #f6e0e3;
+  outline-offset: 2px;
+}
+.townSign {
+  position: absolute;
+  left: 50%;
+  top: -14%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: clamp(10px, 2.3cqw, 13px);
+  font-weight: 500;
+  color: #4f0208;
+  background: #fffaf5;
+  padding: 2px 9px;
+  border-radius: 20px;
+  box-shadow: 0 2px 6px #20070a33;
+}
+.townSign.isCockpit {
+  top: auto;
+  bottom: -2%;
+  background: #4f0208;
+  color: #fff;
+}
+.townSpot.isLocked .townSign {
+  background: #e8ded6;
+  color: #6d5d55;
+}
+.townSpot.isLocked .townSign::after {
+  content: " · ยังไม่เชื่อม";
+}
+
+/* Crew tokens */
+.townToken {
+  position: absolute;
+  transform: translate(-50%, -100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #fff;
+  min-width: 44px;
+  min-height: 44px;
+  cursor: pointer;
+}
+.townFace {
+  display: block;
+  width: var(--token);
+  height: var(--token);
+  border-radius: 50%;
+  background-color: #f6e0e3;
+  background-repeat: no-repeat;
+  box-shadow:
+    0 0 0 2px #fffaf5,
+    0 4px 8px #20070a66;
+  animation: townIdle 3.4s ease-in-out infinite;
+}
+.townToken[data-index="1"] .townFace {
+  animation-delay: -0.7s;
+}
+.townToken[data-index="2"] .townFace {
+  animation-delay: -1.4s;
+}
+.townToken[data-index="3"] .townFace {
+  animation-delay: -2.1s;
+}
+.townToken[data-index="4"] .townFace {
+  animation-delay: -2.8s;
+}
+@keyframes townIdle {
+  50% {
+    transform: translateY(-2px);
+  }
+}
+.townToken.isWalking .townFace {
+  animation: townHop 0.34s ease-in-out infinite;
+}
+@keyframes townHop {
+  50% {
+    transform: translateY(-5px) rotate(3deg);
+  }
+}
+.townToken.isWorking .townFace {
+  box-shadow:
+    0 0 0 3px #f7cb3f,
+    0 4px 10px #20070a66;
+}
+.townToken[aria-pressed="true"] .townFace {
+  box-shadow:
+    0 0 0 3px #f6e0e3,
+    0 0 0 5px #4f0208,
+    0 4px 10px #20070a66;
+}
+.townName {
+  font-size: clamp(10px, 2.2cqw, 12px);
+  font-weight: 500;
+  line-height: 1;
+  padding: 3px 7px;
+  border-radius: 10px;
+  background: #350207e6;
+}
+.townToken[aria-pressed="true"] .townName {
+  background: #f6e0e3;
+  color: #4f0208;
+}
+.townBubble {
+  position: absolute;
+  bottom: calc(100% + 4px);
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 34cqw;
+  width: max-content;
+  font-size: clamp(10px, 2.3cqw, 12.5px);
+  line-height: 1.35;
+  text-align: center;
+  color: #350207;
+  background: #fffaf5;
+  padding: 4px 9px;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px #20070a40;
+}
+.townBubble::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  border: 5px solid transparent;
+  border-top-color: #fffaf5;
+  transform: translateX(-50%);
+}
+.townToken.isWorking .townBubble {
+  background: #f7cb3f;
+}
+.townToken.isWorking .townBubble::after {
+  border-top-color: #f7cb3f;
+}
+.townParcel {
+  position: absolute;
+  right: -8px;
+  top: 40%;
+  width: 16px;
+  height: 18px;
+  border-radius: 3px;
+  background: #f6e0e3 url("assets/icon-brief.svg") center / 12px no-repeat;
+  box-shadow: 0 2px 4px #20070a66;
+}
+.simTown.hide-names .townName,
+.simTown.hide-names .townSign {
+  display: none;
+}
+.simTown.hide-bubbles .townBubble {
+  display: none;
+}
+
+/* HUD + toolbar */
+.townHud,
+.townBar {
+  position: absolute;
+  top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  z-index: 2000;
+  max-width: 58%;
+}
+.townHud {
+  left: 10px;
+}
+.townBar {
+  right: 10px;
+  justify-content: flex-end;
+  max-width: 40%;
+}
+.townChip {
+  font-size: clamp(10px, 2.2cqw, 12px);
+  background: #fffaf5e6;
+  color: #4f0208;
+  padding: 3px 8px;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+.townChip.isLive::before,
+.townChip.isDemo::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+  background: #4f0208;
+}
+.townChip.isDemo {
+  background: #f7cb3f;
+  font-weight: 600;
+}
+.townChip.isDemo::before {
+  animation: simPulse 1.2s infinite;
+}
+.townChip.isMuted {
+  color: #7a6a62;
+}
+.townBar button,
+.simTownBack {
+  min-height: 32px;
+  font-size: clamp(11px, 2.3cqw, 13px);
+  border: 0;
+  border-radius: 16px;
+  padding: 4px 11px;
+  background: #350207d9;
+  color: #f6e0e3;
+  cursor: pointer;
+}
+.townBar button[aria-pressed="false"] {
+  opacity: 0.55;
+  text-decoration: line-through;
+}
+.simTownBack {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 200;
+}
+
+/* Paused / reduced motion: everything holds still. */
+.simTown.isPaused *,
+.simTown.isPaused .townFlow {
+  animation-play-state: paused !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  .simTown * {
+    animation: none !important;
+  }
+}
+@media (max-width: 680px) {
+  .simTown {
+    width: 100%;
+    border-radius: 12px;
+  }
+}
+@media (min-width: 900px) {
+  .simTown {
+    margin: 0;
+    flex: 0 1 auto;
+  }
+}

@@ -94,8 +94,11 @@
       $(group).scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
     } else $("workEditor").scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
   }
+  // Other views (town map) follow the simulator through these DOM events.
+  const emit = (name, detail) => document.dispatchEvent(new CustomEvent("bbsim:" + name, { detail }));
   function select(index, scroll = false) {
     selected = index;
+    emit("select", { index });
     const p = model.crew[index];
     actors.forEach((a, i) => a.setAttribute("aria-pressed", String(i === index)));
     dock.forEach((a, i) => a.setAttribute("aria-pressed", String(i === index)));
@@ -172,6 +175,7 @@
     }
   }
   function refresh() {
+    emit("refresh", {});
     const brand = currentBrand(),
       saved = readSaved(),
       refs = referenceRecords;
@@ -213,6 +217,7 @@
   }
   function stopDemo() {
     demoRunning = false;
+    emit("demo", { running: false });
     clearMotion();
     $("simContinue").hidden = true;
     $("simDemo").textContent = "▶ ทดลอง Journey";
@@ -229,6 +234,7 @@
       return;
     }
     const person = model.crew[step.owner];
+    emit("demo", { running: true, step, index: demoIndex, from: demoSteps[demoIndex - 1]?.owner ?? step.owner });
     actors.forEach((a) => a.classList.remove("isWorking"));
     actors[step.owner].classList.add("isWorking");
     select(step.owner);
@@ -248,6 +254,7 @@
     }
     if (step.state === "Complete") {
       demoRunning = false;
+      emit("demo", { running: false, complete: true });
       clearMotion();
       $("simDemo").textContent = "↻ ทดลองอีกครั้ง";
       $("simContinue").hidden = true;
@@ -307,6 +314,7 @@
       if (b.dataset.tab === "simulator") refresh();
     }),
   );
+  window.BBSimSelect = (index, scroll) => select(index, scroll);
   select(0);
   refresh();
   addLog("เปิด Cockpit · " + currentBrand().name);

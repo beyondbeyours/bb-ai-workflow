@@ -42,3 +42,23 @@ Not done / limits:
 
 Preview (private Artifact, browser-local data only): https://claude.ai/artifact/NQ1C4JfABSTtptHN2V923W
 Rendered screenshots: `PREVIEW/round-01/`
+
+## Round 02 · 2026-10-09 · BB Town
+
+แม่ asked for a living, game-like town (reference: the "AI agent 16 ตัว ทำงานใน marketing agency" reel) and chose: town + BB's jet parked as the Cockpit; art drawn in code.
+
+Changes:
+
+- New default view `town.js` / `town.css`: isometric floating island in CI colours, S-shaped road, one building per crew (Footage Studio · Leo, Edit House · Kitty, Graphics Lab · Tidy, Review Office · Chicha), Export Gate shown locked ("ยังไม่เชื่อม"), BB's jet parked at the airfield as the Cockpit.
+- Jet: `assets/bb-jet-cutout-v1.png`, the approved v19 aircraft with its plain background removed by colour flood fill (no regeneration), projected flat onto the ground.
+- Crew tokens use the same face crops as the roster. Tap token, building or jet → that person's tools.
+- Bubbles in Workspace mode come only from this browser's data (brief title, Reference/Footage counts, subtitle/Super settings, Chicha's open review points). HUD shows Workspace counts; Demo shows "DEMO · ไม่บันทึกงานจริง".
+- Demo: the previous owner carries the brief along the road to the next owner and walks home; road flow animates; stops at BB for แม่'s approval. Freeze/reduced-motion respected.
+- Cabin view kept: "ในเครื่องบิน" button switches, "← กลับเมือง" returns; choice remembered in this browser.
+- simulator.js emits `bbsim:select`, `bbsim:demo`, `bbsim:refresh` events and exposes `BBSimSelect` for other views.
+
+Tests: unit 10/10; browser smoke 83/83 (town default view, every token/building/jet opens the right person, Workspace HUD, locked Export Gate, cabin switch and back, Demo labelled in HUD, plus all round-01 checks). No horizontal overflow at 360/390/1366/1440.
+
+Limits: on laptop the town is height-limited (about 340-420px wide), so faces are small there; the roster beside it carries the large faces.
+
+Screenshots: `PREVIEW/round-02/`
