@@ -1,0 +1,484 @@
+/* ===== Order Builder (order.js): the brief as a picture-card control panel ===== */
+.workbody {
+  max-width: 1120px;
+}
+.ob {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 270px;
+  grid-template-areas: "nav nav" "body preview";
+  gap: 18px 24px;
+  align-items: start;
+  margin: 8px 0 18px;
+}
+.obNav {
+  grid-area: nav;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 6px;
+}
+.obNav button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 6px 10px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--deep);
+  color: var(--pink);
+  text-align: left;
+  font-size: 13.5px;
+  cursor: pointer;
+}
+.obNav b {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  background: var(--wine);
+  color: var(--pink);
+}
+.obNav button.isDone b {
+  background: var(--pink);
+  color: var(--wine);
+}
+.obNav button.isOn {
+  background: var(--pink);
+  color: var(--wine);
+}
+.obNav button.isOn b {
+  background: var(--wine);
+  color: var(--pink);
+}
+.obBody {
+  grid-area: body;
+  min-width: 0;
+}
+.obChapter {
+  display: grid;
+  gap: 22px;
+}
+.obChapterHead h3 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 500;
+}
+.obChapterHead p {
+  margin: 4px 0 0;
+  color: var(--pink);
+  font-size: 14px;
+}
+.obGroup {
+  display: grid;
+  gap: 10px;
+}
+.obGroup > input,
+.obGroup > textarea {
+  max-width: 420px;
+}
+.obGroupHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+}
+.obGroup h4 {
+  margin: 0;
+  font-size: 15.5px;
+  font-weight: 500;
+}
+.obGroupHead small {
+  color: var(--pink);
+  font-size: 12.5px;
+}
+.obCards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+  gap: 8px;
+}
+.obCard {
+  display: grid;
+  gap: 6px;
+  justify-items: center;
+  align-content: start;
+  padding: 10px 8px 10px;
+  min-height: 112px;
+  border: 0;
+  border-radius: 14px;
+  background: var(--deep);
+  color: #fff;
+  text-align: center;
+  cursor: pointer;
+  transition:
+    transform 0.15s,
+    background 0.15s;
+}
+.obCard:hover {
+  transform: translateY(-2px);
+  background: #440309;
+}
+.obArt {
+  display: block;
+  width: 64px;
+  height: 64px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #f6e0e31f;
+}
+.obArt svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.obArt.isPhoto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.obLabel {
+  font-size: 13px;
+  line-height: 1.3;
+}
+.obCard[aria-checked="true"],
+.obCard[aria-pressed="true"] {
+  background: var(--pink);
+  color: var(--wine);
+  box-shadow: 0 0 0 2px var(--pink);
+}
+.obCard[aria-checked="true"] .obArt,
+.obCard[aria-pressed="true"] .obArt {
+  background: #4f02081a;
+}
+.obLooks {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+  scroll-snap-type: x mandatory;
+}
+.obLook {
+  flex: 0 0 116px;
+  display: grid;
+  gap: 6px;
+  padding: 0 0 8px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--deep);
+  color: #fff;
+  font-size: 12.5px;
+  cursor: pointer;
+  scroll-snap-align: start;
+  overflow: hidden;
+}
+.obLook img {
+  width: 100%;
+  aspect-ratio: 9 / 13;
+  object-fit: cover;
+  display: block;
+}
+.obLook[aria-pressed="true"] {
+  box-shadow: 0 0 0 3px var(--pink);
+}
+.obChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.obChips button {
+  min-height: 44px;
+  padding: 8px 18px;
+  border: 0;
+  border-radius: 22px;
+  background: var(--deep);
+  color: #fff;
+  cursor: pointer;
+}
+.obChips button[aria-pressed="true"] {
+  background: var(--pink);
+  color: var(--wine);
+}
+.obField {
+  display: grid;
+  gap: 6px;
+  max-width: 520px;
+}
+.obField label {
+  font-size: 15px;
+  font-weight: 500;
+  margin: 0;
+}
+.obRules {
+  display: grid;
+  gap: 12px;
+}
+.obNote {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: var(--deep);
+  color: var(--pink);
+  font-size: 14px;
+}
+.obFoot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+}
+.obFoot .primary {
+  margin-left: auto;
+}
+
+/* Live preview */
+.obPreview {
+  grid-area: preview;
+  position: sticky;
+  top: 12px;
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border-radius: 16px;
+  background: var(--deep);
+}
+.obPreviewLabel {
+  font-size: 12px;
+  color: var(--pink);
+}
+.obMock {
+  position: relative;
+  width: 100%;
+  max-width: 220px;
+  margin: 0 auto;
+  aspect-ratio: 9 / 16;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #000;
+  box-shadow:
+    0 0 0 5px #1f0104,
+    0 10px 24px #12000366;
+  transition: aspect-ratio 0.3s;
+}
+.obMock[data-ratio="16:9"] {
+  aspect-ratio: 16 / 9;
+  max-width: 240px;
+}
+.obMock[data-ratio="1:1"] {
+  aspect-ratio: 1;
+}
+.obMock[data-ratio="4:5"] {
+  aspect-ratio: 4 / 5;
+}
+.obMock img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.62) saturate(0.85);
+}
+.obMockTitle {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  padding: 6px 8px;
+  border-radius: 6px;
+  font-size: 14px;
+  line-height: 1.25;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+.obMockTitle[data-pos="top"],
+.obMockTitle[data-pos="split"] {
+  top: 12%;
+}
+.obMockTitle[data-pos="center"] {
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 17px;
+}
+.obMockTitle[data-pos="bottom"] {
+  bottom: 24%;
+}
+.obMockSuper {
+  position: absolute;
+  left: 50%;
+  top: 34%;
+  transform: translateX(-50%) rotate(-2deg);
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #29262b;
+  white-space: nowrap;
+  max-width: 86%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.obMockSub {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 9%;
+  padding: 2px 7px;
+  border-radius: 3px;
+  background: #000b;
+  color: #fff;
+  font-size: 11px;
+  white-space: nowrap;
+}
+.obMockSub[data-pos="middle"] {
+  bottom: auto;
+  top: 62%;
+}
+.obMockTag {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  padding: 2px 7px;
+  border-radius: 8px;
+  background: #fffaf5e6;
+  color: #4f0208;
+  font-size: 9.5px;
+}
+.obTicket {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 4px 10px;
+  margin: 0;
+  font-size: 12.5px;
+}
+.obTicket dt {
+  color: var(--pink);
+}
+.obTicket dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.obMissing {
+  margin: 0;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: var(--wine);
+  font-size: 12.5px;
+  color: var(--yellow);
+}
+.obMissing.isOk {
+  color: var(--pink);
+}
+.obAdvanced {
+  margin: 8px 0 0;
+  padding: 0;
+}
+.obAdvanced > summary {
+  cursor: pointer;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  color: var(--pink);
+  font-size: 14px;
+}
+@media (max-width: 900px) {
+  .ob {
+    grid-template-columns: 1fr;
+    grid-template-areas: "nav" "preview" "body";
+  }
+  .obNav {
+    display: flex;
+    overflow-x: auto;
+    margin: 0 -18px;
+    padding: 0 18px 4px;
+  }
+  .obNav button {
+    flex: 0 0 auto;
+  }
+  .obPreview {
+    position: static;
+    grid-template-columns: 112px minmax(0, 1fr);
+    grid-template-areas: "label label" "mock ticket" "missing missing";
+    align-items: start;
+  }
+  .obPreviewLabel {
+    grid-area: label;
+  }
+  .obMock {
+    grid-area: mock;
+    max-width: 112px;
+    border-radius: 12px;
+  }
+  .obMock[data-ratio="16:9"] {
+    max-width: 112px;
+  }
+  .obTicket {
+    grid-area: ticket;
+    font-size: 12px;
+  }
+  .obMissing {
+    grid-area: missing;
+  }
+  .obMockTitle {
+    font-size: 10.5px;
+    padding: 3px 4px;
+  }
+  .obMockTitle[data-pos="center"] {
+    font-size: 12px;
+  }
+  .obMockSuper,
+  .obMockSub {
+    font-size: 8.5px;
+  }
+  .obMockTag {
+    font-size: 8px;
+  }
+  .obCards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .obCard {
+    min-height: 104px;
+    padding: 8px 4px;
+  }
+  .obArt {
+    width: 56px;
+    height: 56px;
+  }
+  .obLabel {
+    font-size: 12px;
+  }
+}
+#workEditor.isOrder .workactions {
+  display: none;
+}
+#workEditor.isOrder #stepStatus {
+  display: none;
+}
+.obMock img {
+  filter: brightness(0.5) saturate(0.8);
+}
+.obCard {
+  min-height: 0;
+}
+@media (max-width: 900px) {
+  .obMockTag {
+    display: none;
+  }
+}
+/* Illustrations sit on a light tile so the wine line art reads on dark cards. */
+.obArt {
+  background: #f8e9ec;
+}
+.obCard[aria-checked="true"] .obArt,
+.obCard[aria-pressed="true"] .obArt {
+  background: #fffaf5;
+}
+.obFoot .primary {
+  width: auto;
+  flex: 0 0 auto;
+}
+.obFoot .textbutton {
+  white-space: nowrap;
+}

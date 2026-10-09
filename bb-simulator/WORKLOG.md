@@ -113,3 +113,18 @@ Changes:
 Tests: unit 10/10; smoke 74/74 at 390 / 1366 / 1440; builder + review 21/21 at 390 and 1440. No horizontal overflow.
 
 Limits: no backend, so files and pins stay in this browser (team cannot open them from their own device yet); Drive clips are not read or played; SRT download is blocked inside the claude.ai preview frame (works on a normal site); browser must be able to play the file (H.264 MP4 or WebM).
+
+## Round 06 · 2026-10-10 · Order Builder (picture-card Brief)
+
+แม่: the brief intake is not friendly; it needs layouts, looks and tones to pick from with pictures, not just dropdowns; think of it as the production control center.
+
+Changes:
+
+- `order.js` / `order.css`: the Brief step is now six short chapters with a progress bar: 1 งานอะไร (name, quick presets, content type, platform) · 2 เป้าหมาย (objective, audience, key message, CTA + destination) · 3 หน้าตา & โทน (looks from the real Style Board thumbnails, design style shown with real covers, mood as colour tiles, palettes, title position) · 4 ข้อความบนจอ (subtitle language / position / file, Super language / style / text, cover mode / text / image) · 5 เสียง & จังหวะ (pace, opening, music, audio, graphics; video lane only except graphics) · 6 ส่งมอบ (length, ratio, deliverable, deadline, Include / Keep / Avoid, rules, direction).
+- Every option is a card with a small line illustration drawn in code (CI colours, no icon set, no generation cost) or a real thumbnail. Each card writes to the original form control, so drafts, save, review checks, Projects and older briefs keep working. "กำหนดเอง" shows the custom field right under its cards.
+- Live preview beside the chapters (on phones above them): a mock of the piece in the chosen ratio with look image, title position, Super in the palette accent, subtitle language/position, platform + length tag; an order ticket of the picks; and what is still missing (from the real review checks).
+- The old long form stays under "ตั้งค่าแบบละเอียดทั้งหมด (ฟอร์มเดิม)". The generic Back/Next bar is hidden on the Brief step because chapters have their own.
+
+Tests: unit 10/10; smoke 79/79 at 390 / 1366 / 1440 (adds card picks → form values, selected state, live ticket, palette card, palette survives reload); builder + review 21/21 at 390 and 1440. No horizontal overflow.
+
+Limits: the live mock is a layout sketch on Style Board covers that already carry their own text, not a render of the final piece. Screenshots: `PREVIEW/round-06/`
