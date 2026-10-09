@@ -94,7 +94,7 @@
       $(group).scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
     } else $("workEditor").scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
   }
-  // Other views (town map) follow the simulator through these DOM events.
+  // Overlay layers (cabin-live.js) follow the simulator through these DOM events.
   const emit = (name, detail) => document.dispatchEvent(new CustomEvent("bbsim:" + name, { detail }));
   function select(index, scroll = false) {
     selected = index;
@@ -162,6 +162,7 @@
   }
   function addLog(text) {
     log.unshift({ text, time: new Date().toLocaleTimeString("th-TH", { hour: "2-digit", minute: "2-digit" }) });
+    emit("log", log[0]);
     log = log.slice(0, 4);
     $("simLog").replaceChildren();
     for (const item of log) {
@@ -233,7 +234,6 @@
       stopDemo();
       return;
     }
-    const person = model.crew[step.owner];
     emit("demo", { running: true, step, index: demoIndex, from: demoSteps[demoIndex - 1]?.owner ?? step.owner });
     actors.forEach((a) => a.classList.remove("isWorking"));
     actors[step.owner].classList.add("isWorking");
@@ -241,11 +241,7 @@
     $("simTask").textContent = "Demo · " + step.text;
     $("simMode").textContent = "Demo · " + step.state;
     addLog("Demo · " + step.text);
-    const parcel = $("simParcel");
-    parcel.hidden = false;
-    parcel.style.left = person.x + 7 + "%";
-    parcel.style.top = person.y - 13 + "%";
-    // Seated crew stay at their stations; only the handoff token travels.
+    // Seated crew stay at their stations; cabin-live.js carries the handoff along the aisle.
 
     if (step.pause) {
       $("simContinue").hidden = false;

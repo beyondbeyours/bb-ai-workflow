@@ -1,0 +1,508 @@
+/* Living cabin: sky, lights, status chips, HUD, Log / Status Board, Demo handoff. */
+.simScene {
+  overflow: hidden;
+  border-radius: 18px;
+  container-type: inline-size;
+}
+.simEnvironment {
+  position: relative;
+  z-index: 1;
+}
+.simSky {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 50% 45%, #5c0710 0%, #3a0207 70%, #300106 100%);
+}
+.simCloud {
+  position: absolute;
+  left: var(--cx);
+  top: 105%;
+  width: var(--cw);
+  aspect-ratio: 2.4;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background:
+    radial-gradient(closest-side at 35% 55%, #fff8 0%, #fff0 100%), radial-gradient(closest-side at 65% 45%, #fff6 0%, #fff0 100%);
+  filter: blur(2px);
+  opacity: 0.38;
+  animation: simCloudRise var(--dur) linear infinite;
+  animation-delay: var(--delay);
+}
+@keyframes simCloudRise {
+  from {
+    top: 105%;
+  }
+  to {
+    top: -30%;
+  }
+}
+
+/* Lights */
+.simLights {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+.simLight {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+}
+.simLight.beacon {
+  width: 1.3%;
+  aspect-ratio: 1;
+  animation: simBeacon 1.8s steps(1) infinite;
+  animation-delay: var(--d);
+}
+.simLight.isGreen {
+  background: #6dff9a;
+  box-shadow: 0 0 10px 4px #6dff9a88;
+}
+.simLight.isRed {
+  background: #ff4d5e;
+  box-shadow: 0 0 10px 4px #ff4d5e88;
+}
+@keyframes simBeacon {
+  0%,
+  60% {
+    opacity: 1;
+  }
+  61%,
+  100% {
+    opacity: 0.15;
+  }
+}
+.simLight.engine {
+  width: 8%;
+  aspect-ratio: 1.6;
+  background: radial-gradient(closest-side, #ffd27a99, #ffd27a00);
+  animation: simGlow 2.6s ease-in-out infinite;
+}
+.simLight.screen {
+  width: 7%;
+  aspect-ratio: 1.7;
+  border-radius: 3px;
+  background: radial-gradient(closest-side, #9fd4ff55, #9fd4ff00);
+  mix-blend-mode: screen;
+  animation: simGlow 3.4s ease-in-out infinite;
+  animation-delay: var(--d);
+}
+.simLight.screen.small {
+  width: 5%;
+}
+@keyframes simGlow {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+/* Demo trail along the aisle */
+.simTrail {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  pointer-events: none;
+}
+.simTrail polyline {
+  fill: none;
+  stroke: #f7cb3f;
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1 10;
+  vector-effect: non-scaling-stroke;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.simScene.isDemo .simTrail polyline {
+  opacity: 0.9;
+  animation: simTrailFlow 0.9s linear infinite;
+}
+@keyframes simTrailFlow {
+  to {
+    stroke-dashoffset: -11;
+  }
+}
+.simParcel {
+  z-index: 90;
+  transition: none;
+}
+
+/* Name chip = role icon + name + one status line, beside the portrait */
+.simRole {
+  display: inline-block;
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+  background: currentColor;
+  -webkit-mask: var(--icon) center / contain no-repeat;
+  mask: var(--icon) center / contain no-repeat;
+}
+.simName {
+  gap: 6px;
+  align-items: center;
+  padding: 4px 10px 4px 8px;
+  border-radius: 14px;
+}
+.simChipText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.15;
+}
+.simStatus {
+  font-size: 11.5px;
+  font-weight: 400;
+  color: #f6e0e3;
+  width: max-content;
+  max-width: 22cqw;
+  text-align: left;
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.simActor[aria-pressed="true"] .simName {
+  background: #f6e0e3;
+  color: #4f0208;
+}
+.simActor[aria-pressed="true"] .simName .type {
+  filter: brightness(0);
+}
+.simActor[aria-pressed="true"] .simStatus {
+  color: #4f0208;
+}
+.simActor.isWorking .simName {
+  background: #f7cb3f;
+  color: #350207;
+}
+.simActor.isWorking .simName .type {
+  filter: brightness(0);
+}
+.simActor.isWorking .simStatus {
+  color: #350207;
+}
+.simActor.isWorking .simSprite img {
+  filter: drop-shadow(0 0 5px #f7cb3f) drop-shadow(0 4px 4px #1a0608aa);
+}
+.simActor.isWaiting .simSprite img {
+  animation: simWaitPulse 1.4s ease-in-out infinite;
+}
+@keyframes simWaitPulse {
+  50% {
+    filter: drop-shadow(0 0 8px #f6e0e3) drop-shadow(0 4px 4px #1a0608aa);
+  }
+}
+.simActor.isHop .simSprite {
+  animation:
+    simHop 0.45s ease-out 1,
+    simBreathe 4s ease-in-out 0.45s infinite;
+}
+@keyframes simHop {
+  40% {
+    transform: translateY(-5%);
+  }
+}
+.simScene.hide-names .simName {
+  display: none;
+}
+.simScene.hide-status .simStatus {
+  display: none;
+}
+
+/* Work sparks during Demo */
+.simSpark {
+  position: absolute;
+  z-index: 95;
+  width: 22px;
+  height: 22px;
+  color: #4f0208;
+  background: none;
+  pointer-events: none;
+  animation: simSpark 1.6s ease-out forwards;
+}
+.simSpark::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: #fffaf5;
+  box-shadow: 0 2px 6px #20070a55;
+  z-index: -1;
+}
+@keyframes simSpark {
+  from {
+    transform: translate(-50%, 0) scale(0.6);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+    transform: translate(-50%, -30%) scale(1);
+  }
+  to {
+    transform: translate(-50%, -260%) scale(0.9);
+    opacity: 0;
+  }
+}
+
+/* HUD + toolbar */
+.simHud,
+.simToolbar {
+  position: absolute;
+  top: 10px;
+  z-index: 100;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.simHud {
+  left: 10px;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.simToolbar {
+  right: 10px;
+  justify-content: flex-end;
+  max-width: 64%;
+}
+.simHudChip {
+  font-size: 12px;
+  line-height: 1.2;
+  background: #fffaf5e8;
+  color: #4f0208;
+  padding: 4px 9px;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+.simHudChip.isLive::before,
+.simHudChip.isDemo::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: 6px;
+  border-radius: 50%;
+  vertical-align: middle;
+  background: #4f0208;
+}
+.simHudChip.isDemo {
+  background: #f7cb3f;
+  font-weight: 600;
+}
+.simHudChip.isDemo::before {
+  animation: simPulse 1.2s infinite;
+}
+.simToolbar button {
+  min-height: 36px;
+  min-width: 44px;
+  padding: 6px 12px;
+  border: 0;
+  border-radius: 18px;
+  font-size: 13px;
+  background: #350207d9;
+  color: #f6e0e3;
+  cursor: pointer;
+}
+.simToolbar button[aria-pressed="false"] {
+  opacity: 0.55;
+}
+.simToolbar button[data-panel][aria-pressed="true"] {
+  background: #f6e0e3;
+  color: #4f0208;
+}
+
+/* Log / Status Board sheet */
+.simPanel {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  z-index: 120;
+  max-height: 58%;
+  display: flex;
+  flex-direction: column;
+  background: #2a0105f2;
+  border-radius: 14px;
+  box-shadow: 0 -6px 24px #12000366;
+  color: #fff;
+}
+.simPanelHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px 8px;
+  border-bottom: 1px solid #f6e0e32b;
+  font-size: 15px;
+}
+.simPanelHead button {
+  min-height: 36px;
+  border: 0;
+  background: none;
+  color: #f6e0e3;
+  font-size: 14px;
+  cursor: pointer;
+}
+.simPanelBody {
+  overflow: auto;
+  padding: 8px 14px 12px;
+}
+.simPanelLog {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+  font-size: 14px;
+}
+.simPanelLog li {
+  display: flex;
+  gap: 10px;
+  color: #f6e0e3;
+}
+.simPanelLog time {
+  font-size: 12px;
+  opacity: 0.7;
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+.simBoardNote {
+  margin: 4px 0 8px;
+  font-size: 13px;
+  color: #f6e0e3;
+}
+.simBoardSteps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.simBoardSteps span {
+  font-size: 12px;
+  padding: 3px 9px;
+  border-radius: 12px;
+  background: #f6e0e31f;
+  color: #f6e0e3;
+}
+.simBoardSteps span.isDone {
+  background: #f6e0e3;
+  color: #4f0208;
+}
+.simBoardList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 2px;
+}
+.simBoardList li {
+  display: grid;
+  grid-template-columns: auto 64px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 4px;
+  border-bottom: 1px solid #f6e0e31a;
+  cursor: pointer;
+}
+.simBoardList .simAvatar {
+  zoom: 0.72;
+}
+.simBoardWho {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+.simBoardWho strong {
+  font-size: 14px;
+  font-weight: 500;
+}
+.simBoardWho small,
+.simBoardStatus {
+  font-size: 12px;
+  color: #f6e0e3;
+}
+.simBoardStatus {
+  overflow-wrap: anywhere;
+}
+.simBoardList em {
+  font-style: normal;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: #f6e0e31f;
+  color: #f6e0e3;
+  white-space: nowrap;
+}
+.simBoardList em.isWorking {
+  background: #f7cb3f;
+  color: #350207;
+}
+.simBoardList em.isWaiting {
+  background: #f6e0e3;
+  color: #4f0208;
+}
+
+/* Paused / reduced motion */
+.simScene.simPaused .simCloud,
+.simScene.simPaused .simLight,
+.simScene.simPaused .simTrail polyline,
+.simScene.simPaused .simHudChip::before {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .simCloud,
+  .simLight,
+  .simTrail polyline,
+  .simSpark {
+    animation: none !important;
+  }
+}
+@media (max-width: 680px) {
+  .simScene {
+    border-radius: 12px;
+  }
+  .simStatus {
+    font-size: 10.5px;
+    max-width: 24cqw;
+  }
+  .simRole {
+    width: 12px;
+    height: 12px;
+  }
+  .simName {
+    padding: 3px 8px 3px 6px;
+  }
+  .simHudChip {
+    font-size: 11px;
+  }
+  .simToolbar {
+    gap: 4px;
+  }
+  .simToolbar button {
+    font-size: 12px;
+    padding: 4px 9px;
+    min-width: 40px;
+    min-height: 34px;
+  }
+}
+.simRole.is-command {
+  --icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M4%2014a8%208%200%200%201%200-4M8%2012h.01M20%2010a8%208%200%200%201%200%204M7.5%2016.5a6%206%200%200%201%200-9M16.5%207.5a6%206%200%200%201%200%209%22/%3E%3C/svg%3E");
+}
+.simRole.is-camera {
+  --icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%223%22%20y%3D%227%22%20width%3D%2218%22%20height%3D%2213%22%20rx%3D%222%22/%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2213.5%22%20r%3D%223.5%22/%3E%3Cpath%20d%3D%22M9%207l1.5-3h3L15%207%22/%3E%3C/svg%3E");
+}
+.simRole.is-timeline {
+  --icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M4%207h10M4%2012h16M4%2017h7%22/%3E%3Cpath%20d%3D%22M17%204v16%22/%3E%3C/svg%3E");
+}
+.simRole.is-pen {
+  --icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M4%2020l1.5-5L16%204.5l3.5%203.5L9%2018.5z%22/%3E%3Cpath%20d%3D%22M14%206.5l3.5%203.5%22/%3E%3C/svg%3E");
+}
+.simRole.is-check {
+  --icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%225%22%20y%3D%223.5%22%20width%3D%2214%22%20height%3D%2217%22%20rx%3D%222%22/%3E%3Cpath%20d%3D%22M8.5%2012.5l2.5%202.5%204.5-5%22/%3E%3C/svg%3E");
+}

@@ -62,3 +62,22 @@ Tests: unit 10/10; browser smoke 83/83 (town default view, every token/building/
 Limits: on laptop the town is height-limited (about 340-420px wide), so faces are small there; the roster beside it carries the large faces.
 
 Screenshots: `PREVIEW/round-02/`
+
+## Round 03 · 2026-10-10 · Living cabin (town reverted)
+
+แม่: the town was the wrong direction. Keep the approved cabin; make it move, feel cute and alive, and give it an overview with buttons to follow status (Log etc.) like the reference reel.
+
+Changes:
+
+- Removed `town.js` / `town.css` (kept in git history, commit 64c8f7e). Cabin is the main view again.
+- Jet now renders as `assets/bb-jet-cutout-v19.webp` (same v19 render, plain background removed, 190 KB) over a sky layer, so clouds stream under the aircraft as if it is flying.
+- `cabin-live.js` / `cabin-live.css`: blinking wing and tail beacons, engine glow, soft screen glow at each station, tap "hop" on the selected person.
+- Name chips now show a role icon, the name and one status line built only from this browser's data. Toggle with "ชื่อ" and "สถานะ".
+- HUD: Workspace counts, or DEMO + "ไม่บันทึกงานจริง".
+- Toolbar: Log (activity list) and Board (Status Board: brief progress Brief → Reference → Footage → Review, each crew's status, Export not connected; tap a row to open that person).
+- Demo: the brief moves along the aisle between stations with a glowing dotted trail; the working person's chip turns yellow and role icons float up; stops at BB for แม่'s approval.
+- simulator.js: emits `bbsim:log`; the old diagonal parcel jump was removed.
+
+Tests: unit 10/10; browser smoke 67/67 (cabin main view, Workspace HUD, five status lines, Board rows and Export note, Board row opens Tidy, Log, panel close, status toggle, Demo HUD, plus round-01 checks). No horizontal overflow at 360/390/1366/1440.
+
+Screenshots: `PREVIEW/round-03/`
