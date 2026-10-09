@@ -128,3 +128,7 @@ Changes:
 Tests: unit 10/10; smoke 79/79 at 390 / 1366 / 1440 (adds card picks → form values, selected state, live ticket, palette card, palette survives reload); builder + review 21/21 at 390 and 1440. No horizontal overflow.
 
 Limits: the live mock is a layout sketch on Style Board covers that already carry their own text, not a render of the final piece. Screenshots: `PREVIEW/round-06/`
+
+## Handoff to Codex · 2026-10-10
+
+แม่ asked to package everything for Codex (AI quota running out). Added `handoff-codex/` (START_HERE, CODEX_PROMPT, HANDOFF_STATE, RECOMMENDATIONS). ZIP built from source + docs + WORKLOG + latest screenshots (JPEG) + Gigi original docs + SHA256SUMS; 26 MB; not committed (rebuildable).
