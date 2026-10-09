@@ -1,1 +1,945 @@
-<!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#4f0208"><title>BB Simulator</title><meta name="description" content="BB Simulator"><link rel="stylesheet" href="style.css?v=22"><link rel="stylesheet" href="simulator.css?v=22"></head><body><header><a class="brand" href="#"><img class="brandlogo" src="assets/bb-logo.png" alt="BEYOND BEYOURS"><img class="type" src="assets/type/bb-simulator.svg" alt="BB Simulator"></a><span class="badge">Workspace preview · Production ยังไม่ได้เชื่อม</span></header><main><section class="routing fields"><div><label for="brandSelect">แบรนด์</label><select id="brandSelect"><option value="beyond">Beyond Beyours</option><option value="thailista">Thailista</option><option value="maemore">Maemore AI</option><option value="yaadz">Y&amp;Z Stories</option><option value="custom">แบรนด์อื่น</option></select><input id="customBrand" placeholder="ชื่อแบรนด์" hidden aria-label="ชื่อแบรนด์อื่น"></div><div><label for="productionLane">สายงาน</label><select id="productionLane"><option value="video">Video · สั่งผลิตคลิป</option><option value="content">Content · สั่งผลิตคอนเทนต์</option><option value="scheduled">Content · ตามแผน</option></select></div></section><section class="projectbar"><strong id="projectName">Untitled project</strong><div class="projectstats"><span><b id="count">0</b> คลิป</span><span><b id="durationLabel">15</b> วินาที</span></div></section><nav class="tabs" aria-label="Workspace"><button data-tab="simulator" class="selected"><img class="type" src="assets/type/simulator.svg" alt="Simulator"></button><button data-tab="workspace"><img class="type" src="assets/type/work-zone.svg" alt="Work Zone"></button><button data-tab="history"><img class="type" src="assets/type/projects.svg" alt="Projects"></button></nav><section id="simulator" class="tabcontent"><div class="simbar"><div class="simbarTitle"><img class="type" src="assets/type/simulator.svg" alt="Simulator"><span id="simBrandLabel">Beyond Beyours</span></div><div class="simControls"><button id="simSound" class="simQuiet" aria-pressed="false">หยุดภาพเคลื่อนไหว</button><button id="simDemo" class="simDemo">▶ ทดลอง Journey</button></div></div><div class="simLayout"><div class="simWorld"><div class="simScene" id="simScene"><img class="simEnvironment" src="assets/bb-simulator-full-aircraft-v19.png" width="1024" height="1536" alt="เครื่องบินสตูดิโอเต็มลำ เห็นหัวเครื่อง ปีก และหาง มี Cockpit ของ BB และสี่โซนผลิต" fetchpriority="high"><div id="simActors" class="simActors"></div><img class="simCockpitForeground" src="assets/bb-simulator-full-aircraft-v19.png" width="1024" height="1536" alt="" aria-hidden="true"><span id="simParcel" class="simParcel" hidden aria-hidden="true"><img src="assets/icon-brief.svg" alt=""></span><span class="simSceneLabel"><img class="type" src="assets/type/cockpit.svg" alt="Cockpit"></span></div><div class="simCrewDock" id="simCrewDock" aria-label="เลือกทีม"></div></div><aside class="simSide"><section id="simCommand"><div class="simIdentity" id="simIdentity"></div><div id="simRouting"></div><div class="simActions" id="simActions"></div><p id="simTask" class="simTask" aria-live="polite"></p></section><section class="simDashboard"><div class="simSectionTitle"><img class="type" src="assets/type/projects.svg" alt="Projects"><button id="simOpenQueue" class="simQuiet">ดูทั้งหมด →</button></div><div class="simMetrics"><div><strong id="simJobCount">0</strong><span>โปรเจกต์</span></div><div><strong id="simRefCount">0</strong><span>Reference</span></div><div><strong>—</strong><span>รออนุมัติจริง</span></div></div><div id="simJobs"></div></section><section class="simActivity"><div class="simSectionTitle"><img class="type" src="assets/type/activity.svg" alt="Activity"><span id="simMode">Workspace</span></div><ol id="simLog" aria-live="polite"></ol><button id="simContinue" class="simDemo" hidden>ต่อ Journey ตัวอย่าง →</button><p class="simConnection">สถานะใน Demo เป็นงานจำลอง · Production ยังไม่ได้เชื่อม</p></section></aside></div></section><section id="workspace" class="tabcontent"><section id="workLaunch" class="worklaunch"><div class="launchscene"><img src="assets/bb-workzone-hero-v14.png" width="1536" height="1024" fetchpriority="high" alt="BB หัวหน้าทีมที่โต๊ะผลิตงานในเคบินเครื่องบิน เห็นศีรษะและพื้นที่ทำงานครบ"><button id="sceneStart" class="sceneStart" aria-label="เริ่ม Brief กับ BB"></button></div><div class="launchcontrols"><h1><img class="type" src="assets/type/work-zone.svg" alt="Work Zone"></h1><button id="startBrief" class="startbrief"><span class="starticon"><img src="assets/icon-brief.svg" alt=""></span><span><img class="type" src="assets/type/start-brief.svg" alt="Start Brief"><small>กำหนดงานกับ BB</small></span><span aria-hidden="true">→</span></button><div class="launchshortcuts"><button data-launch-step="1"><img class="toolicon" src="assets/icon-reference.svg" alt=""><img class="type" src="assets/type/reference.svg" alt="Reference"><small>แนบต้นแบบ</small></button><button data-launch-step="2"><img class="toolicon" src="assets/icon-footage.svg" alt=""><img class="type" src="assets/type/footage.svg" alt="Footage"><small>ใส่คลิป</small></button><button data-launch-step="3"><img class="toolicon" src="assets/icon-review.svg" alt=""><img class="type" src="assets/type/review.svg" alt="Review"><small>ตรวจคำสั่ง</small></button></div><button id="openProduction" class="textbutton">ดูคิวผลิต →</button><button id="openStyleBoard" class="textbutton"><img class="type" src="assets/type/choose-a-look.svg" alt="Choose A Look"></button><button id="resumeBrief" class="textbutton" hidden><img class="type" src="assets/type/continue-brief.svg" alt="Continue Brief"></button></div></section><div id="workEditor" hidden><div class="editorhead"><button id="backWorkZone" class="textbutton">← <img class="type" src="assets/type/work-zone.svg" alt="Work Zone"></button><span id="stepCount">01 / 04</span></div><nav id="workSteps" class="worksteps" aria-label="Project steps"><button data-step="0"><img class="toolicon" src="assets/icon-brief.svg" alt=""><span>01</span><img class="type" src="assets/type/brief.svg" alt="Brief"></button><button data-step="1"><img class="toolicon" src="assets/icon-reference.svg" alt=""><span>02</span><img class="type" src="assets/type/reference.svg" alt="Reference"></button><button data-step="2"><img class="toolicon" src="assets/icon-footage.svg" alt=""><span>03</span><img class="type" src="assets/type/footage.svg" alt="Footage"></button><button data-step="3"><img class="toolicon" src="assets/icon-review.svg" alt=""><span>04</span><img class="type" src="assets/type/review.svg" alt="Review"></button></nav><div class="workbody"><section class="workstep" data-work-step="0"><h2><span id="briefOwner" class="owner">BB</span><img class="type" src="assets/type/brief.svg" alt="Brief"></h2><div><label for="title"><img class="type" src="assets/type/project-name.svg" alt="Project Name"></label><input id="title" type="text" placeholder="ชื่อโปรเจกต์"></div><div class="chips"><button data-preset="review"><img class="type" src="assets/type/product-review.svg" alt="Product Review"></button><button data-preset="lesson"><img class="type" src="assets/type/tutorial.svg" alt="Tutorial"></button><button data-preset="vlog"><img class="type" src="assets/type/vlog.svg" alt="Vlog"></button></div><details class="briefgroup" open><summary><img class="type" src="assets/type/project.svg" alt="Project"></summary><div class="fields"><div><label for="contentType"><img class="type" src="assets/type/content-type.svg" alt="Content Type"></label><select id="contentType" data-choice><option>รีวิวสินค้า</option><option>Tutorial</option><option>Carousel</option><option>Single Post</option><option>Article</option><option>Vlog</option><option>สัมภาษณ์</option><option>โฆษณา</option><option>Podcast</option><option>คลิปเปิดตัว</option><option>กำหนดเอง</option></select><input id="contentTypeCustom" data-custom-for="contentType" placeholder="ระบุเพิ่มเติม" aria-label="Content Type เพิ่มเติม" hidden></div><div><label for="objective"><img class="type" src="assets/type/objective.svg" alt="Objective"></label><select id="objective" data-choice><option>เพิ่มการรับรู้</option><option>ขายสินค้า / บริการ</option><option>เพิ่มผู้ติดตาม</option><option>เก็บลีด / รับสมัคร</option><option>สอน / อธิบาย</option><option>เล่าเรื่อง / สร้างภาพลักษณ์</option><option>กำหนดเอง</option></select><input id="objectiveCustom" data-custom-for="objective" placeholder="ระบุเพิ่มเติม" aria-label="Objective เพิ่มเติม" hidden></div><div><label for="audience"><img class="type" src="assets/type/audience.svg" alt="Audience"></label><select id="audience" data-choice><option>ผู้ชมใหม่</option><option>ลูกค้าเดิม</option><option>เจ้าของธุรกิจ</option><option>คนทำงาน</option><option>นักเรียน / นักศึกษา</option><option>ผู้เรียนคอร์ส</option><option>กำหนดเอง</option></select><input id="audienceCustom" data-custom-for="audience" placeholder="ระบุเพิ่มเติม" aria-label="Audience เพิ่มเติม" hidden></div><div><label for="keyMessage"><img class="type" src="assets/type/key-message.svg" alt="Key Message"></label><input id="keyMessage" type="text" placeholder="สารหลัก / ข้อเสนอ / สิ่งที่ต้องพูด"></div><div><label for="platform"><img class="type" src="assets/type/platform.svg" alt="Platform"></label><select id="platform"><option>Reels / TikTok / Shorts</option><option>Facebook / Instagram</option><option>YouTube</option><option>สื่อการสอน</option></select></div><div><label for="cta"><img class="type" src="assets/type/call-to-action.svg" alt="Call To Action"></label><select id="cta" data-choice><option>ไม่มี CTA</option><option>ทัก LINE</option><option>ส่งข้อความ</option><option>ซื้อ / จอง</option><option>สมัครเรียน</option><option>เข้าชมเว็บไซต์</option><option>ติดตาม</option><option>คอมเมนต์ / แชร์</option><option>กำหนดเอง</option></select><input id="ctaCustom" data-custom-for="cta" placeholder="ระบุเพิ่มเติม" aria-label="Call To Action เพิ่มเติม" hidden></div><div><label for="ctaDestination"><img class="type" src="assets/type/destination.svg" alt="Destination"></label><input id="ctaDestination" type="text" placeholder="ลิงก์ / LINE / คำที่ให้ทัก"></div></div></details><details id="styleBoardGroup" class="briefgroup visualgroup"><summary><img class="type" src="assets/type/style-board.svg" alt="Style Board"></summary><div class="styleboard"><div class="styletiles"><button data-look="outfit" aria-pressed="false"><img class="lookphoto" src="assets/lookbook/cover-02-v15.jpg" alt="เฟรมเปิด Outfit Collage จากคลิป 02" loading="lazy" width="512" height="910"><img class="type" src="assets/type/outfit-collage.svg" alt="Outfit Collage"><small>พื้นหลังลายตาราง ภาพตัดขอบ และหัวเรื่องหลายระดับ</small></button><button data-look="collage" aria-pressed="false"><img class="lookphoto" src="assets/lookbook/cover-03-v15.jpg" alt="เฟรมเปิด Creator Intro จากคลิป 03" loading="lazy" width="512" height="910"><img class="type" src="assets/type/creator-intro.svg" alt="Creator Intro"><small>ภาพบุคคลตัดขอบบนพื้นลายทาง พร้อมหัวเรื่องชัด</small></button><button data-look="type" aria-pressed="false"><img class="lookphoto" src="assets/lookbook/cover-04-v15.jpg" alt="เฟรมเปิด Text Focus จากคลิป 04" loading="lazy" width="512" height="910"><img class="type" src="assets/type/text-focus.svg" alt="Text Focus"><small>คัดเฟรมที่หัวเรื่องขึ้นครบ ใช้คำหลักตัวใหญ่เป็นจุดเด่น</small></button><button data-look="screen" aria-pressed="false"><img class="lookphoto" src="assets/lookbook/cover-05-v15.jpg" alt="เฟรมเปิด Screen Demo จากคลิป 05" loading="lazy" width="512" height="910"><img class="type" src="assets/type/screen-demo.svg" alt="Screen Demo"><small>หน้าจอจริงกับหัวเรื่องแบบโน้ตสั้น</small></button><button data-look="workshop" aria-pressed="false"><img class="lookphoto" src="assets/lookbook/cover-06-v15.jpg" alt="เฟรมเปิด Workshop Story จากคลิป 06" loading="lazy" width="512" height="910"><img class="type" src="assets/type/workshop-story.svg" alt="Workshop Story"><small>เฟรมเปิดผู้พูดและหัวเรื่องเวิร์กชอป ก่อนสลับบรรยากาศจริง</small></button><button data-look="classroom" aria-pressed="false"><img class="lookphoto" src="assets/lookbook/cover-07-v15.jpg" alt="เฟรมเปิด Classroom Collage จากคลิป 07" loading="lazy" width="512" height="910"><img class="type" src="assets/type/classroom-collage.svg" alt="Classroom Collage"><small>ช็อตคลาสกับภาพบุคคลตัดขอบและหัวเรื่อง</small></button><button data-look="onsite" aria-pressed="false"><img class="lookphoto" src="assets/lookbook/cover-08-v15.jpg" alt="เฟรมเปิด Workshop Campaign จากคลิป 08" loading="lazy" width="512" height="910"><img class="type" src="assets/type/workshop-campaign.svg" alt="Workshop Campaign"><small>หน้าผู้พูด ชื่อเวิร์กชอป และกลุ่มผู้ชมเด่น</small></button><button data-look="mission" aria-pressed="false"><img class="lookphoto" src="assets/lookbook/cover-09-v15.jpg" alt="เฟรมเปิด Creator Mission จากคลิป 09" loading="lazy" width="512" height="910"><img class="type" src="assets/type/creator-mission.svg" alt="Creator Mission"><small>ผู้พูดเป็นตัวหลัก คำสั้นตัวใหญ่ สีชมพูและเหลือง</small></button><button data-look="learning" aria-pressed="false"><img class="lookphoto" src="assets/lookbook/cover-10-v15.jpg" alt="เฟรมเปิด Learn By Doing จากคลิป 10" loading="lazy" width="512" height="910"><img class="type" src="assets/type/learn-by-doing.svg" alt="Learn By Doing"><small>ภาพการลงมือทำกับข้อความเปิดสร้างแรงบันดาลใจ</small></button><button data-look="bilingual" aria-pressed="false"><img class="lookphoto" src="assets/lookbook/cover-11-v15.jpg" alt="เฟรมเปิด Bilingual Lesson จากคลิป 11" loading="lazy" width="512" height="910"><img class="type" src="assets/type/bilingual-lesson.svg" alt="Bilingual Lesson"><small>เฟรมเปิดสถานการณ์จริงและชื่อบทเรียนสองภาษา</small></button></div><p id="lookStatus" class="hint" aria-live="polite">11 คลิป · คัดเฟรมเปิดที่หัวเรื่องชัด · แตะเพื่อเลือกแนวทาง</p><div class="boardsection"><h3><img class="type" src="assets/type/color-palette.svg" alt="Color Palette"></h3><div id="paletteTiles" class="palettetiles"></div><div class="customcolors"><label for="customPrimary">สีหลัก<input id="customPrimary" type="color" value="#4f0208"></label><label for="customSecondary">สีรอง<input id="customSecondary" type="color" value="#f6e0e3"></label><label for="customAccent">สีเน้น<input id="customAccent" type="color" value="#f7cb3f"></label></div></div><div class="boardsection"><h3><img class="type" src="assets/type/text-layout.svg" alt="Text Layout"></h3><div class="layouttiles"><button data-layout="top" aria-pressed="false"><span class="layoutmini layout-top"><i></i><b></b><em></em></span><span>หัวด้านบน</span></button><button data-layout="center" aria-pressed="false"><span class="layoutmini layout-center"><i></i><b></b><em></em></span><span>คำหลักกลางภาพ</span></button><button data-layout="bottom" aria-pressed="false"><span class="layoutmini layout-bottom"><i></i><b></b><em></em></span><span>ข้อความด้านล่าง</span></button><button data-layout="split" aria-pressed="false"><span class="layoutmini layout-split"><i></i><b></b><em></em></span><span>หัวบน + ซับล่าง</span></button></div></div><div class="boardsection previewboard"><div class="previewcontrols"><h3><img class="type" src="assets/type/cover-preview.svg" alt="Cover Preview"></h3><label for="previewHeadline">ข้อความพรีวิว</label><input id="previewHeadline" value="เรียนรู้แล้วทำได้จริง" maxlength="90"><label for="previewPhoto">ภาพตัวอย่าง</label><select id="previewPhoto"><option value="assets/lookbook/cover-02-v15.jpg">02 · Outfit Collage</option><option value="assets/lookbook/cover-03-v15.jpg">03 · Creator Intro</option><option value="assets/lookbook/cover-04-v15.jpg">04 · Text Focus</option><option value="assets/lookbook/cover-05-v15.jpg">05 · Screen Demo</option><option value="assets/lookbook/cover-06-v15.jpg">06 · Workshop Story</option><option value="assets/lookbook/cover-07-v15.jpg">07 · Classroom Moment</option><option value="assets/lookbook/cover-08-v15.jpg">08 · On-site Workshop</option><option value="assets/lookbook/cover-09-v15.jpg">09 · Creator Mission</option><option value="assets/lookbook/cover-10-v15.jpg">10 · Learning Moment</option><option value="assets/lookbook/cover-11-v15.jpg">11 · Bilingual Lesson</option></select><p class="hint">พรีวิว Layout · ยังไม่ใช่หน้าปกส่งออก</p></div><div id="stylePreview" class="stylepreview" data-layout="bottom"><img id="stylePreviewPhoto" src="assets/lookbook/cover-06-v15.jpg" alt="ภาพตัวอย่างหน้าปก"><div class="previewshade"></div><span id="previewSuper">ประเด็นสำคัญ</span><strong id="previewTitle">เรียนรู้แล้วทำได้จริง</strong><span id="previewSubtitle">ตัวอย่าง Subtitle</span></div></div></div></details><details id="creativeGroup" class="briefgroup"><summary><img class="type" src="assets/type/creative.svg" alt="Creative"></summary><div class="fields"><div><label for="designStyle"><img class="type" src="assets/type/design-style.svg" alt="Design Style"></label><select id="designStyle" data-choice><option>ตามแบรนด์ BB</option><option>ตาม Reference</option><option>เรียบ เท่ พรีเมียม</option><option>Editorial</option><option>Cinematic</option><option>Documentary</option><option>Bold / Dynamic</option><option>กำหนดเอง</option></select><input id="designStyleCustom" data-custom-for="designStyle" placeholder="ระบุเพิ่มเติม" aria-label="Design Style เพิ่มเติม" hidden></div><div><label for="mood"><img class="type" src="assets/type/mood-tone.svg" alt="Mood &amp; Tone"></label><select id="mood" data-choice><option>มั่นใจ ฉลาด เป็นกันเอง</option><option>สงบ มีระดับ</option><option>สนุก มีพลัง</option><option>จริงใจ เป็นธรรมชาติ</option><option>จริงจัง น่าเชื่อถือ</option><option>อบอุ่น สร้างแรงบันดาลใจ</option><option>กำหนดเอง</option></select><input id="moodCustom" data-custom-for="mood" placeholder="ระบุเพิ่มเติม" aria-label="Mood & Tone เพิ่มเติม" hidden></div><div><label for="palette"><img class="type" src="assets/type/color-palette.svg" alt="Color Palette"></label><select id="palette" data-choice><option>BB: ไวน์ ขาว ชมพู เหลืองเล็กน้อย</option><option>ตาม Reference</option><option>คงสีต้นฉบับ</option><option>ขาวดำ</option><option>สีธรรมชาติ</option><option>กำหนดเอง</option></select><input id="paletteCustom" data-custom-for="palette" placeholder="ระบุเพิ่มเติม" aria-label="Color Palette เพิ่มเติม" hidden></div><div><label for="pace"><img class="type" src="assets/type/edit-pace.svg" alt="Edit Pace"></label><select id="pace" data-choice><option>กระชับ สมดุล</option><option>เร็ว มีพลัง</option><option>ช้า มีพื้นที่หายใจ</option><option>ตาม Reference</option><option>กำหนดเอง</option></select><input id="paceCustom" data-custom-for="pace" placeholder="ระบุเพิ่มเติม" aria-label="Edit Pace เพิ่มเติม" hidden></div><div><label for="hook"><img class="type" src="assets/type/opening.svg" alt="Opening"></label><select id="hook" data-choice><option>ช็อตเด่นที่สุด</option><option>คำถาม</option><option>ผลลัพธ์ก่อน</option><option>ปัญหา / Pain point</option><option>เปิดด้วยผู้พูด</option><option>ตาม Reference</option><option>กำหนดเอง</option></select><input id="hookCustom" data-custom-for="hook" placeholder="ระบุเพิ่มเติม" aria-label="Opening เพิ่มเติม" hidden></div><div><label for="referenceMode"><img class="type" src="assets/type/reference-direction.svg" alt="Reference Direction"></label><select id="referenceMode" data-choice><option>ยึดสไตล์ ไม่คัดลอกเนื้อหา</option><option>ยึดจังหวะตัด</option><option>ยึด Mood และสี</option><option>ยึดซับ / กราฟิก</option><option>เป็นแรงบันดาลใจเท่านั้น</option><option>กำหนดเอง</option></select><input id="referenceModeCustom" data-custom-for="referenceMode" placeholder="ระบุเพิ่มเติม" aria-label="Reference Direction เพิ่มเติม" hidden></div></div></details><details id="soundGroup" class="briefgroup"><summary><img class="type" src="assets/type/sound-graphics.svg" alt="Sound &amp; Graphics"></summary><div class="fields"><div><label for="graphics"><img class="type" src="assets/type/graphics.svg" alt="Graphics"></label><select id="graphics" data-choice><option>น้อย เฉพาะจุดสำคัญ</option><option>ตาม CI แบรนด์</option><option>ตาม Reference</option><option>เน้นข้อความ</option><option>ไม่ใส่กราฟิก</option><option>กำหนดเอง</option></select><input id="graphicsCustom" data-custom-for="graphics" placeholder="ระบุเพิ่มเติม" aria-label="Graphics เพิ่มเติม" hidden></div><div><label for="music"><img class="type" src="assets/type/music.svg" alt="Music"></label><select id="music" data-choice><option>เพลงที่มีสิทธิ์ใช้งาน</option><option>ใช้เพลงที่แนบ</option><option>คงเสียงต้นฉบับ ไม่เพิ่มเพลง</option><option>ไม่มีเพลง</option><option>กำหนดเอง</option></select><input id="musicCustom" data-custom-for="music" placeholder="ระบุเพิ่มเติม" aria-label="Music เพิ่มเติม" hidden></div><div><label for="audio"><img class="type" src="assets/type/audio.svg" alt="Audio"></label><select id="audio" data-choice><option>เสียงพูดชัด เพลงอยู่ด้านหลัง</option><option>คงเสียงต้นฉบับ</option><option>Voiceover</option><option>เพลงเป็นหลัก</option><option>กำหนดเอง</option></select><input id="audioCustom" data-custom-for="audio" placeholder="ระบุเพิ่มเติม" aria-label="Audio เพิ่มเติม" hidden></div><div><label for="captionsFile"><img class="type" src="assets/type/caption-file.svg" alt="Caption File"></label><select id="captionsFile" data-choice><option>ฝังซับในคลิป</option><option>ฝังซับ + SRT</option><option>SRT แยก</option><option>ไม่ต้องการ</option><option>กำหนดเอง</option></select><input id="captionsFileCustom" data-custom-for="captionsFile" placeholder="ระบุเพิ่มเติม" aria-label="Caption File เพิ่มเติม" hidden></div></div></details><details class="briefgroup"><summary><img class="type" src="assets/type/text-cover.svg" alt="Text &amp; Cover"></summary><div class="fields"><div><label class="togglelabel"><input id="subtitleEnabled" type="checkbox" checked><span>ใส่ Subtitle</span></label></div><div><label for="subtitles"><img class="type" src="assets/type/subtitles.svg" alt="Subtitles"></label><select id="subtitles" data-choice><option>ไทย</option><option>อังกฤษ</option><option>ไทย + อังกฤษ</option><option>ภาษาเดิม</option><option>ไม่ใส่ซับ</option><option>กำหนดเอง</option></select><input id="subtitlesCustom" data-custom-for="subtitles" placeholder="ระบุเพิ่มเติม" aria-label="Subtitles เพิ่มเติม" hidden></div><div><label for="superLanguage"><img class="type" src="assets/type/super-language.svg" alt="Super Language"></label><select id="superLanguage" data-choice><option>ไทย</option><option>อังกฤษ</option><option>ไทย + อังกฤษ</option><option>ไม่ใส่ Super</option><option>กำหนดเอง</option></select><input id="superLanguageCustom" placeholder="ระบุเพิ่มเติม" aria-label="Super Language เพิ่มเติม" hidden></div><div><label for="superStyle"><img class="type" src="assets/type/super-style.svg" alt="Super Style"></label><select id="superStyle" data-choice><option>เน้นคำสำคัญ</option><option>สั้น หนึ่งประเด็นต่อช็อต</option><option>ตาม Reference</option><option>ข้อความที่กำหนด</option><option>กำหนดเอง</option></select><input id="superStyleCustom" placeholder="ระบุเพิ่มเติม" aria-label="Super Style เพิ่มเติม" hidden></div><div><label for="coverMode"><img class="type" src="assets/type/cover-headline.svg" alt="Cover Headline"></label><select id="coverMode" data-choice><option>ให้ทีมเสนอ 3 แบบ</option><option>ใช้ข้อความที่กำหนด</option><option>ไม่ใส่ข้อความ</option><option>กำหนดเอง</option></select><input id="coverModeCustom" placeholder="ระบุเพิ่มเติม" aria-label="Cover Headline เพิ่มเติม" hidden></div><div><label for="coverLanguage"><img class="type" src="assets/type/cover-language.svg" alt="Cover Language"></label><select id="coverLanguage" data-choice><option>ไทย</option><option>อังกฤษ</option><option>ไทย + อังกฤษ</option><option>กำหนดเอง</option></select><input id="coverLanguageCustom" placeholder="ระบุเพิ่มเติม" aria-label="Cover Language เพิ่มเติม" hidden></div><div><label for="coverShot"><img class="type" src="assets/type/cover-image.svg" alt="Cover Image"></label><select id="coverShot" data-choice><option>ช็อตเด่นจากคลิป</option><option>ผู้พูด / บุคคล</option><option>สินค้า / ผลลัพธ์</option><option>เลือกภาพใน Style Board</option><option>กำหนดเอง</option></select><input id="coverShotCustom" placeholder="ระบุเพิ่มเติม" aria-label="Cover Image เพิ่มเติม" hidden></div><div><label for="coverStyle"><img class="type" src="assets/type/cover-style.svg" alt="Cover Style"></label><select id="coverStyle" data-choice><option>ตาม CI แบรนด์</option><option>ตาม Reference</option><option>เรียบ เท่</option><option>ข้อความเด่น</option><option>ภาพเด่น</option><option>กำหนดเอง</option></select><input id="coverStyleCustom" placeholder="ระบุเพิ่มเติม" aria-label="Cover Style เพิ่มเติม" hidden></div><div><label for="subtitlePosition"><img class="type" src="assets/type/subtitle-position.svg" alt="Subtitle Position"></label><select id="subtitlePosition" data-choice><option>ล่างใน Safe Area</option><option>กลางภาพ</option><option>ตาม Reference</option><option>กำหนดเอง</option></select><input id="subtitlePositionCustom" placeholder="ระบุเพิ่มเติม" aria-label="Subtitle Position เพิ่มเติม" hidden></div><div class="wide"><label for="coverText"><img class="type" src="assets/type/headline-text.svg" alt="Headline Text"></label><input id="coverText" placeholder="คำบนหน้าปก ถ้าเลือกใช้ข้อความที่กำหนด"><label for="superText"><img class="type" src="assets/type/super-text.svg" alt="Super Text"></label><textarea id="superText" rows="2" placeholder="ข้อความเน้น / Keyword / ประโยคที่ต้องมี"></textarea></div></div></details><fieldset class="choicegroup"><legend><img class="type" src="assets/type/include.svg" alt="Include"></legend><div class="choices"><label><input type="checkbox" name="wanted" value="ช็อตสินค้า"><span>ช็อตสินค้า</span></label><label><input type="checkbox" name="wanted" value="ผู้พูด"><span>ผู้พูด</span></label><label><input type="checkbox" name="wanted" value="B-roll"><span>B-roll</span></label><label><input type="checkbox" name="wanted" value="โลโก้"><span>โลโก้</span></label><label><input type="checkbox" name="wanted" value="ราคา / ข้อเสนอ"><span>ราคา / ข้อเสนอ</span></label><label><input type="checkbox" name="wanted" value="CTA"><span>CTA</span></label><label><input type="checkbox" name="wanted" value="ข้อความสำคัญ"><span>ข้อความสำคัญ</span></label></div></fieldset><fieldset class="choicegroup"><legend><img class="type" src="assets/type/keep.svg" alt="Keep"></legend><div class="choices"><label><input type="checkbox" name="preserve" value="สีแบรนด์" checked><span>สีแบรนด์</span></label><label><input type="checkbox" name="preserve" value="โลโก้" checked><span>โลโก้</span></label><label><input type="checkbox" name="preserve" value="ความหมายของผู้พูด" checked><span>ความหมายของผู้พูด</span></label><label><input type="checkbox" name="preserve" value="เสียงต้นฉบับ"><span>เสียงต้นฉบับ</span></label><label><input type="checkbox" name="preserve" value="ช็อตที่ระบุ"><span>ช็อตที่ระบุ</span></label><label><input type="checkbox" name="preserve" value="ชื่อสินค้า / ราคา"><span>ชื่อสินค้า / ราคา</span></label></div></fieldset><fieldset class="choicegroup"><legend><img class="type" src="assets/type/avoid.svg" alt="Avoid"></legend><div class="choices"><label><input type="checkbox" name="avoid" value="ไอคอนหัวใจ" checked><span>ไอคอนหัวใจ</span></label><label><input type="checkbox" name="avoid" value="กรอบซ้อนกรอบ" checked><span>กรอบซ้อนกรอบ</span></label><label><input type="checkbox" name="avoid" value="ขอบสีเหลือง" checked><span>ขอบสีเหลือง</span></label><label><input type="checkbox" name="avoid" value="แต่งข้อมูล / ราคา" checked><span>แต่งข้อมูล / ราคา</span></label><label><input type="checkbox" name="avoid" value="เปลี่ยนหน้าตาบุคคล"><span>เปลี่ยนหน้าตาบุคคล</span></label><label><input type="checkbox" name="avoid" value="เพลงไม่มีสิทธิ์" checked><span>เพลงไม่มีสิทธิ์</span></label><label><input type="checkbox" name="avoid" value="เอฟเฟกต์เยอะ"><span>เอฟเฟกต์เยอะ</span></label></div></fieldset><label for="restrictions"><img class="type" src="assets/type/additional-rules.svg" alt="Additional Rules"></label><textarea id="restrictions" rows="2" placeholder="ช็อต / Timecode ที่ต้องเก็บหรือห้ามใช้ และข้อห้ามเพิ่มเติม"></textarea><label for="brief"><img class="type" src="assets/type/direction.svg" alt="Direction"></label><textarea id="brief" rows="3" placeholder="คำสั่งเพิ่มเติม ถ้ามี"></textarea><details class="briefgroup"><summary><img class="type" src="assets/type/delivery.svg" alt="Delivery"></summary><div class="fields"><div><label for="length"><img class="type" src="assets/type/duration.svg" alt="Duration"></label><select id="length"><option value="15">15 วินาที</option><option value="30">30 วินาที</option><option value="60">60 วินาที</option><option value="custom">กำหนดเอง</option></select><input id="customLength" type="number" min="1" max="3600" placeholder="วินาที" hidden></div><div><label for="ratio"><img class="type" src="assets/type/aspect-ratio.svg" alt="Aspect Ratio"></label><select id="ratio"><option>9:16 แนวตั้ง</option><option>16:9 แนวนอน</option><option>1:1 จัตุรัส</option><option>4:5 โพสต์</option></select></div><div><label for="resolution"><img class="type" src="assets/type/resolution.svg" alt="Resolution"></label><select id="resolution" data-choice><option>1080p</option><option>4K</option><option>ตามไฟล์ต้นฉบับ</option><option>กำหนดเอง</option></select><input id="resolutionCustom" data-custom-for="resolution" placeholder="ระบุเพิ่มเติม" aria-label="Resolution เพิ่มเติม" hidden></div><div><label for="fps"><img class="type" src="assets/type/frame-rate.svg" alt="Frame Rate"></label><select id="fps" data-choice><option>ตามไฟล์ต้นฉบับ</option><option>24 fps</option><option>25 fps</option><option>30 fps</option><option>60 fps</option><option>กำหนดเอง</option></select><input id="fpsCustom" data-custom-for="fps" placeholder="ระบุเพิ่มเติม" aria-label="Frame Rate เพิ่มเติม" hidden></div><div><label for="delivery"><img class="type" src="assets/type/deliverables.svg" alt="Deliverables"></label><select id="delivery"><option value="edit">CapCut Project + ไฟล์ต้นฉบับ</option><option value="both">CapCut Project + MP4 หลังอนุมัติ</option></select></div><div><label for="deadline"><img class="type" src="assets/type/deadline.svg" alt="Deadline"></label><input id="deadline" type="datetime-local" placeholder=""></div><div><label for="approver"><img class="type" src="assets/type/final-approval.svg" alt="Final Approval"></label><input id="approver" type="text" value="BB" placeholder="ผู้อนุมัติสุดท้าย"></div><div><label for="revisions"><img class="type" src="assets/type/revision-rounds.svg" alt="Revision Rounds"></label><select id="revisions" data-choice><option>1 รอบ</option><option>2 รอบ</option><option>3 รอบ</option><option>กำหนดเอง</option></select><input id="revisionsCustom" data-custom-for="revisions" placeholder="ระบุเพิ่มเติม" aria-label="Revision Rounds เพิ่มเติม" hidden></div><div><label for="rights"><img class="type" src="assets/type/usage-rights.svg" alt="Usage Rights"></label><select id="rights" data-choice><option>ยังไม่ยืนยัน</option><option>ยืนยันสิทธิ์ไฟล์ เพลง และบุคคลแล้ว</option><option>มีไฟล์ที่ต้องตรวจสิทธิ์</option><option>กำหนดเอง</option></select><input id="rightsCustom" data-custom-for="rights" placeholder="ระบุเพิ่มเติม" aria-label="Usage Rights เพิ่มเติม" hidden></div><div><label for="assetsLink"><img class="type" src="assets/type/brand-assets.svg" alt="Brand Assets"></label><input id="assetsLink" type="text" placeholder="ลิงก์โลโก้ ฟอนต์ CI เพลง / ไฟล์เพิ่มเติม"></div></div></details></section><section class="workstep" data-work-step="1" hidden><h2><img class="type" src="assets/type/reference.svg" alt="Reference"></h2><div class="referenceToolbar"><button id="addReference" class="action"><img class="type" src="assets/type/add-reference.svg" alt="Add Reference"></button><input id="referenceFiles" type="file" accept="video/*,image/*" multiple hidden></div><div id="referenceList" class="referenceList"></div><label for="referenceNotes"><img class="type" src="assets/type/style-notes.svg" alt="Style Notes"></label><textarea id="referenceNotes" rows="4" placeholder="จังหวะตัด / Hook / ซับ / Mood / สิ่งที่ต้องยึด"></textarea><label for="styleName"><img class="type" src="assets/type/style-name.svg" alt="Style Name"></label><input id="styleName" placeholder="ชื่อสไตล์"><button id="saveStyle" class="textbutton"><img class="type" src="assets/type/save-style.svg" alt="Save Style"></button><p id="referenceStatus" class="hint" aria-live="polite"></p></section><section class="workstep" data-work-step="2" hidden><div class="sectionhead"><h2><img class="type" src="assets/type/footage.svg" alt="Footage"></h2><button id="add" class="textbutton"><img class="type" src="assets/type/add-footage.svg" alt="Add Footage"></button></div><input type="file" id="files" accept="video/*,image/*" multiple hidden><button id="drop" class="dropzone"><img class="type" src="assets/type/upload-footage.svg" alt="Upload Footage"></button><div id="fileList" class="filelist"></div><section class="previewpanel"><h3><img class="type" src="assets/type/preview.svg" alt="Preview"></h3><div id="emptyPreview" class="emptypreview">เลือกไฟล์</div><video id="video" controls playsinline hidden></video><img id="imagePreview" hidden alt="ไฟล์ภาพที่เลือก"><p id="videoName" class="hint"></p></section></section><section class="workstep" data-work-step="3" hidden><h2><img class="type" src="assets/type/review.svg" alt="Review"></h2><div id="projectReview" class="projectReview"></div><button id="save" class="primary"><img class="type" src="assets/type/save-project.svg" alt="Save Project"></button><p id="saveStatus" class="hint" aria-live="polite"></p></section></div><div class="workactions"><button id="stepBack" class="textbutton"><img class="type" src="assets/type/back.svg" alt="Back"></button><button id="stepNext" class="primary compact"><img class="type" src="assets/type/next.svg" alt="Next"></button><p id="stepStatus" aria-live="polite"></p></div></div></section><section id="crew" class="tabcontent" hidden><div class="studiotop"><h1><img class="type" src="assets/type/simulator.svg" alt="Simulator"></h1><button data-tab="workspace" class="action"><img class="type" src="assets/type/work-zone.svg" alt="Work Zone"></button></div><div class="cabinviewport"><div class="cabinworld"><img class="cabinart" src="assets/bb-cabin-journey-v11.png" alt="BB Private Studio: BB ด้านหน้า ตามด้วย Leo Kitty Tidy และ Chicha"><div id="agents" class="cabinTargets"></div></div></div><div id="stationNav" class="stationNav"></div><section class="agentdetail" id="agentDetail" aria-live="polite"></section></section><section id="production" class="tabcontent" hidden><div class="sectionhead"><h1>คิวผลิต</h1><button id="backToBrief" class="textbutton">← กลับไปบรีฟ</button></div><p id="productionRoute" class="hint"></p><div id="productionSteps" class="productionSteps"></div><section id="productionDetail" class="productionDetail" aria-live="polite"></section><div class="fields"><div><label for="editorUrl">ลิงก์งานใน Canva / CapCut</label><input id="editorUrl" type="url" placeholder="https://…"></div><div><label for="handoffVersion">เวอร์ชันงาน</label><input id="handoffVersion" placeholder="เช่น v01"></div></div><label for="handoffNotes">โน้ตส่งต่อ</label><textarea id="handoffNotes" rows="3" placeholder="จุดที่ต้องแก้ / สิ่งที่ต้องตรวจ"></textarea><button id="saveHandoff" class="primary">บันทึกการส่งต่อ</button><p id="handoffStatus" class="hint" role="status"></p></section><section id="history" class="tabcontent" hidden><h1><img class="type" src="assets/type/projects.svg" alt="Projects"></h1><div id="historyList"></div></section><footer><img class="type" src="assets/type/bb-simulator.svg" alt="BB Simulator"><span>โปรเจกต์และ Reference เก็บในเบราว์เซอร์นี้ · คลิปต้นฉบับต้องแนบใหม่</span></footer></main><script src="workflow.js?v=17"></script><script src="app.js?v=22"></script><script src="simulator-model.js?v=22"></script><script src="simulator.js?v=22"></script></body></html>
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#4f0208" />
+    <title>BB Simulator</title>
+    <meta name="description" content="BB Simulator" />
+    <link rel="stylesheet" href="style.css?v=22" />
+    <link rel="stylesheet" href="simulator.css?v=22" />
+  </head>
+  <body>
+    <header>
+      <a class="brand" href="#"
+        ><img class="brandlogo" src="assets/bb-logo.png" alt="BEYOND BEYOURS" /><img
+          class="type"
+          src="assets/type/bb-simulator.svg"
+          alt="BB Simulator" /></a
+      ><span class="badge">Workspace preview · Production ยังไม่ได้เชื่อม</span>
+    </header>
+    <main>
+      <section class="routing fields">
+        <div>
+          <label for="brandSelect">แบรนด์</label
+          ><select id="brandSelect">
+            <option value="beyond">Beyond Beyours</option>
+            <option value="thailista">Thailista</option>
+            <option value="maemore">Maemore AI</option>
+            <option value="yaadz">Y&amp;Z Stories</option>
+            <option value="custom">แบรนด์อื่น</option></select
+          ><input id="customBrand" placeholder="ชื่อแบรนด์" hidden aria-label="ชื่อแบรนด์อื่น" />
+        </div>
+        <div>
+          <label for="productionLane">สายงาน</label
+          ><select id="productionLane">
+            <option value="video">Video · สั่งผลิตคลิป</option>
+            <option value="content">Content · สั่งผลิตคอนเทนต์</option>
+            <option value="scheduled">Content · ตามแผน</option>
+          </select>
+        </div>
+      </section>
+      <section class="projectbar">
+        <strong id="projectName">Untitled project</strong>
+        <div class="projectstats">
+          <span><b id="count">0</b> คลิป</span><span><b id="durationLabel">15</b> วินาที</span>
+        </div>
+      </section>
+      <nav class="tabs" aria-label="Workspace">
+        <button data-tab="simulator" class="selected"><img class="type" src="assets/type/simulator.svg" alt="Simulator" /></button
+        ><button data-tab="workspace"><img class="type" src="assets/type/work-zone.svg" alt="Work Zone" /></button
+        ><button data-tab="history"><img class="type" src="assets/type/projects.svg" alt="Projects" /></button>
+      </nav>
+      <section id="simulator" class="tabcontent">
+        <div class="simbar">
+          <div class="simbarTitle">
+            <img class="type" src="assets/type/simulator.svg" alt="Simulator" /><span id="simBrandLabel">Beyond Beyours</span>
+          </div>
+          <div class="simControls">
+            <button id="simSound" class="simQuiet" aria-pressed="false">หยุดภาพเคลื่อนไหว</button
+            ><button id="simDemo" class="simDemo">▶ ทดลอง Journey</button>
+          </div>
+        </div>
+        <div class="simLayout">
+          <div class="simWorld">
+            <div class="simScene" id="simScene">
+              <img
+                class="simEnvironment"
+                src="assets/bb-simulator-full-aircraft-v19.png"
+                width="1024"
+                height="1536"
+                alt="เครื่องบินสตูดิโอเต็มลำ เห็นหัวเครื่อง ปีก และหาง มี Cockpit ของ BB และสี่โซนผลิต"
+                fetchpriority="high"
+              />
+              <div id="simActors" class="simActors"></div>
+              <img
+                class="simCockpitForeground"
+                src="assets/bb-simulator-full-aircraft-v19.png"
+                width="1024"
+                height="1536"
+                alt=""
+                aria-hidden="true"
+              /><span id="simParcel" class="simParcel" hidden aria-hidden="true"><img src="assets/icon-brief.svg" alt="" /></span
+              ><span class="simSceneLabel"><img class="type" src="assets/type/cockpit.svg" alt="Cockpit" /></span>
+            </div>
+            <div class="simCrewDock" id="simCrewDock" aria-label="เลือกทีม"></div>
+          </div>
+          <aside class="simSide">
+            <section id="simCommand">
+              <div class="simIdentity" id="simIdentity"></div>
+              <div id="simRouting"></div>
+              <div class="simActions" id="simActions"></div>
+              <p id="simTask" class="simTask" aria-live="polite"></p>
+            </section>
+            <section class="simDashboard">
+              <div class="simSectionTitle">
+                <img class="type" src="assets/type/projects.svg" alt="Projects" /><button id="simOpenQueue" class="simQuiet">
+                  ดูทั้งหมด →
+                </button>
+              </div>
+              <div class="simMetrics">
+                <div><strong id="simJobCount">0</strong><span>โปรเจกต์</span></div>
+                <div><strong id="simRefCount">0</strong><span>Reference</span></div>
+                <div><strong>—</strong><span>รออนุมัติจริง</span></div>
+              </div>
+              <div id="simJobs"></div>
+            </section>
+            <section class="simActivity">
+              <div class="simSectionTitle">
+                <img class="type" src="assets/type/activity.svg" alt="Activity" /><span id="simMode">Workspace</span>
+              </div>
+              <ol id="simLog" aria-live="polite"></ol>
+              <button id="simContinue" class="simDemo" hidden>ต่อ Journey ตัวอย่าง →</button>
+              <p class="simConnection">สถานะใน Demo เป็นงานจำลอง · Production ยังไม่ได้เชื่อม</p>
+            </section>
+          </aside>
+        </div>
+      </section>
+      <section id="workspace" class="tabcontent">
+        <section id="workLaunch" class="worklaunch">
+          <div class="launchscene">
+            <img
+              src="assets/bb-workzone-hero-v14.png"
+              width="1536"
+              height="1024"
+              fetchpriority="high"
+              alt="BB หัวหน้าทีมที่โต๊ะผลิตงานในเคบินเครื่องบิน เห็นศีรษะและพื้นที่ทำงานครบ"
+            /><button id="sceneStart" class="sceneStart" aria-label="เริ่ม Brief กับ BB"></button>
+          </div>
+          <div class="launchcontrols">
+            <h1><img class="type" src="assets/type/work-zone.svg" alt="Work Zone" /></h1>
+            <button id="startBrief" class="startbrief">
+              <span class="starticon"><img src="assets/icon-brief.svg" alt="" /></span
+              ><span><img class="type" src="assets/type/start-brief.svg" alt="Start Brief" /><small>กำหนดงานกับ BB</small></span
+              ><span aria-hidden="true">→</span>
+            </button>
+            <div class="launchshortcuts">
+              <button data-launch-step="1">
+                <img class="toolicon" src="assets/icon-reference.svg" alt="" /><img
+                  class="type"
+                  src="assets/type/reference.svg"
+                  alt="Reference"
+                /><small>แนบต้นแบบ</small></button
+              ><button data-launch-step="2">
+                <img class="toolicon" src="assets/icon-footage.svg" alt="" /><img
+                  class="type"
+                  src="assets/type/footage.svg"
+                  alt="Footage"
+                /><small>ใส่คลิป</small></button
+              ><button data-launch-step="3">
+                <img class="toolicon" src="assets/icon-review.svg" alt="" /><img
+                  class="type"
+                  src="assets/type/review.svg"
+                  alt="Review"
+                /><small>ตรวจคำสั่ง</small>
+              </button>
+            </div>
+            <button id="openProduction" class="textbutton">ดูคิวผลิต →</button
+            ><button id="openStyleBoard" class="textbutton">
+              <img class="type" src="assets/type/choose-a-look.svg" alt="Choose A Look" /></button
+            ><button id="resumeBrief" class="textbutton" hidden>
+              <img class="type" src="assets/type/continue-brief.svg" alt="Continue Brief" />
+            </button>
+          </div>
+        </section>
+        <div id="workEditor" hidden>
+          <div class="editorhead">
+            <button id="backWorkZone" class="textbutton">← <img class="type" src="assets/type/work-zone.svg" alt="Work Zone" /></button
+            ><span id="stepCount">01 / 04</span>
+          </div>
+          <nav id="workSteps" class="worksteps" aria-label="Project steps">
+            <button data-step="0">
+              <img class="toolicon" src="assets/icon-brief.svg" alt="" /><span>01</span
+              ><img class="type" src="assets/type/brief.svg" alt="Brief" /></button
+            ><button data-step="1">
+              <img class="toolicon" src="assets/icon-reference.svg" alt="" /><span>02</span
+              ><img class="type" src="assets/type/reference.svg" alt="Reference" /></button
+            ><button data-step="2">
+              <img class="toolicon" src="assets/icon-footage.svg" alt="" /><span>03</span
+              ><img class="type" src="assets/type/footage.svg" alt="Footage" /></button
+            ><button data-step="3">
+              <img class="toolicon" src="assets/icon-review.svg" alt="" /><span>04</span
+              ><img class="type" src="assets/type/review.svg" alt="Review" />
+            </button>
+          </nav>
+          <div class="workbody">
+            <section class="workstep" data-work-step="0">
+              <h2><span id="briefOwner" class="owner">BB</span><img class="type" src="assets/type/brief.svg" alt="Brief" /></h2>
+              <div>
+                <label for="title"><img class="type" src="assets/type/project-name.svg" alt="Project Name" /></label
+                ><input id="title" type="text" placeholder="ชื่อโปรเจกต์" />
+              </div>
+              <div class="chips">
+                <button data-preset="review"><img class="type" src="assets/type/product-review.svg" alt="Product Review" /></button
+                ><button data-preset="lesson"><img class="type" src="assets/type/tutorial.svg" alt="Tutorial" /></button
+                ><button data-preset="vlog"><img class="type" src="assets/type/vlog.svg" alt="Vlog" /></button>
+              </div>
+              <details class="briefgroup" open>
+                <summary><img class="type" src="assets/type/project.svg" alt="Project" /></summary>
+                <div class="fields">
+                  <div>
+                    <label for="contentType"><img class="type" src="assets/type/content-type.svg" alt="Content Type" /></label
+                    ><select id="contentType" data-choice>
+                      <option>รีวิวสินค้า</option>
+                      <option>Tutorial</option>
+                      <option>Carousel</option>
+                      <option>Single Post</option>
+                      <option>Article</option>
+                      <option>Vlog</option>
+                      <option>สัมภาษณ์</option>
+                      <option>โฆษณา</option>
+                      <option>Podcast</option>
+                      <option>คลิปเปิดตัว</option>
+                      <option>กำหนดเอง</option></select
+                    ><input
+                      id="contentTypeCustom"
+                      data-custom-for="contentType"
+                      placeholder="ระบุเพิ่มเติม"
+                      aria-label="Content Type เพิ่มเติม"
+                      hidden
+                    />
+                  </div>
+                  <div>
+                    <label for="objective"><img class="type" src="assets/type/objective.svg" alt="Objective" /></label
+                    ><select id="objective" data-choice>
+                      <option>เพิ่มการรับรู้</option>
+                      <option>ขายสินค้า / บริการ</option>
+                      <option>เพิ่มผู้ติดตาม</option>
+                      <option>เก็บลีด / รับสมัคร</option>
+                      <option>สอน / อธิบาย</option>
+                      <option>เล่าเรื่อง / สร้างภาพลักษณ์</option>
+                      <option>กำหนดเอง</option></select
+                    ><input
+                      id="objectiveCustom"
+                      data-custom-for="objective"
+                      placeholder="ระบุเพิ่มเติม"
+                      aria-label="Objective เพิ่มเติม"
+                      hidden
+                    />
+                  </div>
+                  <div>
+                    <label for="audience"><img class="type" src="assets/type/audience.svg" alt="Audience" /></label
+                    ><select id="audience" data-choice>
+                      <option>ผู้ชมใหม่</option>
+                      <option>ลูกค้าเดิม</option>
+                      <option>เจ้าของธุรกิจ</option>
+                      <option>คนทำงาน</option>
+                      <option>นักเรียน / นักศึกษา</option>
+                      <option>ผู้เรียนคอร์ส</option>
+                      <option>กำหนดเอง</option></select
+                    ><input
+                      id="audienceCustom"
+                      data-custom-for="audience"
+                      placeholder="ระบุเพิ่มเติม"
+                      aria-label="Audience เพิ่มเติม"
+                      hidden
+                    />
+                  </div>
+                  <div>
+                    <label for="keyMessage"><img class="type" src="assets/type/key-message.svg" alt="Key Message" /></label
+                    ><input id="keyMessage" type="text" placeholder="สารหลัก / ข้อเสนอ / สิ่งที่ต้องพูด" />
+                  </div>
+                  <div>
+                    <label for="platform"><img class="type" src="assets/type/platform.svg" alt="Platform" /></label
+                    ><select id="platform">
+                      <option>Reels / TikTok / Shorts</option>
+                      <option>Facebook / Instagram</option>
+                      <option>YouTube</option>
+                      <option>สื่อการสอน</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label for="cta"><img class="type" src="assets/type/call-to-action.svg" alt="Call To Action" /></label
+                    ><select id="cta" data-choice>
+                      <option>ไม่มี CTA</option>
+                      <option>ทัก LINE</option>
+                      <option>ส่งข้อความ</option>
+                      <option>ซื้อ / จอง</option>
+                      <option>สมัครเรียน</option>
+                      <option>เข้าชมเว็บไซต์</option>
+                      <option>ติดตาม</option>
+                      <option>คอมเมนต์ / แชร์</option>
+                      <option>กำหนดเอง</option></select
+                    ><input id="ctaCustom" data-custom-for="cta" placeholder="ระบุเพิ่มเติม" aria-label="Call To Action เพิ่มเติม" hidden />
+                  </div>
+                  <div>
+                    <label for="ctaDestination"><img class="type" src="assets/type/destination.svg" alt="Destination" /></label
+                    ><input id="ctaDestination" type="text" placeholder="ลิงก์ / LINE / คำที่ให้ทัก" />
+                  </div>
+                </div>
+              </details>
+              <details id="styleBoardGroup" class="briefgroup visualgroup">
+                <summary><img class="type" src="assets/type/style-board.svg" alt="Style Board" /></summary>
+                <div class="styleboard">
+                  <div class="styletiles">
+                    <button data-look="outfit" aria-pressed="false">
+                      <img
+                        class="lookphoto"
+                        src="assets/lookbook/cover-02-v15.jpg"
+                        alt="เฟรมเปิด Outfit Collage จากคลิป 02"
+                        loading="lazy"
+                        width="512"
+                        height="910"
+                      /><img class="type" src="assets/type/outfit-collage.svg" alt="Outfit Collage" /><small
+                        >พื้นหลังลายตาราง ภาพตัดขอบ และหัวเรื่องหลายระดับ</small
+                      ></button
+                    ><button data-look="collage" aria-pressed="false">
+                      <img
+                        class="lookphoto"
+                        src="assets/lookbook/cover-03-v15.jpg"
+                        alt="เฟรมเปิด Creator Intro จากคลิป 03"
+                        loading="lazy"
+                        width="512"
+                        height="910"
+                      /><img class="type" src="assets/type/creator-intro.svg" alt="Creator Intro" /><small
+                        >ภาพบุคคลตัดขอบบนพื้นลายทาง พร้อมหัวเรื่องชัด</small
+                      ></button
+                    ><button data-look="type" aria-pressed="false">
+                      <img
+                        class="lookphoto"
+                        src="assets/lookbook/cover-04-v15.jpg"
+                        alt="เฟรมเปิด Text Focus จากคลิป 04"
+                        loading="lazy"
+                        width="512"
+                        height="910"
+                      /><img class="type" src="assets/type/text-focus.svg" alt="Text Focus" /><small
+                        >คัดเฟรมที่หัวเรื่องขึ้นครบ ใช้คำหลักตัวใหญ่เป็นจุดเด่น</small
+                      ></button
+                    ><button data-look="screen" aria-pressed="false">
+                      <img
+                        class="lookphoto"
+                        src="assets/lookbook/cover-05-v15.jpg"
+                        alt="เฟรมเปิด Screen Demo จากคลิป 05"
+                        loading="lazy"
+                        width="512"
+                        height="910"
+                      /><img class="type" src="assets/type/screen-demo.svg" alt="Screen Demo" /><small
+                        >หน้าจอจริงกับหัวเรื่องแบบโน้ตสั้น</small
+                      ></button
+                    ><button data-look="workshop" aria-pressed="false">
+                      <img
+                        class="lookphoto"
+                        src="assets/lookbook/cover-06-v15.jpg"
+                        alt="เฟรมเปิด Workshop Story จากคลิป 06"
+                        loading="lazy"
+                        width="512"
+                        height="910"
+                      /><img class="type" src="assets/type/workshop-story.svg" alt="Workshop Story" /><small
+                        >เฟรมเปิดผู้พูดและหัวเรื่องเวิร์กชอป ก่อนสลับบรรยากาศจริง</small
+                      ></button
+                    ><button data-look="classroom" aria-pressed="false">
+                      <img
+                        class="lookphoto"
+                        src="assets/lookbook/cover-07-v15.jpg"
+                        alt="เฟรมเปิด Classroom Collage จากคลิป 07"
+                        loading="lazy"
+                        width="512"
+                        height="910"
+                      /><img class="type" src="assets/type/classroom-collage.svg" alt="Classroom Collage" /><small
+                        >ช็อตคลาสกับภาพบุคคลตัดขอบและหัวเรื่อง</small
+                      ></button
+                    ><button data-look="onsite" aria-pressed="false">
+                      <img
+                        class="lookphoto"
+                        src="assets/lookbook/cover-08-v15.jpg"
+                        alt="เฟรมเปิด Workshop Campaign จากคลิป 08"
+                        loading="lazy"
+                        width="512"
+                        height="910"
+                      /><img class="type" src="assets/type/workshop-campaign.svg" alt="Workshop Campaign" /><small
+                        >หน้าผู้พูด ชื่อเวิร์กชอป และกลุ่มผู้ชมเด่น</small
+                      ></button
+                    ><button data-look="mission" aria-pressed="false">
+                      <img
+                        class="lookphoto"
+                        src="assets/lookbook/cover-09-v15.jpg"
+                        alt="เฟรมเปิด Creator Mission จากคลิป 09"
+                        loading="lazy"
+                        width="512"
+                        height="910"
+                      /><img class="type" src="assets/type/creator-mission.svg" alt="Creator Mission" /><small
+                        >ผู้พูดเป็นตัวหลัก คำสั้นตัวใหญ่ สีชมพูและเหลือง</small
+                      ></button
+                    ><button data-look="learning" aria-pressed="false">
+                      <img
+                        class="lookphoto"
+                        src="assets/lookbook/cover-10-v15.jpg"
+                        alt="เฟรมเปิด Learn By Doing จากคลิป 10"
+                        loading="lazy"
+                        width="512"
+                        height="910"
+                      /><img class="type" src="assets/type/learn-by-doing.svg" alt="Learn By Doing" /><small
+                        >ภาพการลงมือทำกับข้อความเปิดสร้างแรงบันดาลใจ</small
+                      ></button
+                    ><button data-look="bilingual" aria-pressed="false">
+                      <img
+                        class="lookphoto"
+                        src="assets/lookbook/cover-11-v15.jpg"
+                        alt="เฟรมเปิด Bilingual Lesson จากคลิป 11"
+                        loading="lazy"
+                        width="512"
+                        height="910"
+                      /><img class="type" src="assets/type/bilingual-lesson.svg" alt="Bilingual Lesson" /><small
+                        >เฟรมเปิดสถานการณ์จริงและชื่อบทเรียนสองภาษา</small
+                      >
+                    </button>
+                  </div>
+                  <p id="lookStatus" class="hint" aria-live="polite">11 คลิป · คัดเฟรมเปิดที่หัวเรื่องชัด · แตะเพื่อเลือกแนวทาง</p>
+                  <div class="boardsection">
+                    <h3><img class="type" src="assets/type/color-palette.svg" alt="Color Palette" /></h3>
+                    <div id="paletteTiles" class="palettetiles"></div>
+                    <div class="customcolors">
+                      <label for="customPrimary">สีหลัก<input id="customPrimary" type="color" value="#4f0208" /></label
+                      ><label for="customSecondary">สีรอง<input id="customSecondary" type="color" value="#f6e0e3" /></label
+                      ><label for="customAccent">สีเน้น<input id="customAccent" type="color" value="#f7cb3f" /></label>
+                    </div>
+                  </div>
+                  <div class="boardsection">
+                    <h3><img class="type" src="assets/type/text-layout.svg" alt="Text Layout" /></h3>
+                    <div class="layouttiles">
+                      <button data-layout="top" aria-pressed="false">
+                        <span class="layoutmini layout-top"><i></i><b></b><em></em></span><span>หัวด้านบน</span></button
+                      ><button data-layout="center" aria-pressed="false">
+                        <span class="layoutmini layout-center"><i></i><b></b><em></em></span><span>คำหลักกลางภาพ</span></button
+                      ><button data-layout="bottom" aria-pressed="false">
+                        <span class="layoutmini layout-bottom"><i></i><b></b><em></em></span><span>ข้อความด้านล่าง</span></button
+                      ><button data-layout="split" aria-pressed="false">
+                        <span class="layoutmini layout-split"><i></i><b></b><em></em></span><span>หัวบน + ซับล่าง</span>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="boardsection previewboard">
+                    <div class="previewcontrols">
+                      <h3><img class="type" src="assets/type/cover-preview.svg" alt="Cover Preview" /></h3>
+                      <label for="previewHeadline">ข้อความพรีวิว</label
+                      ><input id="previewHeadline" value="เรียนรู้แล้วทำได้จริง" maxlength="90" /><label for="previewPhoto"
+                        >ภาพตัวอย่าง</label
+                      ><select id="previewPhoto">
+                        <option value="assets/lookbook/cover-02-v15.jpg">02 · Outfit Collage</option>
+                        <option value="assets/lookbook/cover-03-v15.jpg">03 · Creator Intro</option>
+                        <option value="assets/lookbook/cover-04-v15.jpg">04 · Text Focus</option>
+                        <option value="assets/lookbook/cover-05-v15.jpg">05 · Screen Demo</option>
+                        <option value="assets/lookbook/cover-06-v15.jpg">06 · Workshop Story</option>
+                        <option value="assets/lookbook/cover-07-v15.jpg">07 · Classroom Moment</option>
+                        <option value="assets/lookbook/cover-08-v15.jpg">08 · On-site Workshop</option>
+                        <option value="assets/lookbook/cover-09-v15.jpg">09 · Creator Mission</option>
+                        <option value="assets/lookbook/cover-10-v15.jpg">10 · Learning Moment</option>
+                        <option value="assets/lookbook/cover-11-v15.jpg">11 · Bilingual Lesson</option>
+                      </select>
+                      <p class="hint">พรีวิว Layout · ยังไม่ใช่หน้าปกส่งออก</p>
+                    </div>
+                    <div id="stylePreview" class="stylepreview" data-layout="bottom">
+                      <img id="stylePreviewPhoto" src="assets/lookbook/cover-06-v15.jpg" alt="ภาพตัวอย่างหน้าปก" />
+                      <div class="previewshade"></div>
+                      <span id="previewSuper">ประเด็นสำคัญ</span><strong id="previewTitle">เรียนรู้แล้วทำได้จริง</strong
+                      ><span id="previewSubtitle">ตัวอย่าง Subtitle</span>
+                    </div>
+                  </div>
+                </div>
+              </details>
+              <details id="creativeGroup" class="briefgroup">
+                <summary><img class="type" src="assets/type/creative.svg" alt="Creative" /></summary>
+                <div class="fields">
+                  <div>
+                    <label for="designStyle"><img class="type" src="assets/type/design-style.svg" alt="Design Style" /></label
+                    ><select id="designStyle" data-choice>
+                      <option>ตามแบรนด์ BB</option>
+                      <option>ตาม Reference</option>
+                      <option>เรียบ เท่ พรีเมียม</option>
+                      <option>Editorial</option>
+                      <option>Cinematic</option>
+                      <option>Documentary</option>
+                      <option>Bold / Dynamic</option>
+                      <option>กำหนดเอง</option></select
+                    ><input
+                      id="designStyleCustom"
+                      data-custom-for="designStyle"
+                      placeholder="ระบุเพิ่มเติม"
+                      aria-label="Design Style เพิ่มเติม"
+                      hidden
+                    />
+                  </div>
+                  <div>
+                    <label for="mood"><img class="type" src="assets/type/mood-tone.svg" alt="Mood &amp; Tone" /></label
+                    ><select id="mood" data-choice>
+                      <option>มั่นใจ ฉลาด เป็นกันเอง</option>
+                      <option>สงบ มีระดับ</option>
+                      <option>สนุก มีพลัง</option>
+                      <option>จริงใจ เป็นธรรมชาติ</option>
+                      <option>จริงจัง น่าเชื่อถือ</option>
+                      <option>อบอุ่น สร้างแรงบันดาลใจ</option>
+                      <option>กำหนดเอง</option></select
+                    ><input id="moodCustom" data-custom-for="mood" placeholder="ระบุเพิ่มเติม" aria-label="Mood & Tone เพิ่มเติม" hidden />
+                  </div>
+                  <div>
+                    <label for="palette"><img class="type" src="assets/type/color-palette.svg" alt="Color Palette" /></label
+                    ><select id="palette" data-choice>
+                      <option>BB: ไวน์ ขาว ชมพู เหลืองเล็กน้อย</option>
+                      <option>ตาม Reference</option>
+                      <option>คงสีต้นฉบับ</option>
+                      <option>ขาวดำ</option>
+                      <option>สีธรรมชาติ</option>
+                      <option>กำหนดเอง</option></select
+                    ><input
+                      id="paletteCustom"
+                      data-custom-for="palette"
+                      placeholder="ระบุเพิ่มเติม"
+                      aria-label="Color Palette เพิ่มเติม"
+                      hidden
+                    />
+                  </div>
+                  <div>
+                    <label for="pace"><img class="type" src="assets/type/edit-pace.svg" alt="Edit Pace" /></label
+                    ><select id="pace" data-choice>
+                      <option>กระชับ สมดุล</option>
+                      <option>เร็ว มีพลัง</option>
+                      <option>ช้า มีพื้นที่หายใจ</option>
+                      <option>ตาม Reference</option>
+                      <option>กำหนดเอง</option></select
+                    ><input id="paceCustom" data-custom-for="pace" placeholder="ระบุเพิ่มเติม" aria-label="Edit Pace เพิ่มเติม" hidden />
+                  </div>
+                  <div>
+                    <label for="hook"><img class="type" src="assets/type/opening.svg" alt="Opening" /></label
+                    ><select id="hook" data-choice>
+                      <option>ช็อตเด่นที่สุด</option>
+                      <option>คำถาม</option>
+                      <option>ผลลัพธ์ก่อน</option>
+                      <option>ปัญหา / Pain point</option>
+                      <option>เปิดด้วยผู้พูด</option>
+                      <option>ตาม Reference</option>
+                      <option>กำหนดเอง</option></select
+                    ><input id="hookCustom" data-custom-for="hook" placeholder="ระบุเพิ่มเติม" aria-label="Opening เพิ่มเติม" hidden />
+                  </div>
+                  <div>
+                    <label for="referenceMode"
+                      ><img class="type" src="assets/type/reference-direction.svg" alt="Reference Direction" /></label
+                    ><select id="referenceMode" data-choice>
+                      <option>ยึดสไตล์ ไม่คัดลอกเนื้อหา</option>
+                      <option>ยึดจังหวะตัด</option>
+                      <option>ยึด Mood และสี</option>
+                      <option>ยึดซับ / กราฟิก</option>
+                      <option>เป็นแรงบันดาลใจเท่านั้น</option>
+                      <option>กำหนดเอง</option></select
+                    ><input
+                      id="referenceModeCustom"
+                      data-custom-for="referenceMode"
+                      placeholder="ระบุเพิ่มเติม"
+                      aria-label="Reference Direction เพิ่มเติม"
+                      hidden
+                    />
+                  </div>
+                </div>
+              </details>
+              <details id="soundGroup" class="briefgroup">
+                <summary><img class="type" src="assets/type/sound-graphics.svg" alt="Sound &amp; Graphics" /></summary>
+                <div class="fields">
+                  <div>
+                    <label for="graphics"><img class="type" src="assets/type/graphics.svg" alt="Graphics" /></label
+                    ><select id="graphics" data-choice>
+                      <option>น้อย เฉพาะจุดสำคัญ</option>
+                      <option>ตาม CI แบรนด์</option>
+                      <option>ตาม Reference</option>
+                      <option>เน้นข้อความ</option>
+                      <option>ไม่ใส่กราฟิก</option>
+                      <option>กำหนดเอง</option></select
+                    ><input
+                      id="graphicsCustom"
+                      data-custom-for="graphics"
+                      placeholder="ระบุเพิ่มเติม"
+                      aria-label="Graphics เพิ่มเติม"
+                      hidden
+                    />
+                  </div>
+                  <div>
+                    <label for="music"><img class="type" src="assets/type/music.svg" alt="Music" /></label
+                    ><select id="music" data-choice>
+                      <option>เพลงที่มีสิทธิ์ใช้งาน</option>
+                      <option>ใช้เพลงที่แนบ</option>
+                      <option>คงเสียงต้นฉบับ ไม่เพิ่มเพลง</option>
+                      <option>ไม่มีเพลง</option>
+                      <option>กำหนดเอง</option></select
+                    ><input id="musicCustom" data-custom-for="music" placeholder="ระบุเพิ่มเติม" aria-label="Music เพิ่มเติม" hidden />
+                  </div>
+                  <div>
+                    <label for="audio"><img class="type" src="assets/type/audio.svg" alt="Audio" /></label
+                    ><select id="audio" data-choice>
+                      <option>เสียงพูดชัด เพลงอยู่ด้านหลัง</option>
+                      <option>คงเสียงต้นฉบับ</option>
+                      <option>Voiceover</option>
+                      <option>เพลงเป็นหลัก</option>
+                      <option>กำหนดเอง</option></select
+                    ><input id="audioCustom" data-custom-for="audio" placeholder="ระบุเพิ่มเติม" aria-label="Audio เพิ่มเติม" hidden />
+                  </div>
+                  <div>
+                    <label for="captionsFile"><img class="type" src="assets/type/caption-file.svg" alt="Caption File" /></label
+                    ><select id="captionsFile" data-choice>
+                      <option>ฝังซับในคลิป</option>
+                      <option>ฝังซับ + SRT</option>
+                      <option>SRT แยก</option>
+                      <option>ไม่ต้องการ</option>
+                      <option>กำหนดเอง</option></select
+                    ><input
+                      id="captionsFileCustom"
+                      data-custom-for="captionsFile"
+                      placeholder="ระบุเพิ่มเติม"
+                      aria-label="Caption File เพิ่มเติม"
+                      hidden
+                    />
+                  </div>
+                </div>
+              </details>
+              <details class="briefgroup">
+                <summary><img class="type" src="assets/type/text-cover.svg" alt="Text &amp; Cover" /></summary>
+                <div class="fields">
+                  <div>
+                    <label class="togglelabel"><input id="subtitleEnabled" type="checkbox" checked /><span>ใส่ Subtitle</span></label>
+                  </div>
+                  <div>
+                    <label for="subtitles"><img class="type" src="assets/type/subtitles.svg" alt="Subtitles" /></label
+                    ><select id="subtitles" data-choice>
+                      <option>ไทย</option>
+                      <option>อังกฤษ</option>
+                      <option>ไทย + อังกฤษ</option>
+                      <option>ภาษาเดิม</option>
+                      <option>ไม่ใส่ซับ</option>
+                      <option>กำหนดเอง</option></select
+                    ><input
+                      id="subtitlesCustom"
+                      data-custom-for="subtitles"
+                      placeholder="ระบุเพิ่มเติม"
+                      aria-label="Subtitles เพิ่มเติม"
+                      hidden
+                    />
+                  </div>
+                  <div>
+                    <label for="superLanguage"><img class="type" src="assets/type/super-language.svg" alt="Super Language" /></label
+                    ><select id="superLanguage" data-choice>
+                      <option>ไทย</option>
+                      <option>อังกฤษ</option>
+                      <option>ไทย + อังกฤษ</option>
+                      <option>ไม่ใส่ Super</option>
+                      <option>กำหนดเอง</option></select
+                    ><input id="superLanguageCustom" placeholder="ระบุเพิ่มเติม" aria-label="Super Language เพิ่มเติม" hidden />
+                  </div>
+                  <div>
+                    <label for="superStyle"><img class="type" src="assets/type/super-style.svg" alt="Super Style" /></label
+                    ><select id="superStyle" data-choice>
+                      <option>เน้นคำสำคัญ</option>
+                      <option>สั้น หนึ่งประเด็นต่อช็อต</option>
+                      <option>ตาม Reference</option>
+                      <option>ข้อความที่กำหนด</option>
+                      <option>กำหนดเอง</option></select
+                    ><input id="superStyleCustom" placeholder="ระบุเพิ่มเติม" aria-label="Super Style เพิ่มเติม" hidden />
+                  </div>
+                  <div>
+                    <label for="coverMode"><img class="type" src="assets/type/cover-headline.svg" alt="Cover Headline" /></label
+                    ><select id="coverMode" data-choice>
+                      <option>ให้ทีมเสนอ 3 แบบ</option>
+                      <option>ใช้ข้อความที่กำหนด</option>
+                      <option>ไม่ใส่ข้อความ</option>
+                      <option>กำหนดเอง</option></select
+                    ><input id="coverModeCustom" placeholder="ระบุเพิ่มเติม" aria-label="Cover Headline เพิ่มเติม" hidden />
+                  </div>
+                  <div>
+                    <label for="coverLanguage"><img class="type" src="assets/type/cover-language.svg" alt="Cover Language" /></label
+                    ><select id="coverLanguage" data-choice>
+                      <option>ไทย</option>
+                      <option>อังกฤษ</option>
+                      <option>ไทย + อังกฤษ</option>
+                      <option>กำหนดเอง</option></select
+                    ><input id="coverLanguageCustom" placeholder="ระบุเพิ่มเติม" aria-label="Cover Language เพิ่มเติม" hidden />
+                  </div>
+                  <div>
+                    <label for="coverShot"><img class="type" src="assets/type/cover-image.svg" alt="Cover Image" /></label
+                    ><select id="coverShot" data-choice>
+                      <option>ช็อตเด่นจากคลิป</option>
+                      <option>ผู้พูด / บุคคล</option>
+                      <option>สินค้า / ผลลัพธ์</option>
+                      <option>เลือกภาพใน Style Board</option>
+                      <option>กำหนดเอง</option></select
+                    ><input id="coverShotCustom" placeholder="ระบุเพิ่มเติม" aria-label="Cover Image เพิ่มเติม" hidden />
+                  </div>
+                  <div>
+                    <label for="coverStyle"><img class="type" src="assets/type/cover-style.svg" alt="Cover Style" /></label
+                    ><select id="coverStyle" data-choice>
+                      <option>ตาม CI แบรนด์</option>
+                      <option>ตาม Reference</option>
+                      <option>เรียบ เท่</option>
+                      <option>ข้อความเด่น</option>
+                      <option>ภาพเด่น</option>
+                      <option>กำหนดเอง</option></select
+                    ><input id="coverStyleCustom" placeholder="ระบุเพิ่มเติม" aria-label="Cover Style เพิ่มเติม" hidden />
+                  </div>
+                  <div>
+                    <label for="subtitlePosition"
+                      ><img class="type" src="assets/type/subtitle-position.svg" alt="Subtitle Position" /></label
+                    ><select id="subtitlePosition" data-choice>
+                      <option>ล่างใน Safe Area</option>
+                      <option>กลางภาพ</option>
+                      <option>ตาม Reference</option>
+                      <option>กำหนดเอง</option></select
+                    ><input id="subtitlePositionCustom" placeholder="ระบุเพิ่มเติม" aria-label="Subtitle Position เพิ่มเติม" hidden />
+                  </div>
+                  <div class="wide">
+                    <label for="coverText"><img class="type" src="assets/type/headline-text.svg" alt="Headline Text" /></label
+                    ><input id="coverText" placeholder="คำบนหน้าปก ถ้าเลือกใช้ข้อความที่กำหนด" /><label for="superText"
+                      ><img class="type" src="assets/type/super-text.svg" alt="Super Text" /></label
+                    ><textarea id="superText" rows="2" placeholder="ข้อความเน้น / Keyword / ประโยคที่ต้องมี"></textarea>
+                  </div>
+                </div>
+              </details>
+              <fieldset class="choicegroup">
+                <legend><img class="type" src="assets/type/include.svg" alt="Include" /></legend>
+                <div class="choices">
+                  <label><input type="checkbox" name="wanted" value="ช็อตสินค้า" /><span>ช็อตสินค้า</span></label
+                  ><label><input type="checkbox" name="wanted" value="ผู้พูด" /><span>ผู้พูด</span></label
+                  ><label><input type="checkbox" name="wanted" value="B-roll" /><span>B-roll</span></label
+                  ><label><input type="checkbox" name="wanted" value="โลโก้" /><span>โลโก้</span></label
+                  ><label><input type="checkbox" name="wanted" value="ราคา / ข้อเสนอ" /><span>ราคา / ข้อเสนอ</span></label
+                  ><label><input type="checkbox" name="wanted" value="CTA" /><span>CTA</span></label
+                  ><label><input type="checkbox" name="wanted" value="ข้อความสำคัญ" /><span>ข้อความสำคัญ</span></label>
+                </div>
+              </fieldset>
+              <fieldset class="choicegroup">
+                <legend><img class="type" src="assets/type/keep.svg" alt="Keep" /></legend>
+                <div class="choices">
+                  <label><input type="checkbox" name="preserve" value="สีแบรนด์" checked /><span>สีแบรนด์</span></label
+                  ><label><input type="checkbox" name="preserve" value="โลโก้" checked /><span>โลโก้</span></label
+                  ><label><input type="checkbox" name="preserve" value="ความหมายของผู้พูด" checked /><span>ความหมายของผู้พูด</span></label
+                  ><label><input type="checkbox" name="preserve" value="เสียงต้นฉบับ" /><span>เสียงต้นฉบับ</span></label
+                  ><label><input type="checkbox" name="preserve" value="ช็อตที่ระบุ" /><span>ช็อตที่ระบุ</span></label
+                  ><label><input type="checkbox" name="preserve" value="ชื่อสินค้า / ราคา" /><span>ชื่อสินค้า / ราคา</span></label>
+                </div>
+              </fieldset>
+              <fieldset class="choicegroup">
+                <legend><img class="type" src="assets/type/avoid.svg" alt="Avoid" /></legend>
+                <div class="choices">
+                  <label><input type="checkbox" name="avoid" value="ไอคอนหัวใจ" checked /><span>ไอคอนหัวใจ</span></label
+                  ><label><input type="checkbox" name="avoid" value="กรอบซ้อนกรอบ" checked /><span>กรอบซ้อนกรอบ</span></label
+                  ><label><input type="checkbox" name="avoid" value="ขอบสีเหลือง" checked /><span>ขอบสีเหลือง</span></label
+                  ><label><input type="checkbox" name="avoid" value="แต่งข้อมูล / ราคา" checked /><span>แต่งข้อมูล / ราคา</span></label
+                  ><label><input type="checkbox" name="avoid" value="เปลี่ยนหน้าตาบุคคล" /><span>เปลี่ยนหน้าตาบุคคล</span></label
+                  ><label><input type="checkbox" name="avoid" value="เพลงไม่มีสิทธิ์" checked /><span>เพลงไม่มีสิทธิ์</span></label
+                  ><label><input type="checkbox" name="avoid" value="เอฟเฟกต์เยอะ" /><span>เอฟเฟกต์เยอะ</span></label>
+                </div>
+              </fieldset>
+              <label for="restrictions"><img class="type" src="assets/type/additional-rules.svg" alt="Additional Rules" /></label
+              ><textarea id="restrictions" rows="2" placeholder="ช็อต / Timecode ที่ต้องเก็บหรือห้ามใช้ และข้อห้ามเพิ่มเติม"></textarea
+              ><label for="brief"><img class="type" src="assets/type/direction.svg" alt="Direction" /></label
+              ><textarea id="brief" rows="3" placeholder="คำสั่งเพิ่มเติม ถ้ามี"></textarea>
+              <details class="briefgroup">
+                <summary><img class="type" src="assets/type/delivery.svg" alt="Delivery" /></summary>
+                <div class="fields">
+                  <div>
+                    <label for="length"><img class="type" src="assets/type/duration.svg" alt="Duration" /></label
+                    ><select id="length">
+                      <option value="15">15 วินาที</option>
+                      <option value="30">30 วินาที</option>
+                      <option value="60">60 วินาที</option>
+                      <option value="custom">กำหนดเอง</option></select
+                    ><input id="customLength" type="number" min="1" max="3600" placeholder="วินาที" hidden />
+                  </div>
+                  <div>
+                    <label for="ratio"><img class="type" src="assets/type/aspect-ratio.svg" alt="Aspect Ratio" /></label
+                    ><select id="ratio">
+                      <option>9:16 แนวตั้ง</option>
+                      <option>16:9 แนวนอน</option>
+                      <option>1:1 จัตุรัส</option>
+                      <option>4:5 โพสต์</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label for="resolution"><img class="type" src="assets/type/resolution.svg" alt="Resolution" /></label
+                    ><select id="resolution" data-choice>
+                      <option>1080p</option>
+                      <option>4K</option>
+                      <option>ตามไฟล์ต้นฉบับ</option>
+                      <option>กำหนดเอง</option></select
+                    ><input
+                      id="resolutionCustom"
+                      data-custom-for="resolution"
+                      placeholder="ระบุเพิ่มเติม"
+                      aria-label="Resolution เพิ่มเติม"
+                      hidden
+                    />
+                  </div>
+                  <div>
+                    <label for="fps"><img class="type" src="assets/type/frame-rate.svg" alt="Frame Rate" /></label
+                    ><select id="fps" data-choice>
+                      <option>ตามไฟล์ต้นฉบับ</option>
+                      <option>24 fps</option>
+                      <option>25 fps</option>
+                      <option>30 fps</option>
+                      <option>60 fps</option>
+                      <option>กำหนดเอง</option></select
+                    ><input id="fpsCustom" data-custom-for="fps" placeholder="ระบุเพิ่มเติม" aria-label="Frame Rate เพิ่มเติม" hidden />
+                  </div>
+                  <div>
+                    <label for="delivery"><img class="type" src="assets/type/deliverables.svg" alt="Deliverables" /></label
+                    ><select id="delivery">
+                      <option value="edit">CapCut Project + ไฟล์ต้นฉบับ</option>
+                      <option value="both">CapCut Project + MP4 หลังอนุมัติ</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label for="deadline"><img class="type" src="assets/type/deadline.svg" alt="Deadline" /></label
+                    ><input id="deadline" type="datetime-local" placeholder="" />
+                  </div>
+                  <div>
+                    <label for="approver"><img class="type" src="assets/type/final-approval.svg" alt="Final Approval" /></label
+                    ><input id="approver" type="text" value="BB" placeholder="ผู้อนุมัติสุดท้าย" />
+                  </div>
+                  <div>
+                    <label for="revisions"><img class="type" src="assets/type/revision-rounds.svg" alt="Revision Rounds" /></label
+                    ><select id="revisions" data-choice>
+                      <option>1 รอบ</option>
+                      <option>2 รอบ</option>
+                      <option>3 รอบ</option>
+                      <option>กำหนดเอง</option></select
+                    ><input
+                      id="revisionsCustom"
+                      data-custom-for="revisions"
+                      placeholder="ระบุเพิ่มเติม"
+                      aria-label="Revision Rounds เพิ่มเติม"
+                      hidden
+                    />
+                  </div>
+                  <div>
+                    <label for="rights"><img class="type" src="assets/type/usage-rights.svg" alt="Usage Rights" /></label
+                    ><select id="rights" data-choice>
+                      <option>ยังไม่ยืนยัน</option>
+                      <option>ยืนยันสิทธิ์ไฟล์ เพลง และบุคคลแล้ว</option>
+                      <option>มีไฟล์ที่ต้องตรวจสิทธิ์</option>
+                      <option>กำหนดเอง</option></select
+                    ><input
+                      id="rightsCustom"
+                      data-custom-for="rights"
+                      placeholder="ระบุเพิ่มเติม"
+                      aria-label="Usage Rights เพิ่มเติม"
+                      hidden
+                    />
+                  </div>
+                  <div>
+                    <label for="assetsLink"><img class="type" src="assets/type/brand-assets.svg" alt="Brand Assets" /></label
+                    ><input id="assetsLink" type="text" placeholder="ลิงก์โลโก้ ฟอนต์ CI เพลง / ไฟล์เพิ่มเติม" />
+                  </div>
+                </div>
+              </details>
+            </section>
+            <section class="workstep" data-work-step="1" hidden>
+              <h2><img class="type" src="assets/type/reference.svg" alt="Reference" /></h2>
+              <div class="referenceToolbar">
+                <button id="addReference" class="action">
+                  <img class="type" src="assets/type/add-reference.svg" alt="Add Reference" /></button
+                ><input id="referenceFiles" type="file" accept="video/*,image/*" multiple hidden />
+              </div>
+              <div id="referenceList" class="referenceList"></div>
+              <label for="referenceNotes"><img class="type" src="assets/type/style-notes.svg" alt="Style Notes" /></label
+              ><textarea id="referenceNotes" rows="4" placeholder="จังหวะตัด / Hook / ซับ / Mood / สิ่งที่ต้องยึด"></textarea
+              ><label for="styleName"><img class="type" src="assets/type/style-name.svg" alt="Style Name" /></label
+              ><input id="styleName" placeholder="ชื่อสไตล์" /><button id="saveStyle" class="textbutton">
+                <img class="type" src="assets/type/save-style.svg" alt="Save Style" />
+              </button>
+              <p id="referenceStatus" class="hint" aria-live="polite"></p>
+            </section>
+            <section class="workstep" data-work-step="2" hidden>
+              <div class="sectionhead">
+                <h2><img class="type" src="assets/type/footage.svg" alt="Footage" /></h2>
+                <button id="add" class="textbutton"><img class="type" src="assets/type/add-footage.svg" alt="Add Footage" /></button>
+              </div>
+              <input type="file" id="files" accept="video/*,image/*" multiple hidden /><button id="drop" class="dropzone">
+                <img class="type" src="assets/type/upload-footage.svg" alt="Upload Footage" />
+              </button>
+              <div id="fileList" class="filelist"></div>
+              <section class="previewpanel">
+                <h3><img class="type" src="assets/type/preview.svg" alt="Preview" /></h3>
+                <div id="emptyPreview" class="emptypreview">เลือกไฟล์</div>
+                <video id="video" controls playsinline hidden></video><img id="imagePreview" hidden alt="ไฟล์ภาพที่เลือก" />
+                <p id="videoName" class="hint"></p>
+              </section>
+            </section>
+            <section class="workstep" data-work-step="3" hidden>
+              <h2><img class="type" src="assets/type/review.svg" alt="Review" /></h2>
+              <div id="projectReview" class="projectReview"></div>
+              <button id="save" class="primary"><img class="type" src="assets/type/save-project.svg" alt="Save Project" /></button>
+              <p id="saveStatus" class="hint" aria-live="polite"></p>
+            </section>
+          </div>
+          <div class="workactions">
+            <button id="stepBack" class="textbutton"><img class="type" src="assets/type/back.svg" alt="Back" /></button
+            ><button id="stepNext" class="primary compact"><img class="type" src="assets/type/next.svg" alt="Next" /></button>
+            <p id="stepStatus" aria-live="polite"></p>
+          </div>
+        </div>
+      </section>
+      <section id="crew" class="tabcontent" hidden>
+        <div class="studiotop">
+          <h1><img class="type" src="assets/type/simulator.svg" alt="Simulator" /></h1>
+          <button data-tab="workspace" class="action"><img class="type" src="assets/type/work-zone.svg" alt="Work Zone" /></button>
+        </div>
+        <div class="cabinviewport">
+          <div class="cabinworld">
+            <img
+              class="cabinart"
+              src="assets/bb-cabin-journey-v11.png"
+              alt="BB Private Studio: BB ด้านหน้า ตามด้วย Leo Kitty Tidy และ Chicha"
+            />
+            <div id="agents" class="cabinTargets"></div>
+          </div>
+        </div>
+        <div id="stationNav" class="stationNav"></div>
+        <section class="agentdetail" id="agentDetail" aria-live="polite"></section>
+      </section>
+      <section id="production" class="tabcontent" hidden>
+        <div class="sectionhead">
+          <h1>คิวผลิต</h1>
+          <button id="backToBrief" class="textbutton">← กลับไปบรีฟ</button>
+        </div>
+        <p id="productionRoute" class="hint"></p>
+        <div id="productionSteps" class="productionSteps"></div>
+        <section id="productionDetail" class="productionDetail" aria-live="polite"></section>
+        <div class="fields">
+          <div><label for="editorUrl">ลิงก์งานใน Canva / CapCut</label><input id="editorUrl" type="url" placeholder="https://…" /></div>
+          <div><label for="handoffVersion">เวอร์ชันงาน</label><input id="handoffVersion" placeholder="เช่น v01" /></div>
+        </div>
+        <label for="handoffNotes">โน้ตส่งต่อ</label
+        ><textarea id="handoffNotes" rows="3" placeholder="จุดที่ต้องแก้ / สิ่งที่ต้องตรวจ"></textarea
+        ><button id="saveHandoff" class="primary">บันทึกการส่งต่อ</button>
+        <p id="handoffStatus" class="hint" role="status"></p>
+      </section>
+      <section id="history" class="tabcontent" hidden>
+        <h1><img class="type" src="assets/type/projects.svg" alt="Projects" /></h1>
+        <div id="historyList"></div>
+      </section>
+      <footer>
+        <img class="type" src="assets/type/bb-simulator.svg" alt="BB Simulator" /><span
+          >โปรเจกต์และ Reference เก็บในเบราว์เซอร์นี้ · คลิปต้นฉบับต้องแนบใหม่</span
+        >
+      </footer>
+    </main>
+    <script src="workflow.js?v=17"></script>
+    <script src="app.js?v=22"></script>
+    <script src="simulator-model.js?v=22"></script>
+    <script src="simulator.js?v=22"></script>
+  </body>
+</html>
