@@ -23,7 +23,7 @@ Changes:
 - Scene: each person sits on their real station seat in the v19 aircraft (Chicha rear review desk, Kitty dual-monitor edit desk, Tidy tablet desk, Leo camera desk, BB cockpit chair). One shared portrait height; BB 1.1x for perspective only. Labels moved beside portraits, never over faces. Removed duplicate cockpit foreground image.
 - Aircraft sized to fit the screen on laptop; chrome compacted. Crew roster with face avatars (cropped from the same sprites) beside the aircraft on laptop, under it on mobile.
 - Brand + lane picker follows the user into Simulator, Brief and Projects (one element, one state).
-- Draft autosave (`bb-simulator-draft-v1`, new key; existing keys untouched), Continue Brief after refresh, `+ บรีฟใหม่` to start clean. Save updates the same project ID instead of duplicating.
+- Draft autosave (`bb-simulator-draft-v1`, new key; existing keys untouched), Continue Brief after refresh, `+ บรีฟใหม่` (two-tap confirm, resets in place) to start clean. Save updates the same project ID instead of duplicating.
 - Per-brand empty states for Projects and References.
 - Mobile Style Board as a swipe row.
 - Source formatted with Prettier for review (separate commit, no behavior change).
@@ -31,7 +31,7 @@ Changes:
 Tests:
 
 - `node --test tests/workflow.test.cjs tests/simulator.test.cjs` → 10/10 (added face-overlap / scale test).
-- `node tests/browser.smoke.cjs` (Playwright, mobile 390) → 54/54: tap each person opens the right tools, hit targets ≥ 44px, labels clear of faces, Demo leaves counts unchanged, draft survives reload, save upserts, Y&Z vs Beyond isolation, new brief keeps saved projects, no page errors.
+- `node tests/browser.smoke.cjs` (Playwright, mobile 390) → 57/57: tap each person opens the right tools, hit targets ≥ 44px, labels clear of faces, Demo leaves counts unchanged, draft survives reload, save upserts, Y&Z vs Beyond isolation, new brief (two-tap, in-page reset) keeps saved projects and saves separately, no page errors.
 - No horizontal overflow at 360/390/1366/1440.
 
 Not done / limits:
@@ -39,3 +39,6 @@ Not done / limits:
 - Kanit could not load in this sandbox (Google Fonts blocked), so screenshots use a fallback Thai font. The real site loads Kanit.
 - Cover Preview still overlays a headline on cover frames that already contain text.
 - No backend, sync, Canva, CapCut, Drive or publishing integration (unchanged from baseline).
+
+Preview (private Artifact, browser-local data only): https://claude.ai/artifact/NQ1C4JfABSTtptHN2V923W
+Rendered screenshots: `PREVIEW/round-01/`

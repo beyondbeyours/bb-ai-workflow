@@ -310,9 +310,5 @@
   select(0);
   refresh();
   addLog("เปิด Cockpit · " + currentBrand().name);
-  if (location.hash === "#new-brief") {
-    history.replaceState(null, "", location.pathname);
-    tab("workspace");
-    setStep(0);
-  } else tab("simulator");
+  tab("simulator");
 })();

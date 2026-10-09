@@ -1322,13 +1322,62 @@ for (const area of [$("workEditor"), document.querySelector(".routing")]) {
     if (e.target.closest("[data-look], [data-palette], [data-layout], [data-preset]")) queueDraft();
   });
 }
-$("newBrief").onclick = () => {
-  if (!confirm("เริ่มบรีฟใหม่? บรีฟที่บันทึกใน Projects ยังอยู่ แต่ Draft ที่ยังไม่บันทึกและไฟล์ Footage ที่แนบไว้จะถูกล้าง")) return;
+// Blank-brief snapshot taken before any draft is restored, so "+ บรีฟใหม่" can reset in place.
+const blankBrief = {
+  visual: JSON.parse(JSON.stringify(visualSpec)),
+  fields: [...$("workEditor").querySelectorAll("input:not([type=file]), select, textarea")].map((el) => ({
+    el,
+    value: el.value,
+    checked: el.checked,
+    hidden: el.hidden,
+  })),
+};
+function resetBrief() {
+  for (const f of blankBrief.fields) {
+    f.el.value = f.value;
+    f.el.checked = f.checked;
+    f.el.hidden = f.hidden;
+  }
+  delete $("ratio").dataset.manual;
+  visualSpec = JSON.parse(JSON.stringify(blankBrief.visual));
+  currentProjectId = currentProjectCreated = pendingReferenceIds = null;
+  footage.forEach((f) => URL.revokeObjectURL(f.url));
+  footage = [];
+  selectedURL = null;
+  $("video").pause();
+  $("video").removeAttribute("src");
+  $("video").hidden = $("imagePreview").hidden = true;
+  $("emptyPreview").hidden = false;
+  $("videoName").textContent = $("saveStatus").textContent = "";
+  renderFiles();
+  referenceRecords.forEach((ref) => (ref.selected = true));
+  renderReferences();
+  $("title").oninput();
+  $("length").onchange();
+  renderVisual();
+  updateRouting(true);
   try {
     localStorage.removeItem(draftKey);
   } catch {}
-  location.hash = "new-brief";
-  location.reload();
+  $("draftStatus").textContent = "เริ่มบรีฟใหม่แล้ว";
+  setStep(0);
+  $("title").focus();
+}
+// Two-tap confirm in the page itself (browser confirm dialogs are blocked in some viewers).
+let newBriefArmed = null;
+$("newBrief").onclick = () => {
+  if (!newBriefArmed) {
+    $("newBrief").textContent = "แตะอีกครั้งเพื่อล้าง Draft นี้";
+    newBriefArmed = setTimeout(() => {
+      newBriefArmed = null;
+      $("newBrief").textContent = "+ บรีฟใหม่";
+    }, 4000);
+    return;
+  }
+  clearTimeout(newBriefArmed);
+  newBriefArmed = null;
+  $("newBrief").textContent = "+ บรีฟใหม่";
+  resetBrief();
 };
 (function restoreDraft() {
   const d = readDraft();
