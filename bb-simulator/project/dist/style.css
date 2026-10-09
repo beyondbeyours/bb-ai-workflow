@@ -1758,3 +1758,63 @@ textarea {
   height: 32px;
   max-width: 100%;
 }
+
+/* Draft autosave + new brief */
+.editorhead {
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.drafttools {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-left: auto;
+}
+.draftstatus {
+  color: var(--pink);
+  font-size: 12px;
+}
+#newBrief {
+  min-height: 44px;
+  font-size: 14px;
+}
+#resumeBrief {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+#resumeBrief[hidden] {
+  display: none;
+}
+#resumeInfo {
+  color: var(--pink);
+  font-size: 13px;
+}
+/* Mobile Style Board: one swipeable row instead of a 2,500px-tall grid. */
+@media (max-width: 760px) {
+  .styletiles {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 18px;
+    margin: 0 -18px;
+    padding: 0 18px 6px;
+    scrollbar-width: thin;
+  }
+  .styletiles button {
+    flex: 0 0 42%;
+    scroll-snap-align: start;
+  }
+}
+.workactions {
+  box-shadow: 0 0 0 100vmax var(--wine);
+  clip-path: inset(0 -100vmax);
+}
+.launchcontrols > .textbutton + .textbutton {
+  margin-left: 20px;
+}
+#resumeBrief {
+  margin: 14px 0 0;
+  min-height: 48px;
+}

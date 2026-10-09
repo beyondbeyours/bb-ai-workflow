@@ -6,8 +6,8 @@
     <meta name="theme-color" content="#4f0208" />
     <title>BB Simulator</title>
     <meta name="description" content="BB Simulator" />
-    <link rel="stylesheet" href="style.css?v=22" />
-    <link rel="stylesheet" href="simulator.css?v=22" />
+    <link rel="stylesheet" href="style.css?v=23" />
+    <link rel="stylesheet" href="simulator.css?v=23" />
   </head>
   <body>
     <header>
@@ -72,14 +72,7 @@
                 fetchpriority="high"
               />
               <div id="simActors" class="simActors"></div>
-              <img
-                class="simCockpitForeground"
-                src="assets/bb-simulator-full-aircraft-v19.png"
-                width="1024"
-                height="1536"
-                alt=""
-                aria-hidden="true"
-              /><span id="simParcel" class="simParcel" hidden aria-hidden="true"><img src="assets/icon-brief.svg" alt="" /></span
+              <span id="simParcel" class="simParcel" hidden aria-hidden="true"><img src="assets/icon-brief.svg" alt="" /></span
               ><span class="simSceneLabel"><img class="type" src="assets/type/cockpit.svg" alt="Cockpit" /></span>
             </div>
             <div class="simCrewDock" id="simCrewDock" aria-label="เลือกทีม"></div>
@@ -87,7 +80,7 @@
           <aside class="simSide">
             <section id="simCommand">
               <div class="simIdentity" id="simIdentity"></div>
-              <div id="simRouting"></div>
+              <div id="simRouting" data-routing-slot="simulator"></div>
               <div class="simActions" id="simActions"></div>
               <p id="simTask" class="simTask" aria-live="polite"></p>
             </section>
@@ -133,6 +126,9 @@
               ><span><img class="type" src="assets/type/start-brief.svg" alt="Start Brief" /><small>กำหนดงานกับ BB</small></span
               ><span aria-hidden="true">→</span>
             </button>
+            <button id="resumeBrief" class="textbutton" hidden>
+              <img class="type" src="assets/type/continue-brief.svg" alt="Continue Brief" /><small id="resumeInfo"></small>
+            </button>
             <div class="launchshortcuts">
               <button data-launch-step="1">
                 <img class="toolicon" src="assets/icon-reference.svg" alt="" /><img
@@ -156,15 +152,16 @@
             </div>
             <button id="openProduction" class="textbutton">ดูคิวผลิต →</button
             ><button id="openStyleBoard" class="textbutton">
-              <img class="type" src="assets/type/choose-a-look.svg" alt="Choose A Look" /></button
-            ><button id="resumeBrief" class="textbutton" hidden>
-              <img class="type" src="assets/type/continue-brief.svg" alt="Continue Brief" />
+              <img class="type" src="assets/type/choose-a-look.svg" alt="Choose A Look" />
             </button>
           </div>
         </section>
         <div id="workEditor" hidden>
           <div class="editorhead">
             <button id="backWorkZone" class="textbutton">← <img class="type" src="assets/type/work-zone.svg" alt="Work Zone" /></button
+            ><span class="drafttools"
+              ><small id="draftStatus" class="draftstatus" aria-live="polite"></small
+              ><button id="newBrief" class="textbutton" type="button">+ บรีฟใหม่</button></span
             ><span id="stepCount">01 / 04</span>
           </div>
           <nav id="workSteps" class="worksteps" aria-label="Project steps">
@@ -185,6 +182,7 @@
           <div class="workbody">
             <section class="workstep" data-work-step="0">
               <h2><span id="briefOwner" class="owner">BB</span><img class="type" src="assets/type/brief.svg" alt="Brief" /></h2>
+              <div class="routingslot" data-routing-slot="workspace"></div>
               <div>
                 <label for="title"><img class="type" src="assets/type/project-name.svg" alt="Project Name" /></label
                 ><input id="title" type="text" placeholder="ชื่อโปรเจกต์" />
@@ -929,6 +927,7 @@
       </section>
       <section id="history" class="tabcontent" hidden>
         <h1><img class="type" src="assets/type/projects.svg" alt="Projects" /></h1>
+        <div class="routingslot" data-routing-slot="history"></div>
         <div id="historyList"></div>
       </section>
       <footer>
@@ -937,9 +936,9 @@
         >
       </footer>
     </main>
-    <script src="workflow.js?v=17"></script>
-    <script src="app.js?v=22"></script>
-    <script src="simulator-model.js?v=22"></script>
-    <script src="simulator.js?v=22"></script>
+    <script src="workflow.js?v=23"></script>
+    <script src="app.js?v=23"></script>
+    <script src="simulator-model.js?v=23"></script>
+    <script src="simulator.js?v=23"></script>
   </body>
 </html>

@@ -13,8 +13,6 @@
     log = [];
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (reduced) scene.classList.add("simPaused");
-  const routing = document.querySelector(".routing");
-  $("simRouting").append(routing);
   function nameImage(name) {
     const img = typeImage(name);
     img.alt = name;
@@ -27,14 +25,32 @@
     img.draggable = false;
     return img;
   }
+  // Circular face crop from the same approved sprite the cabin uses, so face, name and role always match.
+  function avatar(index, size) {
+    const [cx, cy, r] = model.crew[index].avatar,
+      scale = size / (2 * r),
+      sheet = index !== 0,
+      el = document.createElement("span");
+    el.className = "simAvatar";
+    el.setAttribute("aria-hidden", "true");
+    el.style.width = el.style.height = size + "px";
+    el.style.backgroundImage = 'url("' + (sheet ? "assets/bb-crew-visible-faces-v22.png" : "assets/bb-cockpit-seated-v19.png") + '")';
+    el.style.backgroundSize = (sheet ? 2048 : 1024) * scale + "px " + (sheet ? 768 : 1536) * scale + "px";
+    el.style.backgroundPosition = -((sheet ? (index - 1) * 512 : 0) + cx - r) * scale + "px " + -(cy - r) * scale + "px";
+    return el;
+  }
+  scene.style.setProperty("--h", model.portraitHeight);
   model.crew.forEach((person, index) => {
     const actor = document.createElement("button");
     actor.className = "simActor";
     actor.type = "button";
     actor.dataset.index = index;
+    actor.dataset.label = person.label;
     actor.style.setProperty("--x", person.x);
     actor.style.setProperty("--y", person.y);
     actor.style.setProperty("--sprite", index === 0 ? 0 : index - 1);
+    actor.style.setProperty("--scale", person.scale || 1);
+    actor.style.zIndex = String(Math.round(person.y));
     actor.setAttribute("aria-label", person.name + " · " + person.role + " · เปิดเครื่องมือ");
     actor.setAttribute("aria-pressed", String(index === 0));
     const sprite = document.createElement("span");
@@ -53,7 +69,8 @@
     const b = document.createElement("button");
     b.type = "button";
     b.setAttribute("aria-pressed", String(index === 0));
-    b.append(nameImage(person.name));
+    b.setAttribute("aria-label", person.name + " · " + person.role);
+    b.append(avatar(index, 48), nameImage(person.name));
     const role = document.createElement("small");
     role.textContent = person.role;
     b.append(role);
@@ -84,10 +101,7 @@
     dock.forEach((a, i) => a.setAttribute("aria-pressed", String(i === index)));
     const identity = $("simIdentity");
     identity.replaceChildren();
-    const face = document.createElement("span");
-    face.className = "simFace" + (index === 0 ? " simFaceBB" : "");
-    face.style.setProperty("--sprite", index === 0 ? 0 : index - 1);
-    face.append(spriteImage(index));
+    const face = avatar(index, 76);
     const titles = document.createElement("div");
     const h = document.createElement("h1");
     h.append(nameImage(p.name));
@@ -97,7 +111,6 @@
     sub.textContent = p.sub;
     titles.append(h, role, sub);
     identity.append(face, titles);
-    routing.hidden = index !== 0;
     const actions = $("simActions");
     actions.replaceChildren();
     const tasks = [
@@ -224,8 +237,8 @@
     addLog("Demo · " + step.text);
     const parcel = $("simParcel");
     parcel.hidden = false;
-    parcel.style.left = person.x + 8 + "%";
-    parcel.style.top = person.y - 6 + "%";
+    parcel.style.left = person.x + 7 + "%";
+    parcel.style.top = person.y - 13 + "%";
     // Seated crew stay at their stations; only the handoff token travels.
 
     if (step.pause) {
@@ -297,5 +310,9 @@
   select(0);
   refresh();
   addLog("เปิด Cockpit · " + currentBrand().name);
-  tab("simulator");
+  if (location.hash === "#new-brief") {
+    history.replaceState(null, "", location.pathname);
+    tab("workspace");
+    setStep(0);
+  } else tab("simulator");
 })();

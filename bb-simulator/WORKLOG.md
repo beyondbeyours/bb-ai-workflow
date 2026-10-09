@@ -1,0 +1,41 @@
+# BB Simulator · Work Log (Claude)
+
+Baseline: Gigi handoff `d3f9ec1` imported unchanged in commit "Import BB Simulator baseline".
+Source of truth for the app: `project/dist` (buildless HTML/CSS/vanilla JS).
+Return package for Gigi is on hold until แม่ asks for it.
+
+## Round 01 · 2026-10-09
+
+Review findings (rendered in Chromium at 360/390 mobile, 1366/1440 laptop):
+
+- Leo's face hidden behind Kitty; crew portraits oversized, floating over the fuselage and seats.
+- Name chips sat on BB's chest and the crew's hands.
+- Laptop 1366x768: Cockpit and BB below the fold.
+- Crew dock had names only, no faces.
+- Brand/lane picker only existed in Simulator; Brief and Projects did not show which brand was active.
+- Brief: no autosave (refresh lost work); saving a reopened brief created a duplicate project.
+- Projects: a brand with no projects showed a blank list; Reference list blank instead of empty state when only other brands had references.
+- Mobile Style Board was a ~2,500px tall grid.
+- Malformed `</button` close in Work Zone launch markup.
+
+Changes:
+
+- Scene: each person sits on their real station seat in the v19 aircraft (Chicha rear review desk, Kitty dual-monitor edit desk, Tidy tablet desk, Leo camera desk, BB cockpit chair). One shared portrait height; BB 1.1x for perspective only. Labels moved beside portraits, never over faces. Removed duplicate cockpit foreground image.
+- Aircraft sized to fit the screen on laptop; chrome compacted. Crew roster with face avatars (cropped from the same sprites) beside the aircraft on laptop, under it on mobile.
+- Brand + lane picker follows the user into Simulator, Brief and Projects (one element, one state).
+- Draft autosave (`bb-simulator-draft-v1`, new key; existing keys untouched), Continue Brief after refresh, `+ บรีฟใหม่` to start clean. Save updates the same project ID instead of duplicating.
+- Per-brand empty states for Projects and References.
+- Mobile Style Board as a swipe row.
+- Source formatted with Prettier for review (separate commit, no behavior change).
+
+Tests:
+
+- `node --test tests/workflow.test.cjs tests/simulator.test.cjs` → 10/10 (added face-overlap / scale test).
+- `node tests/browser.smoke.cjs` (Playwright, mobile 390) → 54/54: tap each person opens the right tools, hit targets ≥ 44px, labels clear of faces, Demo leaves counts unchanged, draft survives reload, save upserts, Y&Z vs Beyond isolation, new brief keeps saved projects, no page errors.
+- No horizontal overflow at 360/390/1366/1440.
+
+Not done / limits:
+
+- Kanit could not load in this sandbox (Google Fonts blocked), so screenshots use a fallback Thai font. The real site loads Kanit.
+- Cover Preview still overlays a headline on cover frames that already contain text.
+- No backend, sync, Canva, CapCut, Drive or publishing integration (unchanged from baseline).

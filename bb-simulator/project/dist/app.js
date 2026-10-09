@@ -44,6 +44,11 @@ const $ = (id) => document.getElementById(id);
 let footage = [];
 let selectedURL = null;
 const key = "ai-video-studio-briefs-v1";
+// Work-in-progress brief, autosaved in this browser so refresh/close does not lose it.
+const draftKey = "bb-simulator-draft-v1";
+let currentProjectId = null,
+  currentProjectCreated = null,
+  pendingReferenceIds = null;
 function readSaved() {
   try {
     return JSON.parse(localStorage.getItem(key) || "[]").map((j) =>
@@ -54,6 +59,10 @@ function readSaved() {
   }
 }
 function tab(name) {
+  // Brand + lane picker is one element that follows the user, so every screen states which brand it is working on.
+  const slot = document.querySelector('[data-routing-slot="' + name + '"]'),
+    routing = document.querySelector(".routing");
+  if (slot && routing && routing.parentElement !== slot) slot.append(routing);
   document.querySelectorAll(".tabcontent").forEach((e) => (e.hidden = e.id !== name));
   document.querySelectorAll("[data-tab]").forEach((e) => e.classList.toggle("selected", e.dataset.tab === name));
   if (name === "history") renderHistory();
@@ -268,10 +277,14 @@ $("save").onclick = () => {
   }
   const record = collectProject();
   try {
-    const saved = readSaved();
+    const saved = readSaved(),
+      existing = saved.findIndex((x) => x.id === record.id);
+    if (existing >= 0) saved.splice(existing, 1);
     saved.unshift(record);
     localStorage.setItem(key, JSON.stringify(saved.slice(0, 50)));
-    $("saveStatus").textContent = "บันทึกโปรเจกต์แล้ว · ยังไม่เริ่มผลิต";
+    currentProjectCreated = record.created;
+    saveDraft();
+    $("saveStatus").textContent = (existing >= 0 ? "อัปเดตโปรเจกต์เดิมแล้ว" : "บันทึกโปรเจกต์แล้ว") + " · ยังไม่เริ่มผลิต";
     showAgent(0);
     $("openProduction").hidden = false;
   } catch {
@@ -287,88 +300,109 @@ function download(record) {
   a.click();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
+function loadProject(r) {
+  restoreRouting(r);
+  currentProjectId = r.id || null;
+  currentProjectCreated = r.created || null;
+  $("title").value = r.title || "";
+  $("title").oninput();
+  $("brief").value = r.brief || "";
+  for (const field of ["objective", "audience", "cta", "restrictions", "referenceNotes", "styleName"]) $(field).value = r[field] || "";
+  if (r.platform) $("platform").value = r.platform;
+  pendingReferenceIds = (r.references || []).map((x) => x.id);
+  referenceRecords.forEach((ref) => (ref.selected = pendingReferenceIds.includes(ref.id)));
+  renderReferences();
+  const standard = ["15", "30", "60"].includes(String(r.seconds));
+  $("length").value = standard ? String(r.seconds) : "custom";
+  $("customLength").value = r.seconds;
+  $("length").onchange();
+  if (r.ratio) $("ratio").value = r.ratio;
+  if (r.delivery) $("delivery").value = r.delivery;
+  footage.forEach((f) => URL.revokeObjectURL(f.url));
+  footage = [];
+  selectedURL = null;
+  $("video").pause();
+  $("video").removeAttribute("src");
+  $("video").load();
+  $("video").hidden = true;
+  $("imagePreview").hidden = true;
+  $("emptyPreview").hidden = false;
+  $("videoName").textContent = "";
+  renderFiles();
+  restoreSpecs(r);
+  $("ratio").dataset.manual = "true";
+}
+function saveDraft() {
+  try {
+    if (!$("title").value.trim() && !$("brief").value.trim() && !currentProjectId) return;
+    localStorage.setItem(draftKey, JSON.stringify({ project: collectProject(), step: workStep, savedAt: new Date().toISOString() }));
+    $("draftStatus").textContent =
+      "บันทึก Draft อัตโนมัติ " + new Date().toLocaleTimeString("th-TH", { hour: "2-digit", minute: "2-digit" });
+  } catch {
+    $("draftStatus").textContent = "บันทึก Draft ไม่ได้ เบราว์เซอร์อาจปิดการเก็บข้อมูล";
+  }
+}
+function readDraft() {
+  try {
+    const d = JSON.parse(localStorage.getItem(draftKey) || "null");
+    return d && d.project ? d : null;
+  } catch {
+    return null;
+  }
+}
 function renderHistory() {
   const list = $("historyList");
   list.replaceChildren();
-  const saved = readSaved();
+  const saved = readSaved().filter((r) => (r.brand?.id || "beyond") === currentBrand().id);
   if (!saved.length) {
     const p = document.createElement("p");
-    p.textContent = "ยังไม่มีบรีฟที่บันทึก เริ่มจากสร้างงานใหม่";
+    p.textContent = "ยังไม่มีบรีฟที่บันทึกของ " + (currentBrand().name || "แบรนด์นี้") + " เริ่มจากสร้างงานใหม่";
     list.append(p);
     return;
   }
-  saved
-    .filter((r) => (r.brand?.id || "beyond") === currentBrand().id)
-    .forEach((r) => {
-      const item = document.createElement("article");
-      item.className = "historyitem";
-      const h = document.createElement("h2");
-      h.textContent = r.title;
-      const meta = document.createElement("p");
-      meta.className = "hint";
-      meta.textContent =
-        new Date(r.created).toLocaleString("th-TH") +
-        " · " +
-        (r.lane && r.lane !== "video" ? "Canva Editable Design" : r.seconds + " วินาที · " + r.ratio + " · CapCut Editable Project");
-      const p = document.createElement("p");
-      p.textContent = r.brief + (r.referenceNotes ? "\nReference: " + r.referenceNotes : "");
-      const note = document.createElement("p");
-      note.className = "hint";
-      note.textContent = "เตรียมบรีฟแล้ว • " + r.files.length + " รายชื่อคลิป • ต้องแนบไฟล์ใหม่เมื่อเปิดงาน";
-      const actions = document.createElement("div");
-      actions.className = "historyactions";
-      const load = document.createElement("button");
-      load.textContent = "เปิดบรีฟ";
-      load.onclick = () => {
-        restoreRouting(r);
-        $("title").value = r.title;
-        $("title").oninput();
-        $("brief").value = r.brief;
-        for (const field of ["objective", "audience", "cta", "restrictions", "referenceNotes", "styleName"])
-          $(field).value = r[field] || "";
-        if (r.platform) $("platform").value = r.platform;
-        referenceRecords.forEach((ref) => (ref.selected = (r.references || []).some((x) => x.id === ref.id)));
-        renderReferences();
-        const standard = ["15", "30", "60"].includes(String(r.seconds));
-        $("length").value = standard ? String(r.seconds) : "custom";
-        $("customLength").value = r.seconds;
-        $("length").onchange();
-        $("ratio").value = r.ratio;
-        $("delivery").value = r.delivery;
-        footage.forEach((f) => URL.revokeObjectURL(f.url));
-        footage = [];
-        selectedURL = null;
-        $("video").pause();
-        $("video").removeAttribute("src");
-        $("video").load();
-        $("video").hidden = true;
-        $("imagePreview").hidden = true;
-        $("emptyPreview").hidden = false;
-        $("videoName").textContent = "";
-        renderFiles();
-        restoreSpecs(r);
-        $("ratio").dataset.manual = "true";
-        tab("workspace");
-        setStep(0);
-        $("saveStatus").textContent = "เปิดบรีฟแล้ว • แนบไฟล์ที่ต้องการใช้สำหรับงานนี้";
-      };
-      const dl = document.createElement("button");
-      dl.textContent = "ดาวน์โหลดบรีฟ";
-      dl.onclick = () => download(r);
-      const del = document.createElement("button");
-      del.textContent = "ลบ";
-      del.onclick = () => {
-        try {
-          localStorage.setItem(key, JSON.stringify(readSaved().filter((x) => x.id !== r.id)));
-          renderHistory();
-        } catch {
-          del.textContent = "ลบไม่ได้";
-        }
-      };
-      actions.append(load, dl, del);
-      item.append(h, meta, p, note, actions);
-      list.append(item);
-    });
+  saved.forEach((r) => {
+    const item = document.createElement("article");
+    item.className = "historyitem";
+    const h = document.createElement("h2");
+    h.textContent = r.title;
+    const meta = document.createElement("p");
+    meta.className = "hint";
+    meta.textContent =
+      new Date(r.created).toLocaleString("th-TH") +
+      " · " +
+      (r.lane && r.lane !== "video" ? "Canva Editable Design" : r.seconds + " วินาที · " + r.ratio + " · CapCut Editable Project");
+    const p = document.createElement("p");
+    p.textContent = r.brief + (r.referenceNotes ? "\nReference: " + r.referenceNotes : "");
+    const note = document.createElement("p");
+    note.className = "hint";
+    note.textContent = "เตรียมบรีฟแล้ว • " + r.files.length + " รายชื่อคลิป • ต้องแนบไฟล์ใหม่เมื่อเปิดงาน";
+    const actions = document.createElement("div");
+    actions.className = "historyactions";
+    const load = document.createElement("button");
+    load.textContent = "เปิดบรีฟ";
+    load.onclick = () => {
+      loadProject(r);
+      tab("workspace");
+      setStep(0);
+      $("saveStatus").textContent = "เปิดบรีฟแล้ว • แนบไฟล์ที่ต้องการใช้สำหรับงานนี้";
+    };
+    const dl = document.createElement("button");
+    dl.textContent = "ดาวน์โหลดบรีฟ";
+    dl.onclick = () => download(r);
+    const del = document.createElement("button");
+    del.textContent = "ลบ";
+    del.onclick = () => {
+      try {
+        localStorage.setItem(key, JSON.stringify(readSaved().filter((x) => x.id !== r.id)));
+        renderHistory();
+      } catch {
+        del.textContent = "ลบไม่ได้";
+      }
+    };
+    actions.append(load, dl, del);
+    item.append(h, meta, p, note, actions);
+    list.append(item);
+  });
 }
 $("video").onerror = () => ($("videoName").textContent = "เบราว์เซอร์นี้เปิดไฟล์ไม่ได้ ลองไฟล์ MP4 ที่ใช้ H.264");
 
@@ -402,7 +436,7 @@ function renderReferences() {
   for (const url of referenceURLs.values()) URL.revokeObjectURL(url);
   referenceURLs.clear();
   $("referenceList").replaceChildren();
-  if (!referenceRecords.length) {
+  if (!referenceRecords.some((ref) => (ref.brandId || "beyond") === currentBrand().id)) {
     const empty = document.createElement("p");
     empty.className = "hint";
     empty.textContent = "ยังไม่มีคลิป Reference";
@@ -502,7 +536,7 @@ $("saveStyle").onclick = () => {
       $("referenceNotes").value = profile.notes || "";
     }
     const saved = await referenceOperation("readonly", (store) => store.getAll());
-    referenceRecords = saved.map((ref) => ({ ...ref, selected: true }));
+    referenceRecords = saved.map((ref) => ({ ...ref, selected: pendingReferenceIds ? pendingReferenceIds.includes(ref.id) : true }));
     renderReferences();
   } catch {
     $("referenceStatus").textContent = "เปิดความจำ Reference ไม่ได้ อาจอยู่ในโหมดส่วนตัวหรือปิดการเก็บข้อมูล";
@@ -580,7 +614,7 @@ function collectProject() {
     lane: $("productionLane").value,
     handoff: collectHandoff(),
     workflow: BBWorkflow.initial($("productionLane").value),
-    id: crypto.randomUUID(),
+    id: currentProjectId || (currentProjectId = crypto.randomUUID()),
     title: $("title").value.trim(),
     brief: $("brief").value.trim(),
     seconds: duration(),
@@ -598,7 +632,8 @@ function collectProject() {
     delivery: $("delivery").value,
     files: footage.map((f) => ({ name: f.file.name, size: f.file.size, type: f.file.type })),
     specs,
-    created: new Date().toISOString(),
+    created: currentProjectCreated || new Date().toISOString(),
+    updated: new Date().toISOString(),
     status: "brief_ready",
   };
 }
@@ -780,6 +815,7 @@ function showWorkLaunch() {
   $("workLaunch").hidden = false;
   $("workEditor").hidden = true;
   $("resumeBrief").hidden = !$("title").value.trim();
+  $("resumeInfo").textContent = $("title").value.trim() + " · ขั้น " + (workStep + 1) + "/4";
 }
 $("startBrief").onclick = $("sceneStart").onclick = () => {
   setStep(0);
@@ -1272,3 +1308,35 @@ $("saveHandoff").onclick = () => {
   }
 };
 updateRouting(true);
+
+// Draft autosave: every edit in the brief or routing is kept in this browser until a new brief is started.
+let draftTimer = null;
+function queueDraft() {
+  clearTimeout(draftTimer);
+  draftTimer = setTimeout(saveDraft, 400);
+}
+for (const area of [$("workEditor"), document.querySelector(".routing")]) {
+  area.addEventListener("input", queueDraft);
+  area.addEventListener("change", queueDraft);
+  area.addEventListener("click", (e) => {
+    if (e.target.closest("[data-look], [data-palette], [data-layout], [data-preset]")) queueDraft();
+  });
+}
+$("newBrief").onclick = () => {
+  if (!confirm("เริ่มบรีฟใหม่? บรีฟที่บันทึกใน Projects ยังอยู่ แต่ Draft ที่ยังไม่บันทึกและไฟล์ Footage ที่แนบไว้จะถูกล้าง")) return;
+  try {
+    localStorage.removeItem(draftKey);
+  } catch {}
+  location.hash = "new-brief";
+  location.reload();
+};
+(function restoreDraft() {
+  const d = readDraft();
+  if (d) {
+    loadProject(d.project);
+    workStep = Math.max(0, Math.min(3, Number(d.step) || 0));
+    $("draftStatus").textContent =
+      "Draft ล่าสุด " + new Date(d.savedAt).toLocaleString("th-TH", { dateStyle: "short", timeStyle: "short" });
+    showWorkLaunch();
+  }
+})();
